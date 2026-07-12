@@ -9,7 +9,7 @@
   :root {
     --paper: #fdf6e3; --paper-2: #f8edcf; --paper-dark: #f5e6c8;
     --paper-line: #d4c5a9; --ink: #4a3728; --ink-light: #7a6455; --ink-faint: #b8a99a;
-    --gold: #d4a853; --gold-glow: #f0d48a; --rose: #c77d8a; --sky: #8ab4c7;
+    --gold: #d4a853; --gold-glow: #f0d48a; --gold-dark: #b8923f; --rose: #c77d8a; --sky: #8ab4c7;
     --mint: #7db89e; --lavender: #9b8ec4; --sunset: #d4845a;
     --shadow: rgba(74,55,40,0.08); --shadow-md: rgba(74,55,40,0.12); --shadow-lg: rgba(74,55,40,0.18);
     --overlay: rgba(74,55,40,0.3);
@@ -23,7 +23,7 @@
   [data-theme="dark"] {
     --paper: #1f1a15; --paper-2: #262019; --paper-dark: #2a231c;
     --paper-line: #3a3026; --ink: #e8dcc4; --ink-light: #b8a99a; --ink-faint: #7a6a5a;
-    --gold: #e0b865; --rose: #d8909c; --sky: #9ac4d7; --mint: #8dc8ae;
+    --gold: #e0b865; --gold-glow: #f0d48a; --gold-dark: #c49a42; --rose: #d8909c; --sky: #9ac4d7; --mint: #8dc8ae;
     --lavender: #a89bd4; --sunset: #e09570;
     --shadow: rgba(0,0,0,0.3); --shadow-md: rgba(0,0,0,0.4); --shadow-lg: rgba(0,0,0,0.5);
     --overlay: rgba(10,8,5,0.6);
@@ -35,7 +35,7 @@
   [data-theme="stars"] {
     --paper: #0a0a1f; --paper-2: #12122e; --paper-dark: #1a1a3a;
     --paper-line: #2a2a5a; --ink: #e8e8ff; --ink-light: #b8b8e0; --ink-faint: #6a6a9a;
-    --gold: #ffd700; --rose: #ff9ecb; --sky: #7ec8ff; --mint: #7effc8;
+    --gold: #ffd700; --gold-glow: #ffed4a; --gold-dark: #e6c200; --rose: #ff9ecb; --sky: #7ec8ff; --mint: #7effc8;
     --lavender: #c89eff; --sunset: #ffb87e;
     --shadow: rgba(0,0,0,0.5); --shadow-md: rgba(0,0,0,0.6); --shadow-lg: rgba(0,0,0,0.7);
     --overlay: rgba(5,5,20,0.7);
@@ -47,7 +47,7 @@
   [data-theme="spring"] {
     --paper: #f0f8e8; --paper-2: #e0f0d0; --paper-dark: #d0e8b8;
     --paper-line: #a8c888; --ink: #2a4a1a; --ink-light: #4a6a3a; --ink-faint: #8aaa7a;
-    --gold: #d4a853; --rose: #e88aa0; --sky: #88c8e8; --mint: #6aaa5a;
+    --gold: #8bc34a; --gold-glow: #aed581; --gold-dark: #689f38; --rose: #e88aa0; --sky: #88c8e8; --mint: #6aaa5a;
     --lavender: #b898d8; --sunset: #e8a868;
     --shadow: rgba(42,74,26,0.1); --shadow-md: rgba(42,74,26,0.15); --shadow-lg: rgba(42,74,26,0.2);
     --overlay: rgba(42,74,26,0.3);
@@ -59,7 +59,7 @@
   [data-theme="winter"] {
     --paper: #e8f0f8; --paper-2: #d8e8f0; --paper-dark: #c8d8e8;
     --paper-line: #a8c0d8; --ink: #2a3a4a; --ink-light: #4a5a6a; --ink-faint: #8a9aaa;
-    --gold: #d4a853; --rose: #c898a8; --sky: #78a8c8; --mint: #88b8c8;
+    --gold: #78a8c8; --gold-glow: #a8d0e8; --gold-dark: #5a8aaa; --rose: #c898a8; --sky: #78a8c8; --mint: #88b8c8;
     --lavender: #a898c8; --sunset: #d8a888;
     --shadow: rgba(42,58,74,0.1); --shadow-md: rgba(42,58,74,0.15); --shadow-lg: rgba(42,58,74,0.2);
     --overlay: rgba(42,58,74,0.3);
@@ -71,7 +71,7 @@
   [data-theme="fireworks"] {
     --paper: #1a1020; --paper-2: #251830; --paper-dark: #302040;
     --paper-line: #4a3060; --ink: #f0e0ff; --ink-light: #c8b0e0; --ink-faint: #8a709a;
-    --gold: #ffcc00; --rose: #ff66aa; --sky: #66ccff; --mint: #66ffaa;
+    --gold: #ffcc00; --gold-glow: #ffdd44; --gold-dark: #e6b800; --rose: #ff66aa; --sky: #66ccff; --mint: #66ffaa;
     --lavender: #cc66ff; --sunset: #ff9966;
     --shadow: rgba(0,0,0,0.5); --shadow-md: rgba(0,0,0,0.6); --shadow-lg: rgba(0,0,0,0.7);
     --overlay: rgba(10,5,15,0.7);
@@ -83,7 +83,7 @@
   [data-theme="bird"] {
     --paper: #e8f4ff; --paper-2: #d8ecff; --paper-dark: #c8e0ff;
     --paper-line: #a8c8e8; --ink: #2a4a6a; --ink-light: #4a6a8a; --ink-faint: #8aaac8;
-    --gold: #d4a853; --rose: #e898b0; --sky: #68a8d8; --mint: #88c8b8;
+    --gold: #68a8d8; --gold-glow: #98c8e8; --gold-dark: #4a88b8; --rose: #e898b0; --sky: #68a8d8; --mint: #88c8b8;
     --lavender: #b898d8; --sunset: #e8a878;
     --shadow: rgba(42,74,106,0.1); --shadow-md: rgba(42,74,106,0.15); --shadow-lg: rgba(42,74,106,0.2);
     --overlay: rgba(42,74,106,0.3);
@@ -92,11 +92,10 @@
     --header-bg: rgba(232,244,255,0.98);
   }
 
-  /* === NEW: OCEAN === */
   [data-theme="ocean"] {
     --paper: #0a2540; --paper-2: #0d3252; --paper-dark: #124068;
     --paper-line: #1e5a85; --ink: #e8f4ff; --ink-light: #b8d8f0; --ink-faint: #6a98b8;
-    --gold: #4ecdc4; --gold-glow: #95e1d3; --rose: #ff8fa3; --sky: #7ec8ff;
+    --gold: #4ecdc4; --gold-glow: #95e1d3; --gold-dark: #3db8b0; --rose: #ff8fa3; --sky: #7ec8ff;
     --mint: #4ecdc4; --lavender: #a78bfa; --sunset: #ffb87e;
     --shadow: rgba(0,0,0,0.4); --shadow-md: rgba(0,0,0,0.5); --shadow-lg: rgba(0,0,0,0.6);
     --overlay: rgba(5,20,40,0.7);
@@ -105,11 +104,10 @@
     --header-bg: rgba(10,37,64,0.95);
   }
 
-  /* === NEW: SAKURA === */
   [data-theme="sakura"] {
     --paper: #fff5f7; --paper-2: #ffe8ee; --paper-dark: #ffd6e0;
     --paper-line: #f5b8c8; --ink: #5a2a3a; --ink-light: #8a4a5a; --ink-faint: #c88a9a;
-    --gold: #ff69b4; --gold-glow: #ffb7c5; --rose: #ff1493; --sky: #88c8e8;
+    --gold: #ff69b4; --gold-glow: #ffb7c5; --gold-dark: #e65ea3; --rose: #ff1493; --sky: #88c8e8;
     --mint: #7db89e; --lavender: #c89eff; --sunset: #ffb87e;
     --shadow: rgba(90,42,58,0.1); --shadow-md: rgba(90,42,58,0.15); --shadow-lg: rgba(90,42,58,0.2);
     --overlay: rgba(90,42,58,0.3);
@@ -118,11 +116,10 @@
     --header-bg: rgba(255,245,247,0.98);
   }
 
-  /* === NEW: AURORA === */
   [data-theme="aurora"] {
     --paper: #0a1628; --paper-2: #12203a; --paper-dark: #1a2a4a;
     --paper-line: #2a3a5a; --ink: #e8f0ff; --ink-light: #b8c8e0; --ink-faint: #6a7a9a;
-    --gold: #4ade80; --gold-glow: #86efac; --rose: #f472b6; --sky: #60a5fa;
+    --gold: #4ade80; --gold-glow: #86efac; --gold-dark: #3bc96e; --rose: #f472b6; --sky: #60a5fa;
     --mint: #2dd4bf; --lavender: #a78bfa; --sunset: #fbbf24;
     --shadow: rgba(0,0,0,0.5); --shadow-md: rgba(0,0,0,0.6); --shadow-lg: rgba(0,0,0,0.7);
     --overlay: rgba(5,10,20,0.7);
@@ -307,7 +304,7 @@
 
   .btn-primary {
     width: 100%;
-    background: linear-gradient(135deg, var(--gold) 0%, #c49a42 100%);
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
     color: white; box-shadow: 0 4px 15px rgba(212,168,83,0.3);
   }
 
@@ -335,6 +332,23 @@
     color: var(--ink-light); cursor: pointer; background: none; border: none; width: 100%;
   }
   .forgot-password-link:hover { color: var(--gold); }
+
+  .auth-extra-links {
+    display: flex; gap: 8px; margin-top: 16px;
+  }
+
+  .auth-extra-link {
+    flex: 1; text-align: center; padding: 8px 10px;
+    font-family: 'Patrick Hand', cursive; font-size: 15px;
+    color: var(--ink-light); cursor: pointer; background: rgba(212,197,169,0.15);
+    border: 1px dashed var(--paper-line); border-radius: 10px;
+    transition: all 0.3s;
+  }
+
+  .auth-extra-link:hover {
+    color: var(--ink); border-color: var(--gold);
+    background: rgba(212,168,83,0.1);
+  }
 
   .app-screen { flex-direction: column; }
 
@@ -508,7 +522,7 @@
 
   .priority-badge {
     position: absolute; top: -10px; right: 16px;
-    background: linear-gradient(135deg, var(--gold) 0%, #c49a42 100%);
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
     color: white; font-size: 12px; padding: 3px 10px; border-radius: 50px;
     font-family: 'Patrick Hand', cursive; font-weight: 600;
     box-shadow: 0 2px 8px rgba(212,168,83,0.4);
@@ -572,7 +586,7 @@
 
   .fab {
     position: fixed; bottom: 32px; right: 32px; width: 60px; height: 60px;
-    border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, #c49a42 100%);
+    border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
     color: white; border: none; font-size: 28px; cursor: pointer;
     box-shadow: 0 4px 15px rgba(212,168,83,0.4), 0 8px 30px rgba(212,168,83,0.2);
     transition: all 0.3s ease; z-index: 50;
@@ -928,7 +942,7 @@
 
   .diary-add-btn {
     padding: 10px 20px; border-radius: 50px;
-    background: linear-gradient(135deg, var(--gold) 0%, #c49a42 100%);
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
     color: white; border: none; cursor: pointer;
     font-family: 'Patrick Hand', cursive; font-size: 16px;
     box-shadow: 0 4px 15px rgba(212,168,83,0.3);
@@ -1093,12 +1107,74 @@
     white-space: nowrap; pointer-events: auto;
   }
 
-  .toast.warm { background: linear-gradient(135deg, var(--gold) 0%, #c49a42 100%); color: white; }
+  .toast.warm { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: white; }
   .toast.rose { background: linear-gradient(135deg, var(--rose) 0%, #b06a77 100%); color: white; }
   .toast.sky { background: linear-gradient(135deg, var(--sky) 0%, #6a94a7 100%); color: white; }
 
   @keyframes toastIn { from { opacity: 0; transform: translateY(20px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
   @keyframes toastOut { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-10px) scale(0.9); } }
+
+  .import-drop-zone {
+    border: 2px dashed var(--paper-line);
+    border-radius: 14px;
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: var(--input-bg);
+    margin-bottom: 16px;
+  }
+
+  .import-drop-zone:hover,
+  .import-drop-zone.drag-over {
+    border-color: var(--gold);
+    background: rgba(212,168,83,0.08);
+  }
+
+  .import-drop-zone .drop-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 8px;
+    animation: floatIcon 2s ease-in-out infinite;
+  }
+
+  .import-drop-zone .drop-title {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .import-drop-zone .drop-hint {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 14px;
+    color: var(--ink-faint);
+  }
+
+  .import-file-info {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: rgba(212,168,83,0.1);
+    border: 1px solid rgba(212,168,83,0.3);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .import-file-info.show { display: flex; }
+
+  .import-file-info .file-icon { font-size: 22px; }
+  .import-file-info .file-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .import-file-info .file-clear {
+    width: 28px; height: 28px; border: none; background: transparent;
+    cursor: pointer; border-radius: 6px; color: var(--ink-faint);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .import-file-info .file-clear:hover { background: rgba(199,125,138,0.15); color: var(--rose); }
 
   @media (max-width: 600px) {
     .auth-card { padding: 24px 20px; }
@@ -1122,6 +1198,7 @@
     .random-dream-text { font-size: 18px; }
     .theme-grid { grid-template-columns: 1fr; }
     .mode-tabs { display: none; }
+    .auth-extra-links { flex-direction: column; }
   }
 
   ::-webkit-scrollbar { width: 8px; }
@@ -1164,7 +1241,10 @@
           </div>
         </div>
         <button type="submit" class="btn btn-primary">✨ Войти</button>
-        <button type="button" class="forgot-password-link" onclick="openForgotPasswordModal()">Забыли пароль?</button>
+        <div class="auth-extra-links">
+          <button type="button" class="auth-extra-link" onclick="openForgotPasswordModal()">🔮 Забыли пароль?</button>
+          <button type="button" class="auth-extra-link" onclick="openImportModal()">📥 Импорт данных</button>
+        </div>
       </form>
       <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
         <div class="form-group">
@@ -1212,7 +1292,8 @@
             <button class="user-dropdown-item" onclick="openProfileEditModal()">👤 Редактировать профиль</button>
             <button class="user-dropdown-item" onclick="openCategoriesModal()">📂 Мои категории</button>
             <button class="user-dropdown-item" onclick="openArchiveModal()">📦 Архивные мечты</button>
-            <button class="user-dropdown-item" onclick="openResetModal()">🔄 Сбросить всё</button>
+            <button class="user-dropdown-item" onclick="exportUserData()">💾 Экспортировать данные</button>
+            <button class="user-dropdown-item" onclick="openResetModal()">🗑️ Удалить профиль</button>
             <div class="user-dropdown-divider"></div>
             <button class="user-dropdown-item danger" onclick="handleLogout()">🚪 Выйти</button>
           </div>
@@ -1364,12 +1445,11 @@ class Particle {
       this.rotationSpeed = (Math.random() - 0.5) * 0.05;
       this.color = ['#7cb342', '#8bc34a', '#9ccc65', '#aed581'][Math.floor(Math.random() * 4)];
     } else if (this.type === 'snow') {
-      // Усиленная метель для зимней темы
       this.x = Math.random() * canvas.width;
       this.y = -20;
       this.size = Math.random() * 5 + 2;
-      this.speedX = (Math.random() - 0.3) * 3; // сильный боковой ветер
-      this.speedY = Math.random() * 2.5 + 1.5; // быстрее падение
+      this.speedX = (Math.random() - 0.3) * 3;
+      this.speedY = Math.random() * 2.5 + 1.5;
       this.opacity = Math.random() * 0.8 + 0.2;
       this.color = '#ffffff';
       this.wobble = Math.random() * Math.PI * 2;
@@ -1383,7 +1463,6 @@ class Particle {
       this.opacity = Math.random() * 0.3 + 0.2;
       this.color = '#ffffff';
     } else if (this.type === 'bubble') {
-      // Океан — пузырьки
       this.x = Math.random() * canvas.width;
       this.y = canvas.height + 20;
       this.size = Math.random() * 8 + 3;
@@ -1395,7 +1474,6 @@ class Particle {
       const colors = ['#ffffff', '#95e1d3', '#7ec8ff', '#4ecdc4'];
       this.color = colors[Math.floor(Math.random() * colors.length)];
     } else if (this.type === 'petal') {
-      // Сакура — лепестки
       this.x = Math.random() * canvas.width;
       this.y = -20;
       this.size = Math.random() * 10 + 6;
@@ -1409,7 +1487,6 @@ class Particle {
       const colors = ['#ffb7c5', '#ff9eb5', '#ffc0cb', '#ff69b4', '#ffd1dc'];
       this.color = colors[Math.floor(Math.random() * colors.length)];
     } else if (this.type === 'butterfly') {
-      // Сакура — бабочки
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height * 0.7;
       this.size = Math.random() * 8 + 6;
@@ -1496,13 +1573,11 @@ class Particle {
       ctx.arc(this.x + this.size * 1.2, this.y, this.size * 0.7, 0, Math.PI * 2);
       ctx.fill();
     } else if (this.type === 'bubble') {
-      // Пузырёк с бликом
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.strokeStyle = this.color;
       ctx.lineWidth = 1.5;
       ctx.stroke();
-      // Блик
       ctx.beginPath();
       ctx.arc(this.x - this.size * 0.3, this.y - this.size * 0.3, this.size * 0.25, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(255,255,255,0.8)';
@@ -1515,7 +1590,6 @@ class Particle {
       ctx.beginPath();
       ctx.ellipse(0, 0, this.size, this.size * 0.5, 0, 0, Math.PI * 2);
       ctx.fill();
-      // Лёгкая прожилка
       ctx.strokeStyle = 'rgba(255,255,255,0.3)';
       ctx.lineWidth = 0.5;
       ctx.beginPath();
@@ -1528,21 +1602,18 @@ class Particle {
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.fillStyle = this.color;
-      // Левое крыло
       ctx.save();
       ctx.scale(1, wingFlap > 0 ? 0.5 + wingFlap * 0.5 : 1);
       ctx.beginPath();
       ctx.ellipse(-this.size * 0.6, 0, this.size, this.size * 0.7, -0.3, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
-      // Правое крыло
       ctx.save();
       ctx.scale(1, wingFlap > 0 ? 0.5 + wingFlap * 0.5 : 1);
       ctx.beginPath();
       ctx.ellipse(this.size * 0.6, 0, this.size, this.size * 0.7, 0.3, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
-      // Тельце
       ctx.fillStyle = 'rgba(60,40,60,0.8)';
       ctx.beginPath();
       ctx.ellipse(0, 0, this.size * 0.15, this.size * 0.6, 0, 0, Math.PI * 2);
@@ -1553,11 +1624,8 @@ class Particle {
   }
 }
 
-// Кометы для звёздной ночи
 class Comet {
-  constructor() {
-    this.reset();
-  }
+  constructor() { this.reset(); }
   reset() {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height * 0.3;
@@ -1581,7 +1649,6 @@ class Comet {
     }
   }
   draw() {
-    // Хвост
     for (let i = 0; i < this.trail.length; i++) {
       const t = this.trail[i];
       const alpha = (i / this.trail.length) * 0.7;
@@ -1592,7 +1659,6 @@ class Comet {
       ctx.fillStyle = '#ffffff';
       ctx.fill();
     }
-    // Голова кометы с сиянием
     ctx.globalAlpha = 1;
     const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 4);
     gradient.addColorStop(0, 'rgba(255,255,255,1)');
@@ -1606,7 +1672,6 @@ class Comet {
   }
 }
 
-// Цветы сакуры внизу (статичные)
 function initSakuraFlowers() {
   sakuraFlowers = [];
   const count = Math.floor(canvas.width / 60);
@@ -1626,7 +1691,6 @@ function drawSakuraFlower(f) {
   ctx.translate(f.x, f.y);
   ctx.rotate(f.rotation);
   ctx.globalAlpha = 0.7;
-  // 5 лепестков
   for (let i = 0; i < 5; i++) {
     ctx.save();
     ctx.rotate((i / 5) * Math.PI * 2);
@@ -1636,7 +1700,6 @@ function drawSakuraFlower(f) {
     ctx.fill();
     ctx.restore();
   }
-  // Центр
   ctx.fillStyle = '#fff59d';
   ctx.beginPath();
   ctx.arc(0, 0, f.size * 0.3, 0, Math.PI * 2);
@@ -1645,7 +1708,6 @@ function drawSakuraFlower(f) {
   ctx.globalAlpha = 1;
 }
 
-// Волны для океана
 function drawOceanWaves() {
   oceanTime += 0.01;
   const waveColors = [
@@ -1673,7 +1735,6 @@ function drawOceanWaves() {
   }
 }
 
-// Северное сияние
 function drawAurora() {
   auroraTime += 0.005;
   const layers = [
@@ -1709,7 +1770,6 @@ function initParticles() {
   } else if (currentTheme === 'spring') {
     for (let i = 0; i < 30; i++) particles.push(new Particle('leaf'));
   } else if (currentTheme === 'winter') {
-    // Усиленная метель: 180 снежинок
     for (let i = 0; i < 180; i++) particles.push(new Particle('snow'));
   } else if (currentTheme === 'bird') {
     for (let i = 0; i < 8; i++) particles.push(new Particle('cloud'));
@@ -1743,24 +1803,20 @@ function createFirework() {
 function animateParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Северное сияние рисуется первым (фон)
   if (currentTheme === 'aurora') {
     drawAurora();
   }
 
   particles.forEach(p => { p.update(); p.draw(); });
 
-  // Волны океана
   if (currentTheme === 'ocean') {
     drawOceanWaves();
   }
 
-  // Цветы сакуры внизу
   if (currentTheme === 'sakura') {
     sakuraFlowers.forEach(drawSakuraFlower);
   }
 
-  // Кометы для звёздной ночи
   if (currentTheme === 'stars') {
     if (Math.random() < 0.005 && comets.length < 3) {
       comets.push(new Comet());
@@ -2082,7 +2138,7 @@ function openInfoModal() {
         <div class="info-credits-title">✨ Для вас старались</div>
         <div class="info-credit-row"><span class="label">Автор идеи и креатив</span><span class="value">MylnikCode</span></div>
         <div class="info-credit-row"><span class="label">Реализация</span><span class="value">Qwen 3.7 Plus</span></div>
-        <div class="info-credit-row"><span class="label">Версия платформы</span><span class="value">v5.1</span></div>
+        <div class="info-credit-row"><span class="label">Версия платформы</span><span class="value">v5.2</span></div>
       </div>
       <div class="info-roadmap">
         <div class="info-roadmap-title">🔮 Наши мечты о платформе</div>
@@ -2699,17 +2755,17 @@ function openResetModal() {
   document.getElementById('userDropdown').classList.remove('show');
   const u = getCurrentUser();
   showGenericModal(`
-    <h3 class="modal-title">🔄 Сброс профиля</h3>
-    <div class="modal-subtitle">${escapeHtml(u.name)}, это действие удалит все твои мечты, мысли и вернёт категории к стандартным.</div>
-    <div class="reset-warning">⚠️ Будут удалены <strong>все мечты и мысли</strong> без возможности восстановления.</div>
+    <h3 class="modal-title">🗑️ Удалить профиль</h3>
+    <div class="modal-subtitle">${escapeHtml(u.name)}, это действие навсегда удалит твой аккаунт и все данные из системы.</div>
+    <div class="reset-warning">⚠️ Будут удалены <strong>все мечты, мысли, категории и сам профиль</strong>. Восстановить их будет невозможно.</div>
     <div class="form-group">
       <label>Чтобы подтвердить, введи фразу ниже:</label>
-      <div class="reset-input-wrapper"><input type="text" id="resetConfirmInput" placeholder="Подтверждаю" oninput="checkResetInput()"></div>
-      <div class="reset-hint">Введи точно: <strong>Подтверждаю</strong></div>
+      <div class="reset-input-wrapper"><input type="text" id="resetConfirmInput" placeholder="Удалить профиль" oninput="checkResetInput()"></div>
+      <div class="reset-hint">Введи точно: <strong>Удалить профиль</strong></div>
     </div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button>
-      <button class="btn btn-danger" id="resetConfirmBtn" disabled onclick="performReset()">🗑️ Сбросить всё</button>
+      <button class="btn btn-danger" id="resetConfirmBtn" disabled onclick="performReset()">🗑️ Удалить навсегда</button>
     </div>
   `);
 }
@@ -2717,26 +2773,277 @@ function openResetModal() {
 function checkResetInput() {
   const input = document.getElementById('resetConfirmInput');
   const btn = document.getElementById('resetConfirmBtn');
-  btn.disabled = input.value.trim() !== 'Подтверждаю';
+  btn.disabled = input.value.trim() !== 'Удалить профиль';
 }
 
 async function performReset() {
   const u = getCurrentUser();
+  if (!u) return;
+  
   const doubleConfirm = await customConfirm({
-    title: 'Точно-точно?', message: `${u.name}, все мечты и мысли будут потеряны навсегда.`,
-    icon: '⚠️', confirmText: 'Да, сбросить', cancelText: 'Нет, отменить', danger: true
+    title: 'Точно-точно?', message: `${u.name}, твой профиль и все данные будут удалены навсегда. Это действие нельзя отменить.`,
+    icon: '⚠️', confirmText: 'Да, удалить', cancelText: 'Нет, отменить', danger: true
   });
   if (!doubleConfirm) return;
-  u.dreams = [];
-  u.thoughts = [];
-  u.categories = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
-  saveCurrentUser(u);
+  
+  const users = getUsers();
+  delete users[u.login];
+  saveUsers(users);
+  localStorage.removeItem('dreamboard_current_user');
+  
   closeGenericModal();
-  currentFilter = 'all';
-  hideFulfilled = false;
-  currentDiaryPage = 0;
-  renderDreams();
-  showToast(`Профиль сброшен, ${u.name}. Начни с чистого листа 🌱`, 'warm');
+  
+  document.getElementById('appScreen').classList.remove('active');
+  document.getElementById('authScreen').classList.add('active');
+  document.getElementById('loginForm').reset();
+  document.getElementById('registerForm').reset();
+  hideAuthError();
+  
+  if (warmPhraseTimer) clearTimeout(warmPhraseTimer);
+  
+  showToast(`Профиль удалён. Будем скучать, ${u.name} 🌙`);
+}
+
+// ==========================================
+// EXPORT / IMPORT
+// ==========================================
+const EXPORT_FORMAT_VERSION = 1;
+const EXPORT_MAGIC = 'DREAMBOARD_EXPORT';
+
+function exportUserData() {
+  document.getElementById('userDropdown').classList.remove('show');
+  const u = getCurrentUser();
+  if (!u) return;
+
+  const exportData = {
+    __magic: EXPORT_MAGIC,
+    __version: EXPORT_FORMAT_VERSION,
+    exportedAt: new Date().toISOString(),
+    user: {
+      name: u.name,
+      login: u.login,
+      password: u.password,
+      createdAt: u.createdAt || Date.now()
+    },
+    dreams: Array.isArray(u.dreams) ? u.dreams : [],
+    thoughts: Array.isArray(u.thoughts) ? u.thoughts : [],
+    categories: Array.isArray(u.categories) ? u.categories : JSON.parse(JSON.stringify(DEFAULT_CATEGORIES))
+  };
+
+  const json = JSON.stringify(exportData, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const safeLogin = (u.login || 'user').replace(/[^a-z0-9а-я_-]/gi, '_');
+  const dateStr = new Date().toISOString().slice(0, 10);
+  const filename = `dreamboard_${safeLogin}_${dateStr}.json`;
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+  showToast(`Файл «${filename}» сохранён 💾`, 'warm');
+}
+
+function openImportModal() {
+  showGenericModal(`
+    <h3 class="modal-title">📥 Импорт данных</h3>
+    <div class="modal-subtitle">Загрузи файл, который ты ранее экспортировал из DreamBoard. Все мечты, мысли и категории вернутся к тебе ✨</div>
+    <div class="import-drop-zone" id="importDropZone">
+      <span class="drop-icon">📁</span>
+      <div class="drop-title">Перетащи файл сюда или нажми</div>
+      <div class="drop-hint">Подойдёт файл .json, созданный в DreamBoard</div>
+      <input type="file" id="importFileInput" accept=".json,application/json" style="display:none;">
+    </div>
+    <div class="import-file-info" id="importFileInfo">
+      <span class="file-icon">📄</span>
+      <span class="file-name" id="importFileName"></span>
+      <button class="file-clear" onclick="clearImportFile()" title="Убрать файл">✕</button>
+    </div>
+    <div id="importError" class="auth-error" style="margin-bottom:12px;"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button>
+      <button class="btn btn-primary" id="importConfirmBtn" disabled onclick="performImport()">📥 Импортировать</button>
+    </div>
+  `);
+
+  window.__importFile = null;
+  window.__importData = null;
+
+  const dropZone = document.getElementById('importDropZone');
+  const fileInput = document.getElementById('importFileInput');
+
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('drag-over');
+  });
+
+  dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('drag-over');
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleImportFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  fileInput.addEventListener('change', (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      handleImportFile(e.target.files[0]);
+    }
+  });
+}
+
+function handleImportFile(file) {
+  const errorEl = document.getElementById('importError');
+  errorEl.classList.remove('show');
+  errorEl.textContent = '';
+
+  if (!file) return;
+
+  if (!file.name.toLowerCase().endsWith('.json') && file.type !== 'application/json') {
+    errorEl.textContent = 'Пожалуйста, выбери файл в формате .json';
+    errorEl.classList.add('show');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const text = e.target.result;
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (err) {
+        throw new Error('Файл повреждён или содержит некорректный JSON');
+      }
+
+      if (!data || data.__magic !== EXPORT_MAGIC) {
+        throw new Error('Это не файл экспорта DreamBoard. Выбери правильный файл.');
+      }
+
+      if (!data.__version || data.__version > EXPORT_FORMAT_VERSION) {
+        throw new Error('Файл создан в более новой версии DreamBoard. Обнови платформу.');
+      }
+
+      if (!data.user || typeof data.user !== 'object' || !data.user.login || !data.user.name) {
+        throw new Error('В файле отсутствуют обязательные данные профиля.');
+      }
+
+      window.__importFile = file;
+      window.__importData = data;
+
+      const info = document.getElementById('importFileInfo');
+      const nameEl = document.getElementById('importFileName');
+      nameEl.textContent = `${file.name} · ${data.user.name} (@${data.user.login})`;
+      info.classList.add('show');
+
+      document.getElementById('importConfirmBtn').disabled = false;
+    } catch (err) {
+      errorEl.textContent = err.message || 'Не удалось прочитать файл';
+      errorEl.classList.add('show');
+      window.__importFile = null;
+      window.__importData = null;
+      document.getElementById('importConfirmBtn').disabled = true;
+    }
+  };
+
+  reader.onerror = () => {
+    const errorEl = document.getElementById('importError');
+    errorEl.textContent = 'Не удалось прочитать файл. Попробуй ещё раз.';
+    errorEl.classList.add('show');
+  };
+
+  reader.readAsText(file);
+}
+
+function clearImportFile() {
+  window.__importFile = null;
+  window.__importData = null;
+  const info = document.getElementById('importFileInfo');
+  if (info) info.classList.remove('show');
+  const fileInput = document.getElementById('importFileInput');
+  if (fileInput) fileInput.value = '';
+  const btn = document.getElementById('importConfirmBtn');
+  if (btn) btn.disabled = true;
+  const errorEl = document.getElementById('importError');
+  if (errorEl) { errorEl.classList.remove('show'); errorEl.textContent = ''; }
+}
+
+async function performImport() {
+  const data = window.__importData;
+  if (!data) return;
+
+  const users = getUsers();
+  const login = String(data.user.login).trim().toLowerCase();
+  const name = String(data.user.name).trim();
+  const password = String(data.user.password || '');
+
+  if (!login || !name) {
+    showToast('В файле нет имени или логина', 'rose');
+    return;
+  }
+
+  const dreams = Array.isArray(data.dreams) ? data.dreams : [];
+  const thoughts = Array.isArray(data.thoughts) ? data.thoughts : [];
+  const categories = Array.isArray(data.categories) && data.categories.length > 0
+    ? data.categories
+    : JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+
+  let finalLogin = login;
+
+  if (users[finalLogin]) {
+    const confirmed = await customConfirm({
+      title: 'Пользователь уже существует',
+      message: `Логин «@${finalLogin}» уже занят. Импортировать данные в этот аккаунт? Текущие данные будут перезаписаны.`,
+      icon: '⚠️',
+      confirmText: 'Перезаписать',
+      cancelText: 'Отмена',
+      danger: true
+    });
+    if (!confirmed) return;
+
+    users[finalLogin] = {
+      ...users[finalLogin],
+      name,
+      password: password || users[finalLogin].password,
+      dreams,
+      thoughts,
+      categories,
+      importedAt: Date.now()
+    };
+    saveUsers(users);
+    localStorage.setItem('dreamboard_current_user', finalLogin);
+    closeGenericModal();
+    showApp();
+    showToast(`Данные импортированы в @${finalLogin} ✨`, 'warm');
+    return;
+  }
+
+  users[finalLogin] = {
+    name,
+    login: finalLogin,
+    password,
+    dreams,
+    thoughts,
+    categories,
+    createdAt: data.user.createdAt || Date.now(),
+    importedAt: Date.now()
+  };
+  saveUsers(users);
+  localStorage.setItem('dreamboard_current_user', finalLogin);
+  closeGenericModal();
+  showApp();
+  showToast(`Добро пожаловать, ${name}! Данные импортированы ✨`, 'warm');
 }
 
 // ==========================================
