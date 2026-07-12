@@ -3216,14 +3216,6 @@ function showToast(msg, style = '') {
   container.appendChild(toast);
   setTimeout(() => toast.remove(), 4000);
 }
-
-// ==========================================
-// INIT
-// ==========================================
-(function init() {
-  const u = getCurrentUser();
-  if (u) showApp();
-})();
 </script>
 </body>
 </html>
