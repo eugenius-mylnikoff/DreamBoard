@@ -1,0 +1,20 @@
+{
+    "name": "DreamBoard — Книга мечтаний",
+    "short_name": "DreamBoard",
+    "description": "Запиши свою мечту — и она станет ближе ✨",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#fdf6e3",
+    "theme_color": "#d4a853",
+    "lang": "ru",
+    "icons": [
+        {
+            "src": "./icons/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}

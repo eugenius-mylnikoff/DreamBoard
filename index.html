@@ -1,0 +1,4862 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PWA для iPhone -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#d4a853">
+  <link rel="apple-touch-icon" href="./icons/icon.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="DreamBoard">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+
+  <title>DreamBoard — Книга мечтаний</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fdf6e3;
+      --paper-2: #f8edcf;
+      --paper-dark: #f5e6c8;
+      --paper-line: #d4c5a9;
+      --ink: #4a3728;
+      --ink-light: #7a6455;
+      --ink-faint: #b8a99a;
+      --gold: #d4a853;
+      --gold-glow: #f0d48a;
+      --gold-dark: #b8923f;
+      --rose: #c77d8a;
+      --sky: #8ab4c7;
+      --mint: #7db89e;
+      --lavender: #9b8ec4;
+      --sunset: #d4845a;
+      --shadow: rgba(74, 55, 40, 0.08);
+      --shadow-md: rgba(74, 55, 40, 0.12);
+      --shadow-lg: rgba(74, 55, 40, 0.18);
+      --overlay: rgba(74, 55, 40, 0.3);
+      --card-bg: linear-gradient(145deg, #fffef9 0%, #fdf6e3 100%);
+      --input-bg: rgba(255, 255, 255, 0.7);
+      --input-bg-focus: white;
+      --header-bg: rgba(253, 246, 227, 0.98);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --transition-theme: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    [data-theme="dark"] {
+      --paper: #1f1a15;
+      --paper-2: #262019;
+      --paper-dark: #2a231c;
+      --paper-line: #3a3026;
+      --ink: #e8dcc4;
+      --ink-light: #b8a99a;
+      --ink-faint: #7a6a5a;
+      --gold: #e0b865;
+      --gold-glow: #f0d48a;
+      --gold-dark: #c49a42;
+      --rose: #d8909c;
+      --sky: #9ac4d7;
+      --mint: #8dc8ae;
+      --lavender: #a89bd4;
+      --sunset: #e09570;
+      --shadow: rgba(0, 0, 0, 0.3);
+      --shadow-md: rgba(0, 0, 0, 0.4);
+      --shadow-lg: rgba(0, 0, 0, 0.5);
+      --overlay: rgba(10, 8, 5, 0.6);
+      --card-bg: linear-gradient(145deg, #2a231c 0%, #241e18 100%);
+      --input-bg: rgba(42, 35, 28, 0.7);
+      --input-bg-focus: #2a231c;
+      --header-bg: rgba(31, 26, 21, 0.95);
+    }
+
+    [data-theme="stars"] {
+      --paper: #0a0a1f;
+      --paper-2: #12122e;
+      --paper-dark: #1a1a3a;
+      --paper-line: #2a2a5a;
+      --ink: #e8e8ff;
+      --ink-light: #b8b8e0;
+      --ink-faint: #6a6a9a;
+      --gold: #ffd700;
+      --gold-glow: #ffed4a;
+      --gold-dark: #e6c200;
+      --rose: #ff9ecb;
+      --sky: #7ec8ff;
+      --mint: #7effc8;
+      --lavender: #c89eff;
+      --sunset: #ffb87e;
+      --shadow: rgba(0, 0, 0, 0.5);
+      --shadow-md: rgba(0, 0, 0, 0.6);
+      --shadow-lg: rgba(0, 0, 0, 0.7);
+      --overlay: rgba(5, 5, 20, 0.7);
+      --card-bg: linear-gradient(145deg, #1a1a3a 0%, #12122e 100%);
+      --input-bg: rgba(26, 26, 58, 0.7);
+      --input-bg-focus: #1a1a3a;
+      --header-bg: rgba(10, 10, 31, 0.95);
+    }
+
+    [data-theme="spring"] {
+      --paper: #f0f8e8;
+      --paper-2: #e0f0d0;
+      --paper-dark: #d0e8b8;
+      --paper-line: #a8c888;
+      --ink: #2a4a1a;
+      --ink-light: #4a6a3a;
+      --ink-faint: #8aaa7a;
+      --gold: #8bc34a;
+      --gold-glow: #aed581;
+      --gold-dark: #689f38;
+      --rose: #e88aa0;
+      --sky: #88c8e8;
+      --mint: #6aaa5a;
+      --lavender: #b898d8;
+      --sunset: #e8a868;
+      --shadow: rgba(42, 74, 26, 0.1);
+      --shadow-md: rgba(42, 74, 26, 0.15);
+      --shadow-lg: rgba(42, 74, 26, 0.2);
+      --overlay: rgba(42, 74, 26, 0.3);
+      --card-bg: linear-gradient(145deg, #fffff0 0%, #f0f8e8 100%);
+      --input-bg: rgba(255, 255, 240, 0.7);
+      --input-bg-focus: #fffff0;
+      --header-bg: rgba(240, 248, 232, 0.98);
+    }
+
+    [data-theme="winter"] {
+      --paper: #e8f0f8;
+      --paper-2: #d8e8f0;
+      --paper-dark: #c8d8e8;
+      --paper-line: #a8c0d8;
+      --ink: #2a3a4a;
+      --ink-light: #4a5a6a;
+      --ink-faint: #8a9aaa;
+      --gold: #78a8c8;
+      --gold-glow: #a8d0e8;
+      --gold-dark: #5a8aaa;
+      --rose: #c898a8;
+      --sky: #78a8c8;
+      --mint: #88b8c8;
+      --lavender: #a898c8;
+      --sunset: #d8a888;
+      --shadow: rgba(42, 58, 74, 0.1);
+      --shadow-md: rgba(42, 58, 74, 0.15);
+      --shadow-lg: rgba(42, 58, 74, 0.2);
+      --overlay: rgba(42, 58, 74, 0.3);
+      --card-bg: linear-gradient(145deg, #ffffff 0%, #e8f0f8 100%);
+      --input-bg: rgba(255, 255, 255, 0.7);
+      --input-bg-focus: #ffffff;
+      --header-bg: rgba(232, 240, 248, 0.98);
+    }
+
+    [data-theme="fireworks"] {
+      --paper: #1a1020;
+      --paper-2: #251830;
+      --paper-dark: #302040;
+      --paper-line: #4a3060;
+      --ink: #f0e0ff;
+      --ink-light: #c8b0e0;
+      --ink-faint: #8a709a;
+      --gold: #ffcc00;
+      --gold-glow: #ffdd44;
+      --gold-dark: #e6b800;
+      --rose: #ff66aa;
+      --sky: #66ccff;
+      --mint: #66ffaa;
+      --lavender: #cc66ff;
+      --sunset: #ff9966;
+      --shadow: rgba(0, 0, 0, 0.5);
+      --shadow-md: rgba(0, 0, 0, 0.6);
+      --shadow-lg: rgba(0, 0, 0, 0.7);
+      --overlay: rgba(10, 5, 15, 0.7);
+      --card-bg: linear-gradient(145deg, #302040 0%, #251830 100%);
+      --input-bg: rgba(48, 32, 64, 0.7);
+      --input-bg-focus: #302040;
+      --header-bg: rgba(26, 16, 32, 0.95);
+    }
+
+    [data-theme="bird"] {
+      --paper: #e8f4ff;
+      --paper-2: #d8ecff;
+      --paper-dark: #c8e0ff;
+      --paper-line: #a8c8e8;
+      --ink: #2a4a6a;
+      --ink-light: #4a6a8a;
+      --ink-faint: #8aaac8;
+      --gold: #68a8d8;
+      --gold-glow: #98c8e8;
+      --gold-dark: #4a88b8;
+      --rose: #e898b0;
+      --sky: #68a8d8;
+      --mint: #88c8b8;
+      --lavender: #b898d8;
+      --sunset: #e8a878;
+      --shadow: rgba(42, 74, 106, 0.1);
+      --shadow-md: rgba(42, 74, 106, 0.15);
+      --shadow-lg: rgba(42, 74, 106, 0.2);
+      --overlay: rgba(42, 74, 106, 0.3);
+      --card-bg: linear-gradient(145deg, #ffffff 0%, #e8f4ff 100%);
+      --input-bg: rgba(255, 255, 255, 0.7);
+      --input-bg-focus: #ffffff;
+      --header-bg: rgba(232, 244, 255, 0.98);
+    }
+
+    [data-theme="ocean"] {
+      --paper: #0a2540;
+      --paper-2: #0d3252;
+      --paper-dark: #124068;
+      --paper-line: #1e5a85;
+      --ink: #e8f4ff;
+      --ink-light: #b8d8f0;
+      --ink-faint: #6a98b8;
+      --gold: #4ecdc4;
+      --gold-glow: #95e1d3;
+      --gold-dark: #3db8b0;
+      --rose: #ff8fa3;
+      --sky: #7ec8ff;
+      --mint: #4ecdc4;
+      --lavender: #a78bfa;
+      --sunset: #ffb87e;
+      --shadow: rgba(0, 0, 0, 0.4);
+      --shadow-md: rgba(0, 0, 0, 0.5);
+      --shadow-lg: rgba(0, 0, 0, 0.6);
+      --overlay: rgba(5, 20, 40, 0.7);
+      --card-bg: linear-gradient(145deg, #124068 0%, #0d3252 100%);
+      --input-bg: rgba(18, 64, 104, 0.7);
+      --input-bg-focus: #124068;
+      --header-bg: rgba(10, 37, 64, 0.95);
+    }
+
+    [data-theme="sakura"] {
+      --paper: #fff5f7;
+      --paper-2: #ffe8ee;
+      --paper-dark: #ffd6e0;
+      --paper-line: #f5b8c8;
+      --ink: #5a2a3a;
+      --ink-light: #8a4a5a;
+      --ink-faint: #c88a9a;
+      --gold: #ff69b4;
+      --gold-glow: #ffb7c5;
+      --gold-dark: #e65ea3;
+      --rose: #ff1493;
+      --sky: #88c8e8;
+      --mint: #7db89e;
+      --lavender: #c89eff;
+      --sunset: #ffb87e;
+      --shadow: rgba(90, 42, 58, 0.1);
+      --shadow-md: rgba(90, 42, 58, 0.15);
+      --shadow-lg: rgba(90, 42, 58, 0.2);
+      --overlay: rgba(90, 42, 58, 0.3);
+      --card-bg: linear-gradient(145deg, #ffffff 0%, #fff5f7 100%);
+      --input-bg: rgba(255, 255, 255, 0.7);
+      --input-bg-focus: #ffffff;
+      --header-bg: rgba(255, 245, 247, 0.98);
+    }
+
+    [data-theme="aurora"] {
+      --paper: #0a1628;
+      --paper-2: #12203a;
+      --paper-dark: #1a2a4a;
+      --paper-line: #2a3a5a;
+      --ink: #e8f0ff;
+      --ink-light: #b8c8e0;
+      --ink-faint: #6a7a9a;
+      --gold: #4ade80;
+      --gold-glow: #86efac;
+      --gold-dark: #3bc96e;
+      --rose: #f472b6;
+      --sky: #60a5fa;
+      --mint: #2dd4bf;
+      --lavender: #a78bfa;
+      --sunset: #fbbf24;
+      --shadow: rgba(0, 0, 0, 0.5);
+      --shadow-md: rgba(0, 0, 0, 0.6);
+      --shadow-lg: rgba(0, 0, 0, 0.7);
+      --overlay: rgba(5, 10, 20, 0.7);
+      --card-bg: linear-gradient(145deg, #1a2a4a 0%, #12203a 100%);
+      --input-bg: rgba(26, 42, 74, 0.7);
+      --input-bg-focus: #1a2a4a;
+      --header-bg: rgba(10, 22, 40, 0.95);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: var(--transition-theme);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 31px, var(--paper-line) 31px, var(--paper-line) 32px);
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+      transition: var(--transition-theme);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(212, 168, 83, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(199, 125, 138, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(138, 180, 199, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    [data-theme="stars"] body::before,
+    [data-theme="fireworks"] body::before,
+    [data-theme="ocean"] body::before,
+    [data-theme="aurora"] body::before {
+      opacity: 0.05;
+    }
+
+    [data-theme="sakura"] body::before {
+      opacity: 0.08;
+    }
+
+    #particles-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      box-shadow: 0 4px 15px var(--shadow-md), 0 2px 8px var(--shadow);
+      cursor: pointer;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      transition: all 0.4s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(15deg);
+      box-shadow: 0 6px 20px var(--shadow-lg);
+    }
+
+    .screen {
+      display: none;
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    .auth-screen {
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 420px;
+      animation: floatIn 0.8s ease-out;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .auth-logo {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .auth-logo .logo-icon {
+      font-size: 56px;
+      display: block;
+      margin-bottom: 12px;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1);
+      }
+
+      50% {
+        transform: scale(1.1) rotate(5deg);
+        filter: brightness(1.2);
+      }
+    }
+
+    .auth-logo h1 {
+      font-family: 'Caveat', cursive;
+      font-size: 48px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .auth-logo p {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 18px;
+      color: var(--ink-light);
+      margin-top: 4px;
+    }
+
+    .auth-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      box-shadow: 0 2px 8px var(--shadow), 0 12px 40px var(--shadow-md);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-theme);
+    }
+
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--rose), var(--sky), var(--mint), var(--lavender));
+    }
+
+    .auth-tabs {
+      display: flex;
+      gap: 4px;
+      background: rgba(212, 197, 169, 0.2);
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 28px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 17px;
+      color: var(--ink-light);
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .auth-tab.active {
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .auth-form {
+      display: none;
+    }
+
+    .auth-form.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      color: var(--ink-light);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--paper-line);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      background: var(--input-bg);
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+      background: var(--input-bg-focus);
+      box-shadow: 0 0 0 4px rgba(212, 168, 83, 0.15);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--ink-faint);
+      font-style: italic;
+    }
+
+    .password-field {
+      position: relative;
+    }
+
+    .password-field input {
+      padding-right: 44px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 14px;
+      color: var(--ink-faint);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .password-toggle:hover {
+      background: rgba(212, 197, 169, 0.3);
+      color: var(--ink);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(212, 168, 83, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 168, 83, 0.4);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: rgba(212, 197, 169, 0.3);
+      color: var(--ink);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 197, 169, 0.5);
+    }
+
+    .btn-danger {
+      background: rgba(199, 125, 138, 0.15);
+      color: var(--rose);
+    }
+
+    .btn-danger:hover {
+      background: rgba(199, 125, 138, 0.25);
+    }
+
+    .auth-error {
+      background: rgba(199, 125, 138, 0.12);
+      color: var(--rose);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 16px;
+      display: none;
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-5px);
+      }
+
+      75% {
+        transform: translateX(5px);
+      }
+    }
+
+    .auth-error.show {
+      display: block;
+    }
+
+    .forgot-password-link {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 15px;
+      color: var(--ink-light);
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+    }
+
+    .forgot-password-link:hover {
+      color: var(--gold);
+    }
+
+    .auth-extra-links {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .auth-extra-link {
+      flex: 1;
+      text-align: center;
+      padding: 8px 10px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 15px;
+      color: var(--ink-light);
+      cursor: pointer;
+      background: rgba(212, 197, 169, 0.15);
+      border: 1px dashed var(--paper-line);
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+
+    .auth-extra-link:hover {
+      color: var(--ink);
+      border-color: var(--gold);
+      background: rgba(212, 168, 83, 0.1);
+    }
+
+    .app-screen {
+      flex-direction: column;
+    }
+
+    .app-header {
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(212, 197, 169, 0.3);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: var(--transition-theme);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-left .h-icon {
+      font-size: 28px;
+    }
+
+    .header-left h2 {
+      font-family: 'Caveat', cursive;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mode-tabs {
+      display: flex;
+      gap: 4px;
+      background: rgba(212, 197, 169, 0.2);
+      border-radius: 10px;
+      padding: 4px;
+      margin-right: 8px;
+    }
+
+    .mode-tab {
+      padding: 6px 14px;
+      border: none;
+      background: transparent;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 15px;
+      color: var(--ink-light);
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .mode-tab.active {
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1.5px solid var(--ink-faint);
+      color: var(--ink-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    .icon-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: scale(1.1);
+    }
+
+    .icon-btn.info-btn {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-glow), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .user-avatar:hover {
+      transform: scale(1.1);
+    }
+
+    .user-menu {
+      position: relative;
+    }
+
+    .user-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 30px var(--shadow-lg);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      min-width: 220px;
+      display: none;
+      overflow: hidden;
+      z-index: 200;
+    }
+
+    .user-dropdown.show {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .user-dropdown-header {
+      padding: 16px;
+      border-bottom: 1px solid rgba(212, 197, 169, 0.3);
+    }
+
+    .user-dropdown-header .name {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 17px;
+      color: var(--ink);
+    }
+
+    .user-dropdown-header .login {
+      font-size: 13px;
+      color: var(--ink-faint);
+    }
+
+    .user-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--ink-light);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .user-dropdown-item:hover {
+      background: rgba(212, 197, 169, 0.2);
+      color: var(--ink);
+    }
+
+    .user-dropdown-item.danger {
+      color: var(--rose);
+    }
+
+    .user-dropdown-item.danger:hover {
+      background: rgba(199, 125, 138, 0.15);
+    }
+
+    .user-dropdown-divider {
+      height: 1px;
+      background: rgba(212, 197, 169, 0.3);
+      margin: 4px 0;
+    }
+
+    .app-main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .greeting {
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      color: var(--ink);
+      margin-bottom: 20px;
+      opacity: 0.85;
+    }
+
+    .greeting .greeting-emoji {
+      display: inline-block;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .stat-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--card-bg);
+      border-radius: 50px;
+      box-shadow: 0 2px 8px var(--shadow);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      font-size: 14px;
+      color: var(--ink-light);
+    }
+
+    .stat-chip .stat-num {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-chip {
+      padding: 8px 16px;
+      border-radius: 50px;
+      border: 2px solid var(--paper-line);
+      background: transparent;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 15px;
+      color: var(--ink-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--gold);
+      color: var(--ink);
+    }
+
+    .filter-chip.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: white;
+    }
+
+    .filter-chip.active-rose {
+      background: var(--rose);
+      border-color: var(--rose);
+      color: white;
+    }
+
+    .filter-chip.active-sky {
+      background: var(--sky);
+      border-color: var(--sky);
+      color: white;
+    }
+
+    .filter-chip.active-mint {
+      background: var(--mint);
+      border-color: var(--mint);
+      color: white;
+    }
+
+    .filter-chip.active-lavender {
+      background: var(--lavender);
+      border-color: var(--lavender);
+      color: white;
+    }
+
+    .filter-chip.active-sunset {
+      background: var(--sunset);
+      border-color: var(--sunset);
+      color: white;
+    }
+
+    .filter-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--paper-line);
+      margin: 0 4px;
+    }
+
+    .filter-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 50px;
+      background: transparent;
+      border: 2px dashed var(--paper-line);
+      font-family: 'Patrick Hand', cursive;
+      font-size: 14px;
+      color: var(--ink-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-toggle:hover {
+      border-color: var(--gold);
+      color: var(--ink);
+    }
+
+    .filter-toggle.active {
+      background: rgba(212, 168, 83, 0.15);
+      border-color: var(--gold);
+      border-style: solid;
+      color: var(--ink);
+    }
+
+    .filter-toggle input {
+      display: none;
+    }
+
+    .filter-toggle .check-box {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--paper-line);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: transparent;
+      transition: all 0.3s;
+    }
+
+    .filter-toggle.active .check-box {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: white;
+    }
+
+    .dreams-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .dream-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 0 2px 12px var(--shadow), 0 8px 30px var(--shadow);
+      border: 1px solid rgba(212, 197, 169, 0.25);
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      animation: cardAppear 0.5s ease-out both;
+    }
+
+    .dream-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 2px;
+      border-radius: 0 0 2px 2px;
+      opacity: 0.6;
+    }
+
+    .dream-card[data-color="gold"]::before {
+      background: var(--gold);
+    }
+
+    .dream-card[data-color="rose"]::before {
+      background: var(--rose);
+    }
+
+    .dream-card[data-color="sky"]::before {
+      background: var(--sky);
+    }
+
+    .dream-card[data-color="mint"]::before {
+      background: var(--mint);
+    }
+
+    .dream-card[data-color="lavender"]::before {
+      background: var(--lavender);
+    }
+
+    .dream-card[data-color="sunset"]::before {
+      background: var(--sunset);
+    }
+
+    .dream-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px var(--shadow-md), 0 12px 40px var(--shadow-md);
+    }
+
+    .dream-card.priority {
+      box-shadow: 0 0 0 2px var(--gold), 0 4px 20px rgba(212, 168, 83, 0.3);
+      animation: cardAppear 0.5s ease-out both, priorityPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes priorityPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 2px var(--gold), 0 4px 20px rgba(212, 168, 83, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 0 0 3px var(--gold-glow), 0 6px 30px rgba(212, 168, 83, 0.5);
+      }
+    }
+
+    .priority-badge {
+      position: absolute;
+      top: -10px;
+      right: 16px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: white;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-family: 'Patrick Hand', cursive;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(212, 168, 83, 0.4);
+    }
+
+    .dream-card.fulfilled {
+      opacity: 0.75;
+    }
+
+    .dream-card.fulfilled .dream-title {
+      text-decoration: line-through;
+      text-decoration-color: var(--gold);
+      text-decoration-thickness: 2px;
+    }
+
+    @keyframes cardAppear {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .dream-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .dream-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .cat-gold {
+      background: rgba(212, 168, 83, 0.15);
+      color: var(--gold);
+    }
+
+    .cat-rose {
+      background: rgba(199, 125, 138, 0.15);
+      color: var(--rose);
+    }
+
+    .cat-sky {
+      background: rgba(138, 180, 199, 0.2);
+      color: var(--sky);
+    }
+
+    .cat-mint {
+      background: rgba(125, 184, 158, 0.15);
+      color: var(--mint);
+    }
+
+    .cat-lavender {
+      background: rgba(155, 142, 196, 0.15);
+      color: var(--lavender);
+    }
+
+    .cat-sunset {
+      background: rgba(212, 132, 90, 0.15);
+      color: var(--sunset);
+    }
+
+    .dream-actions {
+      display: flex;
+      gap: 2px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .dream-card:hover .dream-actions {
+      opacity: 1;
+    }
+
+    .dream-action-btn {
+      width: 30px;
+      height: 30px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: var(--ink-faint);
+    }
+
+    .dream-action-btn:hover {
+      background: rgba(212, 197, 169, 0.3);
+      color: var(--ink);
+    }
+
+    .dream-action-btn.fulfill-btn:hover {
+      background: rgba(212, 168, 83, 0.2);
+    }
+
+    .dream-action-btn.priority-btn:hover {
+      background: rgba(212, 168, 83, 0.2);
+    }
+
+    .dream-action-btn.priority-btn.active {
+      color: var(--gold);
+      background: rgba(212, 168, 83, 0.15);
+    }
+
+    .dream-action-btn.archive-btn:hover {
+      background: rgba(138, 180, 199, 0.2);
+    }
+
+    .dream-action-btn.delete-btn:hover {
+      background: rgba(199, 125, 138, 0.15);
+      color: var(--rose);
+    }
+
+    .dream-title {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .dream-text {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      color: var(--ink-light);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      white-space: pre-wrap;
+    }
+
+    .dream-footer {
+      font-size: 12px;
+      color: var(--ink-faint);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .dream-fulfilled-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      background: rgba(212, 168, 83, 0.15);
+      color: var(--gold);
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .empty-state .empty-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .empty-state h3 {
+      font-family: 'Caveat', cursive;
+      font-size: 32px;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 18px;
+      color: var(--ink-light);
+      margin-bottom: 24px;
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: white;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(212, 168, 83, 0.4), 0 8px 30px rgba(212, 168, 83, 0.2);
+      transition: all 0.3s ease;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fab:hover {
+      transform: scale(1.1) rotate(90deg);
+      box-shadow: 0 6px 20px rgba(212, 168, 83, 0.5);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      animation: modalIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--rose), var(--sky));
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .modal-title {
+      font-family: 'Caveat', cursive;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .modal-subtitle {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      color: var(--ink-light);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .modal .form-group {
+      margin-bottom: 20px;
+    }
+
+    .modal .form-group textarea {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.6;
+    }
+
+    .modal .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a6455' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .modal-actions .btn {
+      flex: 1;
+    }
+
+    .color-picker {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .color-option {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .color-option:hover {
+      transform: scale(1.15);
+    }
+
+    .color-option.selected {
+      border-color: var(--ink);
+      transform: scale(1.15);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .color-option.selected::after {
+      content: '✓';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .color-gold {
+      background: var(--gold);
+    }
+
+    .color-rose {
+      background: var(--rose);
+    }
+
+    .color-sky {
+      background: var(--sky);
+    }
+
+    .color-mint {
+      background: var(--mint);
+    }
+
+    .color-lavender {
+      background: var(--lavender);
+    }
+
+    .color-sunset {
+      background: var(--sunset);
+    }
+
+    .cat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .cat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--input-bg);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .cat-item:hover {
+      border-color: var(--gold);
+    }
+
+    .cat-item .cat-emoji {
+      font-size: 22px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 8px;
+      background: rgba(212, 197, 169, 0.2);
+    }
+
+    .cat-item .cat-emoji:hover {
+      background: rgba(212, 168, 83, 0.25);
+      transform: scale(1.1);
+    }
+
+    .cat-item .cat-name-input {
+      flex: 1;
+      padding: 6px 10px;
+      border: 1px solid transparent;
+      background: transparent;
+      border-radius: 6px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .cat-item .cat-name-input:focus {
+      border-color: var(--gold);
+      background: var(--input-bg-focus);
+    }
+
+    .cat-item .cat-color-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .cat-item .cat-color-dot:hover {
+      transform: scale(1.2);
+    }
+
+    .cat-item .cat-delete-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      color: var(--ink-faint);
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cat-item .cat-delete-btn:hover {
+      background: rgba(199, 125, 138, 0.15);
+      color: var(--rose);
+    }
+
+    .cat-item .cat-delete-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .add-cat-btn {
+      width: 100%;
+      padding: 12px;
+      border: 2px dashed var(--paper-line);
+      background: transparent;
+      border-radius: 12px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      color: var(--ink-light);
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .add-cat-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .emoji-picker-popup {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      background: var(--paper);
+      border: 1px solid rgba(212, 197, 169, 0.4);
+      border-radius: 12px;
+      padding: 10px;
+      box-shadow: 0 8px 25px var(--shadow-lg);
+      z-index: 500;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 4px;
+      max-width: 320px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .emoji-picker-popup .emoji-option {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+    }
+
+    .emoji-picker-popup .emoji-option:hover {
+      background: rgba(212, 168, 83, 0.2);
+      transform: scale(1.2);
+    }
+
+    .emoji-picker-popup .emoji-picker-title {
+      grid-column: 1 / -1;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 13px;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .reset-input-wrapper {
+      position: relative;
+    }
+
+    .reset-input-wrapper input {
+      font-family: 'Patrick Hand', cursive !important;
+      font-size: 17px !important;
+      text-align: center;
+    }
+
+    .reset-hint {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 14px;
+      color: var(--ink-faint);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .reset-warning {
+      background: rgba(199, 125, 138, 0.1);
+      border: 1px solid rgba(199, 125, 138, 0.3);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 20px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 15px;
+      color: var(--rose);
+      line-height: 1.5;
+    }
+
+    .in-dev-illustration {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .in-dev-illustration .big-icon {
+      font-size: 72px;
+      display: block;
+      margin-bottom: 12px;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .in-dev-illustration .sub-icon {
+      font-size: 32px;
+      display: inline-block;
+      margin: 0 6px;
+      animation: floatIcon 2s ease-in-out infinite;
+    }
+
+    .in-dev-illustration .sub-icon:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .in-dev-illustration .sub-icon:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes floatIcon {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .in-dev-quote {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--ink);
+      text-align: center;
+      line-height: 1.4;
+      margin: 16px 0;
+      font-style: italic;
+    }
+
+    .in-dev-text {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      color: var(--ink-light);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .in-dev-progress {
+      height: 6px;
+      background: rgba(212, 197, 169, 0.3);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .in-dev-progress::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 40%;
+      background: linear-gradient(90deg, var(--gold), var(--rose), var(--sky));
+      border-radius: 3px;
+      animation: progressSlide 2s ease-in-out infinite;
+    }
+
+    @keyframes progressSlide {
+      0% {
+        left: -40%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    .info-modal-content {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .info-logo {
+      font-size: 64px;
+      display: block;
+      margin-bottom: 8px;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .info-title {
+      font-family: 'Caveat', cursive;
+      font-size: 36px;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .info-tagline {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 17px;
+      color: var(--ink-light);
+      margin-bottom: 24px;
+    }
+
+    .info-credits {
+      background: var(--input-bg);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .info-credits-title {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--ink);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .info-credit-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      color: var(--ink-light);
+      border-bottom: 1px dashed rgba(212, 197, 169, 0.3);
+    }
+
+    .info-credit-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-credit-row .label {
+      color: var(--ink-faint);
+    }
+
+    .info-credit-row .value {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .info-roadmap {
+      background: var(--input-bg);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .info-roadmap-title {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--ink);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .roadmap-item {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(212, 197, 169, 0.3);
+    }
+
+    .roadmap-item:last-child {
+      border-bottom: none;
+    }
+
+    .roadmap-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .roadmap-content {
+      flex: 1;
+    }
+
+    .roadmap-name {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .roadmap-desc {
+      font-size: 13px;
+      color: var(--ink-light);
+      line-height: 1.4;
+    }
+
+    .info-version {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 14px;
+      color: var(--ink-faint);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .info-version .ver-num {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .archive-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 450px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .archive-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--input-bg);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      border-radius: 12px;
+    }
+
+    .archive-item:hover {
+      border-color: var(--gold);
+    }
+
+    .archive-item-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .archive-item-title {
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .archive-item-cat {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 13px;
+      color: var(--ink-faint);
+    }
+
+    .archive-item-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .archive-action-btn {
+      width: 34px;
+      height: 34px;
+      border: none;
+      background: transparent;
+      color: var(--ink-faint);
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .archive-action-btn:hover {
+      background: rgba(212, 197, 169, 0.3);
+      color: var(--ink);
+    }
+
+    .archive-action-btn.restore-btn:hover {
+      background: rgba(212, 168, 83, 0.2);
+      color: var(--gold);
+    }
+
+    .archive-action-btn.delete-btn:hover {
+      background: rgba(199, 125, 138, 0.15);
+      color: var(--rose);
+    }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+      max-height: 60vh;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .theme-card {
+      padding: 16px;
+      border-radius: 14px;
+      border: 2px solid rgba(212, 197, 169, 0.3);
+      background: var(--input-bg);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .theme-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .theme-card.active {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.2);
+    }
+
+    .theme-icon {
+      font-size: 32px;
+    }
+
+    .theme-name {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 15px;
+      color: var(--ink);
+      text-align: center;
+    }
+
+    .theme-preview {
+      display: flex;
+      gap: 4px;
+    }
+
+    .theme-preview-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .random-dream-modal {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
+      backdrop-filter: blur(8px);
+      z-index: 1500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .random-dream-modal.show {
+      display: flex;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .random-dream-content {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 60px 40px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      animation: randomDreamIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      text-align: center;
+    }
+
+    @keyframes randomDreamIn {
+      from {
+        opacity: 0;
+        transform: scale(0.7) rotate(-5deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
+
+    .random-dream-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--rose), var(--sky), var(--mint), var(--lavender));
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .random-dream-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(212, 197, 169, 0.2);
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: var(--ink-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .random-dream-close:hover {
+      background: rgba(212, 197, 169, 0.4);
+      color: var(--ink);
+      transform: rotate(90deg);
+    }
+
+    .random-dream-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .random-dream-title {
+      font-family: 'Caveat', cursive;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 24px;
+      line-height: 1.2;
+      min-height: 60px;
+    }
+
+    .random-dream-text {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 22px;
+      color: var(--ink-light);
+      line-height: 1.6;
+      margin-bottom: 30px;
+      white-space: pre-wrap;
+      min-height: 40px;
+    }
+
+    .typewriter-char {
+      opacity: 0;
+      display: inline-block;
+      animation: charAppear 0.3s ease forwards;
+    }
+
+    @keyframes charAppear {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .random-dream-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .random-dream-actions .btn {
+      width: auto;
+      padding: 12px 24px;
+    }
+
+    .diary-screen {
+      flex-direction: column;
+    }
+
+    .diary-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .diary-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .diary-title {
+      font-family: 'Caveat', cursive;
+      font-size: 36px;
+      color: var(--ink);
+    }
+
+    .diary-add-btn {
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      box-shadow: 0 4px 15px rgba(212, 168, 83, 0.3);
+      transition: all 0.3s;
+    }
+
+    .diary-add-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 168, 83, 0.4);
+    }
+
+    .diary-page-wrapper {
+      perspective: 1500px;
+      position: relative;
+      min-height: 600px;
+    }
+
+    .diary-page {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: 0 4px 20px var(--shadow-md);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      position: relative;
+      min-height: 600px;
+      transition: transform 0.6s ease;
+    }
+
+    .diary-page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 40px;
+      right: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--paper-line), transparent);
+      opacity: 0.5;
+    }
+
+    .diary-page.flip-left {
+      animation: flipLeft 0.6s ease;
+    }
+
+    .diary-page.flip-right {
+      animation: flipRight 0.6s ease;
+    }
+
+    @keyframes flipLeft {
+      0% {
+        transform: rotateY(0);
+      }
+
+      50% {
+        transform: rotateY(-15deg);
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: rotateY(0);
+      }
+    }
+
+    @keyframes flipRight {
+      0% {
+        transform: rotateY(0);
+      }
+
+      50% {
+        transform: rotateY(15deg);
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: rotateY(0);
+      }
+    }
+
+    .diary-stickers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      min-height: 500px;
+    }
+
+    .diary-sticker {
+      padding: 20px;
+      border-radius: 8px;
+      min-height: 160px;
+      box-shadow: 0 4px 12px var(--shadow-md);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Patrick Hand', cursive;
+    }
+
+    .diary-sticker:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 6px 20px var(--shadow-lg);
+    }
+
+    .diary-sticker.yellow {
+      background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+      color: #5d4037;
+    }
+
+    .diary-sticker.pink {
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+      color: #4a148c;
+    }
+
+    .diary-sticker.blue {
+      background: linear-gradient(135deg, #e1f5fe 0%, #b3e5fc 100%);
+      color: #01579b;
+    }
+
+    .diary-sticker.green {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      color: #1b5e20;
+    }
+
+    .diary-sticker.purple {
+      background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+      color: #4a148c;
+    }
+
+    .diary-sticker.orange {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      color: #e65100;
+    }
+
+    .diary-sticker:nth-child(1) {
+      transform: rotate(-2deg);
+    }
+
+    .diary-sticker:nth-child(2) {
+      transform: rotate(1deg);
+    }
+
+    .diary-sticker:nth-child(3) {
+      transform: rotate(-1deg);
+    }
+
+    .diary-sticker:nth-child(4) {
+      transform: rotate(2deg);
+    }
+
+    .diary-sticker:nth-child(5) {
+      transform: rotate(-1.5deg);
+    }
+
+    .diary-sticker:nth-child(6) {
+      transform: rotate(1.5deg);
+    }
+
+    .diary-sticker-text {
+      font-size: 16px;
+      line-height: 1.5;
+      flex: 1;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .diary-sticker-actions {
+      display: flex;
+      gap: 4px;
+      justify-content: flex-end;
+      margin-top: 10px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .diary-sticker:hover .diary-sticker-actions {
+      opacity: 1;
+    }
+
+    .diary-sticker-btn {
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .diary-sticker-btn:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: scale(1.1);
+    }
+
+    .diary-empty-sticker {
+      border: 2px dashed var(--paper-line);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--ink-faint);
+      box-shadow: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .diary-empty-sticker:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(212, 168, 83, 0.05);
+    }
+
+    .diary-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .diary-page-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid rgba(212, 197, 169, 0.3);
+      box-shadow: 0 2px 8px var(--shadow);
+      cursor: pointer;
+      font-size: 18px;
+      color: var(--ink-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .diary-page-btn:hover:not(:disabled) {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: scale(1.1);
+    }
+
+    .diary-page-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .diary-page-indicator {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      color: var(--ink-light);
+    }
+
+    .diary-color-picker {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .diary-color-option {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .diary-color-option:hover {
+      transform: scale(1.15);
+    }
+
+    .diary-color-option.selected {
+      border-color: var(--ink);
+      transform: scale(1.15);
+    }
+
+    .diary-color-option.yellow {
+      background: #fff59d;
+    }
+
+    .diary-color-option.pink {
+      background: #f8bbd0;
+    }
+
+    .diary-color-option.blue {
+      background: #b3e5fc;
+    }
+
+    .diary-color-option.green {
+      background: #c8e6c9;
+    }
+
+    .diary-color-option.purple {
+      background: #e1bee7;
+    }
+
+    .diary-color-option.orange {
+      background: #ffe0b2;
+    }
+
+    .confetti-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      animation: confettiFall 1.5s ease-out forwards;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg) scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(400px) rotate(720deg) scale(0.3);
+      }
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .toast {
+      padding: 12px 24px;
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 50px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      animation: toastIn 0.4s ease, toastOut 0.4s ease 3.5s forwards;
+      white-space: nowrap;
+      pointer-events: auto;
+    }
+
+    .toast.warm {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: white;
+    }
+
+    .toast.rose {
+      background: linear-gradient(135deg, var(--rose) 0%, #b06a77 100%);
+      color: white;
+    }
+
+    .toast.sky {
+      background: linear-gradient(135deg, var(--sky) 0%, #6a94a7 100%);
+      color: white;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes toastOut {
+      from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.9);
+      }
+    }
+
+    .import-drop-zone {
+      border: 2px dashed var(--paper-line);
+      border-radius: 14px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: var(--input-bg);
+      margin-bottom: 16px;
+    }
+
+    .import-drop-zone:hover,
+    .import-drop-zone.drag-over {
+      border-color: var(--gold);
+      background: rgba(212, 168, 83, 0.08);
+    }
+
+    .import-drop-zone .drop-icon {
+      font-size: 48px;
+      display: block;
+      margin-bottom: 8px;
+      animation: floatIcon 2s ease-in-out infinite;
+    }
+
+    .import-drop-zone .drop-title {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .import-drop-zone .drop-hint {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 14px;
+      color: var(--ink-faint);
+    }
+
+    .import-file-info {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: rgba(212, 168, 83, 0.1);
+      border: 1px solid rgba(212, 168, 83, 0.3);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .import-file-info.show {
+      display: flex;
+    }
+
+    .import-file-info .file-icon {
+      font-size: 22px;
+    }
+
+    .import-file-info .file-name {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .import-file-info .file-clear {
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 6px;
+      color: var(--ink-faint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .import-file-info .file-clear:hover {
+      background: rgba(199, 125, 138, 0.15);
+      color: var(--rose);
+    }
+
+    @media (max-width: 600px) {
+      .auth-card {
+        padding: 24px 20px;
+      }
+
+      .auth-logo h1 {
+        font-size: 38px;
+      }
+
+      .dreams-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .app-main,
+      .diary-container {
+        padding: 16px;
+      }
+
+      .stats-bar {
+        gap: 8px;
+      }
+
+      .stat-chip {
+        padding: 8px 14px;
+        font-size: 13px;
+      }
+
+      .stat-chip .stat-num {
+        font-size: 18px;
+      }
+
+      .modal {
+        padding: 24px 20px;
+      }
+
+      .fab {
+        bottom: 24px;
+        right: 24px;
+        width: 54px;
+        height: 54px;
+        font-size: 24px;
+      }
+
+      .theme-toggle {
+        bottom: 24px;
+        left: 24px;
+        width: 46px;
+        height: 46px;
+        font-size: 20px;
+      }
+
+      .header-left h2 {
+        font-size: 22px;
+      }
+
+      .dream-actions {
+        opacity: 1;
+      }
+
+      .greeting {
+        font-size: 22px;
+      }
+
+      .emoji-picker-popup {
+        grid-template-columns: repeat(6, 1fr);
+        max-width: 240px;
+      }
+
+      .diary-stickers {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .diary-page {
+        padding: 24px;
+      }
+
+      .random-dream-content {
+        padding: 40px 24px;
+      }
+
+      .random-dream-title {
+        font-size: 36px;
+      }
+
+      .random-dream-text {
+        font-size: 18px;
+      }
+
+      .theme-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mode-tabs {
+        display: none;
+      }
+
+      .auth-extra-links {
+        flex-direction: column;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--paper-line);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--ink-faint);
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="particles-canvas"></canvas>
+
+  <button class="theme-toggle" onclick="openThemePicker()" title="Выбрать тему">
+    <span id="themeToggleIcon">🎨</span>
+  </button>
+
+  <div id="authScreen" class="screen auth-screen active">
+    <div class="auth-container">
+      <div class="auth-logo">
+        <span class="logo-icon">🌙</span>
+        <h1>DreamBoard</h1>
+        <p>Запиши свою мечту — и она станет ближе ✨</p>
+      </div>
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="switchAuthTab('login')">Вход</button>
+          <button class="auth-tab" onclick="switchAuthTab('register')">Регистрация</button>
+        </div>
+        <div id="authError" class="auth-error"></div>
+        <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label>👤 Логин</label>
+            <input type="text" id="loginUsername" placeholder="Ваш логин..." required>
+          </div>
+          <div class="form-group">
+            <label>🔑 Пароль</label>
+            <div class="password-field">
+              <input type="password" id="loginPassword" placeholder="Ваш пароль..." required>
+              <button type="button" class="password-toggle"
+                onclick="togglePasswordVisibility('loginPassword', this)">👁️</button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">✨ Войти</button>
+          <div class="auth-extra-links">
+            <button type="button" class="auth-extra-link" onclick="openForgotPasswordModal()">🔮 Забыли пароль?</button>
+            <button type="button" class="auth-extra-link" onclick="openImportModal()">📥 Импорт данных</button>
+          </div>
+        </form>
+        <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label>🌟 Ваше имя</label>
+            <input type="text" id="regName" placeholder="Как вас зовут?" required>
+          </div>
+          <div class="form-group">
+            <label>👤 Логин</label>
+            <input type="text" id="regUsername" placeholder="Придумайте логин..." required>
+          </div>
+          <div class="form-group">
+            <label>🔑 Пароль</label>
+            <div class="password-field">
+              <input type="password" id="regPassword" placeholder="Придумайте пароль..." required minlength="4">
+              <button type="button" class="password-toggle"
+                onclick="togglePasswordVisibility('regPassword', this)">👁️</button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">🚀 Создать аккаунт</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="appScreen" class="screen app-screen">
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="header-left">
+          <span class="h-icon">🌙</span>
+          <h2>DreamBoard</h2>
+        </div>
+        <div class="header-right">
+          <div class="mode-tabs">
+            <button class="mode-tab active" onclick="switchMode('dreams')">Мечты</button>
+            <button class="mode-tab" onclick="switchMode('thoughts')">Мысли</button>
+          </div>
+          <button class="icon-btn" onclick="openRandomDream()" title="Случайная мечта">🎲</button>
+          <button class="icon-btn info-btn" onclick="openInfoModal()" title="О платформе">i</button>
+          <div class="user-menu">
+            <div class="user-avatar" id="userAvatar" onclick="toggleUserMenu()"></div>
+            <div class="user-dropdown" id="userDropdown">
+              <div class="user-dropdown-header">
+                <div class="name" id="dropdownName"></div>
+                <div class="login" id="dropdownLogin"></div>
+              </div>
+              <button class="user-dropdown-item" onclick="openProfileEditModal()">👤 Редактировать профиль</button>
+              <button class="user-dropdown-item" onclick="openCategoriesModal()">📂 Мои категории</button>
+              <button class="user-dropdown-item" onclick="openArchiveModal()">📦 Архивные мечты</button>
+              <button class="user-dropdown-item" onclick="exportUserData()">💾 Экспортировать данные</button>
+              <button class="user-dropdown-item" onclick="openResetModal()">🗑️ Удалить профиль</button>
+              <div class="user-dropdown-divider"></div>
+              <button class="user-dropdown-item danger" onclick="handleLogout()">🚪 Выйти</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main" id="dreamsMode">
+      <div class="greeting" id="greeting"></div>
+      <div class="stats-bar" id="statsBar"></div>
+      <div class="filter-bar" id="filterBar"></div>
+      <div class="dreams-grid" id="dreamsGrid"></div>
+    </main>
+
+    <main class="diary-container" id="thoughtsMode" style="display:none;">
+      <div class="diary-header">
+        <div class="diary-title">📖 Мои мысли</div>
+        <button class="diary-add-btn" onclick="openCreateThoughtModal()">+ Новая мысль</button>
+      </div>
+      <div class="diary-page-wrapper">
+        <div class="diary-page" id="diaryPage">
+          <div class="diary-stickers" id="diaryStickers"></div>
+        </div>
+      </div>
+      <div class="diary-pagination">
+        <button class="diary-page-btn" id="prevPageBtn" onclick="prevDiaryPage()">◀</button>
+        <div class="diary-page-indicator" id="pageIndicator">Страница 1</div>
+        <button class="diary-page-btn" id="nextPageBtn" onclick="nextDiaryPage()">▶</button>
+      </div>
+    </main>
+
+    <button class="fab" id="mainFab" onclick="openCreateModal()" title="Новая мечта">✦</button>
+  </div>
+
+  <div class="modal-overlay" id="dreamModal">
+    <div class="modal">
+      <h3 class="modal-title" id="modalTitle">✨ Новая мечта</h3>
+      <form onsubmit="handleSaveDream(event)">
+        <input type="hidden" id="dreamId">
+        <div class="form-group">
+          <label>🌟 Название мечты</label>
+          <input type="text" id="dreamTitleInput" placeholder="О чём вы мечтаете?" required>
+        </div>
+        <div class="form-group">
+          <label>📝 Описание</label>
+          <textarea id="dreamTextInput" placeholder="Расскажите подробнее..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>📂 Категория</label>
+          <select id="dreamCategory"></select>
+        </div>
+        <div class="form-group">
+          <label>🎨 Цвет</label>
+          <div class="color-picker" id="colorPicker">
+            <div class="color-option color-gold selected" data-color="gold" onclick="selectColor(this)"></div>
+            <div class="color-option color-rose" data-color="rose" onclick="selectColor(this)"></div>
+            <div class="color-option color-sky" data-color="sky" onclick="selectColor(this)"></div>
+            <div class="color-option color-mint" data-color="mint" onclick="selectColor(this)"></div>
+            <div class="color-option color-lavender" data-color="lavender" onclick="selectColor(this)"></div>
+            <div class="color-option color-sunset" data-color="sunset" onclick="selectColor(this)"></div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('dreamModal')">Отмена</button>
+          <button type="submit" class="btn btn-primary" id="modalSubmitBtn">💫 Записать мечту</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="random-dream-modal" id="randomDreamModal">
+    <div class="random-dream-content">
+      <button class="random-dream-close" onclick="closeRandomDream()">✕</button>
+      <div class="random-dream-category" id="randomDreamCategory"></div>
+      <div class="random-dream-title" id="randomDreamTitle"></div>
+      <div class="random-dream-text" id="randomDreamText"></div>
+      <div class="random-dream-actions">
+        <button class="btn btn-secondary" onclick="openRandomDream()">🎲 Ещё одну</button>
+        <button class="btn btn-primary" onclick="closeRandomDream()">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="genericModal">
+    <div class="modal" id="genericModalContent"></div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+    // ==========================================
+    // PARTICLES SYSTEM
+    // ==========================================
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let currentTheme = 'light';
+    let fireworks = [];
+    let comets = [];
+    let auroraTime = 0;
+    let oceanTime = 0;
+    let sakuraFlowers = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      if (currentTheme === 'sakura') initSakuraFlowers();
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor(type = 'default') {
+        this.type = type;
+        this.reset();
+      }
+
+      reset() {
+        if (this.type === 'default') {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 3 + 1;
+          this.speedX = (Math.random() - 0.5) * 0.3;
+          this.speedY = (Math.random() - 0.5) * 0.3 - 0.1;
+          this.opacity = Math.random() * 0.4 + 0.1;
+          this.fadeSpeed = Math.random() * 0.003 + 0.001;
+          this.growing = Math.random() > 0.5;
+          const colors = ['#d4a853', '#c77d8a', '#8ab4c7', '#9b8ec4', '#f0d48a'];
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+        } else if (this.type === 'star') {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 2 + 0.5;
+          this.speedX = 0;
+          this.speedY = 0;
+          this.opacity = Math.random() * 0.8 + 0.2;
+          this.fadeSpeed = Math.random() * 0.005 + 0.002;
+          this.growing = Math.random() > 0.5;
+          this.color = '#ffffff';
+        } else if (this.type === 'leaf') {
+          this.x = Math.random() * canvas.width;
+          this.y = -20;
+          this.size = Math.random() * 8 + 6;
+          this.speedX = (Math.random() - 0.5) * 1;
+          this.speedY = Math.random() * 1.5 + 0.5;
+          this.opacity = Math.random() * 0.6 + 0.4;
+          this.rotation = Math.random() * Math.PI * 2;
+          this.rotationSpeed = (Math.random() - 0.5) * 0.05;
+          this.color = ['#7cb342', '#8bc34a', '#9ccc65', '#aed581'][Math.floor(Math.random() * 4)];
+        } else if (this.type === 'snow') {
+          this.x = Math.random() * canvas.width;
+          this.y = -20;
+          this.size = Math.random() * 5 + 2;
+          this.speedX = (Math.random() - 0.3) * 3;
+          this.speedY = Math.random() * 2.5 + 1.5;
+          this.opacity = Math.random() * 0.8 + 0.2;
+          this.color = '#ffffff';
+          this.wobble = Math.random() * Math.PI * 2;
+          this.wobbleSpeed = Math.random() * 0.05 + 0.02;
+        } else if (this.type === 'cloud') {
+          this.x = -100;
+          this.y = Math.random() * canvas.height * 0.6;
+          this.size = Math.random() * 40 + 30;
+          this.speedX = Math.random() * 0.3 + 0.1;
+          this.speedY = 0;
+          this.opacity = Math.random() * 0.3 + 0.2;
+          this.color = '#ffffff';
+        } else if (this.type === 'bubble') {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height + 20;
+          this.size = Math.random() * 8 + 3;
+          this.speedX = (Math.random() - 0.5) * 0.5;
+          this.speedY = -(Math.random() * 1 + 0.5);
+          this.opacity = Math.random() * 0.5 + 0.3;
+          this.wobble = Math.random() * Math.PI * 2;
+          this.wobbleSpeed = Math.random() * 0.03 + 0.01;
+          const colors = ['#ffffff', '#95e1d3', '#7ec8ff', '#4ecdc4'];
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+        } else if (this.type === 'petal') {
+          this.x = Math.random() * canvas.width;
+          this.y = -20;
+          this.size = Math.random() * 10 + 6;
+          this.speedX = (Math.random() - 0.5) * 1.2;
+          this.speedY = Math.random() * 1 + 0.4;
+          this.opacity = Math.random() * 0.7 + 0.3;
+          this.rotation = Math.random() * Math.PI * 2;
+          this.rotationSpeed = (Math.random() - 0.5) * 0.04;
+          this.wobble = Math.random() * Math.PI * 2;
+          this.wobbleSpeed = Math.random() * 0.03 + 0.01;
+          const colors = ['#ffb7c5', '#ff9eb5', '#ffc0cb', '#ff69b4', '#ffd1dc'];
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+        } else if (this.type === 'butterfly') {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height * 0.7;
+          this.size = Math.random() * 8 + 6;
+          this.speedX = (Math.random() - 0.5) * 1;
+          this.speedY = (Math.random() - 0.5) * 0.5;
+          this.opacity = Math.random() * 0.6 + 0.4;
+          this.wingPhase = Math.random() * Math.PI * 2;
+          this.wingSpeed = Math.random() * 0.15 + 0.1;
+          const colors = ['#ff69b4', '#ffb7c5', '#c89eff', '#88c8e8', '#f0d48a'];
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+        }
+      }
+
+      update() {
+        if (this.type === 'default' || this.type === 'star') {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.growing) {
+            this.opacity += this.fadeSpeed;
+            if (this.opacity >= 0.8) this.growing = false;
+          } else {
+            this.opacity -= this.fadeSpeed;
+            if (this.opacity <= 0) this.reset();
+          }
+          if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+        } else if (this.type === 'leaf') {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          this.rotation += this.rotationSpeed;
+          if (this.y > canvas.height + 20) this.reset();
+        } else if (this.type === 'snow') {
+          this.wobble += this.wobbleSpeed;
+          this.x += this.speedX + Math.sin(this.wobble) * 1.5;
+          this.y += this.speedY;
+          if (this.y > canvas.height + 20 || this.x < -20 || this.x > canvas.width + 20) this.reset();
+        } else if (this.type === 'cloud') {
+          this.x += this.speedX;
+          if (this.x > canvas.width + 100) this.reset();
+        } else if (this.type === 'bubble') {
+          this.wobble += this.wobbleSpeed;
+          this.x += this.speedX + Math.sin(this.wobble) * 0.5;
+          this.y += this.speedY;
+          if (this.y < -20) this.reset();
+        } else if (this.type === 'petal') {
+          this.wobble += this.wobbleSpeed;
+          this.x += this.speedX + Math.sin(this.wobble) * 1;
+          this.y += this.speedY;
+          this.rotation += this.rotationSpeed;
+          if (this.y > canvas.height + 20) this.reset();
+        } else if (this.type === 'butterfly') {
+          this.wingPhase += this.wingSpeed;
+          this.x += this.speedX + Math.sin(this.wingPhase * 0.3) * 0.8;
+          this.y += this.speedY + Math.cos(this.wingPhase * 0.3) * 0.5;
+          if (this.x < -50 || this.x > canvas.width + 50 || this.y < -50 || this.y > canvas.height + 50) this.reset();
+        }
+      }
+
+      draw() {
+        ctx.globalAlpha = this.opacity;
+        if (this.type === 'default' || this.type === 'star') {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        } else if (this.type === 'leaf') {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.rotation);
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size, this.size * 0.5, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        } else if (this.type === 'snow') {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        } else if (this.type === 'cloud') {
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.arc(this.x + this.size * 0.6, this.y - this.size * 0.2, this.size * 0.8, 0, Math.PI * 2);
+          ctx.arc(this.x + this.size * 1.2, this.y, this.size * 0.7, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (this.type === 'bubble') {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.strokeStyle = this.color;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(this.x - this.size * 0.3, this.y - this.size * 0.3, this.size * 0.25, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,0.8)';
+          ctx.fill();
+        } else if (this.type === 'petal') {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.rotation);
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size, this.size * 0.5, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(-this.size, 0);
+          ctx.lineTo(this.size, 0);
+          ctx.stroke();
+          ctx.restore();
+        } else if (this.type === 'butterfly') {
+          const wingFlap = Math.sin(this.wingPhase) * 0.8;
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.fillStyle = this.color;
+          ctx.save();
+          ctx.scale(1, wingFlap > 0 ? 0.5 + wingFlap * 0.5 : 1);
+          ctx.beginPath();
+          ctx.ellipse(-this.size * 0.6, 0, this.size, this.size * 0.7, -0.3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+          ctx.save();
+          ctx.scale(1, wingFlap > 0 ? 0.5 + wingFlap * 0.5 : 1);
+          ctx.beginPath();
+          ctx.ellipse(this.size * 0.6, 0, this.size, this.size * 0.7, 0.3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+          ctx.fillStyle = 'rgba(60,40,60,0.8)';
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size * 0.15, this.size * 0.6, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    class Comet {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height * 0.3;
+        const angle = Math.PI / 4 + (Math.random() - 0.5) * 0.3;
+        const speed = Math.random() * 6 + 4;
+        this.speedX = Math.cos(angle) * speed;
+        this.speedY = Math.sin(angle) * speed;
+        this.size = Math.random() * 2 + 1.5;
+        this.trail = [];
+        this.maxTrail = 25;
+        this.life = 1;
+        this.active = true;
+      }
+      update() {
+        this.trail.push({ x: this.x, y: this.y });
+        if (this.trail.length > this.maxTrail) this.trail.shift();
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width + 50 || this.y > canvas.height + 50) {
+          this.active = false;
+        }
+      }
+      draw() {
+        for (let i = 0; i < this.trail.length; i++) {
+          const t = this.trail[i];
+          const alpha = (i / this.trail.length) * 0.7;
+          const size = (i / this.trail.length) * this.size;
+          ctx.globalAlpha = alpha;
+          ctx.beginPath();
+          ctx.arc(t.x, t.y, size, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 4);
+        gradient.addColorStop(0, 'rgba(255,255,255,1)');
+        gradient.addColorStop(0.3, 'rgba(255,240,200,0.6)');
+        gradient.addColorStop(1, 'rgba(255,240,200,0)');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    function initSakuraFlowers() {
+      sakuraFlowers = [];
+      const count = Math.floor(canvas.width / 60);
+      for (let i = 0; i < count; i++) {
+        sakuraFlowers.push({
+          x: (i / count) * canvas.width + Math.random() * 40,
+          y: canvas.height - Math.random() * 40 - 10,
+          size: Math.random() * 8 + 6,
+          rotation: Math.random() * Math.PI * 2,
+          color: ['#ff69b4', '#ffb7c5', '#ff9eb5', '#ffc0cb'][Math.floor(Math.random() * 4)]
+        });
+      }
+    }
+
+    function drawSakuraFlower(f) {
+      ctx.save();
+      ctx.translate(f.x, f.y);
+      ctx.rotate(f.rotation);
+      ctx.globalAlpha = 0.7;
+      for (let i = 0; i < 5; i++) {
+        ctx.save();
+        ctx.rotate((i / 5) * Math.PI * 2);
+        ctx.fillStyle = f.color;
+        ctx.beginPath();
+        ctx.ellipse(0, -f.size, f.size * 0.5, f.size, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+      ctx.fillStyle = '#fff59d';
+      ctx.beginPath();
+      ctx.arc(0, 0, f.size * 0.3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    }
+
+    function drawOceanWaves() {
+      oceanTime += 0.01;
+      const waveColors = [
+        'rgba(78, 205, 196, 0.3)',
+        'rgba(126, 200, 255, 0.25)',
+        'rgba(149, 225, 211, 0.2)'
+      ];
+
+      for (let w = 0; w < 3; w++) {
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height);
+        const baseY = canvas.height - 40 - w * 15;
+        const amplitude = 8 + w * 3;
+        const frequency = 0.01 + w * 0.003;
+        const offset = oceanTime * (1 + w * 0.3);
+
+        for (let x = 0; x <= canvas.width; x += 5) {
+          const y = baseY + Math.sin(x * frequency + offset) * amplitude + Math.sin(x * frequency * 2 + offset * 1.5) * amplitude * 0.5;
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(canvas.width, canvas.height);
+        ctx.closePath();
+        ctx.fillStyle = waveColors[w];
+        ctx.fill();
+      }
+    }
+
+    function drawAurora() {
+      auroraTime += 0.005;
+      const layers = [
+        { color1: 'rgba(74, 222, 128, 0.4)', color2: 'rgba(74, 222, 128, 0)', yBase: 80, amplitude: 40, freq: 0.005, speed: 1 },
+        { color1: 'rgba(167, 139, 250, 0.35)', color2: 'rgba(167, 139, 250, 0)', yBase: 120, amplitude: 50, freq: 0.004, speed: 0.7 },
+        { color1: 'rgba(244, 114, 182, 0.3)', color2: 'rgba(244, 114, 182, 0)', yBase: 160, amplitude: 35, freq: 0.006, speed: 1.3 },
+        { color1: 'rgba(45, 212, 191, 0.25)', color2: 'rgba(45, 212, 191, 0)', yBase: 200, amplitude: 45, freq: 0.003, speed: 0.9 }
+      ];
+
+      layers.forEach(layer => {
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        for (let x = 0; x <= canvas.width; x += 10) {
+          const y = layer.yBase + Math.sin(x * layer.freq + auroraTime * layer.speed) * layer.amplitude + Math.sin(x * layer.freq * 2 + auroraTime * layer.speed * 1.5) * layer.amplitude * 0.3;
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(canvas.width, 0);
+        ctx.closePath();
+        const gradient = ctx.createLinearGradient(0, 0, 0, layer.yBase + layer.amplitude);
+        gradient.addColorStop(0, layer.color2);
+        gradient.addColorStop(0.5, layer.color1);
+        gradient.addColorStop(1, layer.color2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      });
+    }
+
+    function initParticles() {
+      particles = [];
+      comets = [];
+      if (currentTheme === 'stars') {
+        for (let i = 0; i < 150; i++) particles.push(new Particle('star'));
+      } else if (currentTheme === 'spring') {
+        for (let i = 0; i < 30; i++) particles.push(new Particle('leaf'));
+      } else if (currentTheme === 'winter') {
+        for (let i = 0; i < 180; i++) particles.push(new Particle('snow'));
+      } else if (currentTheme === 'bird') {
+        for (let i = 0; i < 8; i++) particles.push(new Particle('cloud'));
+      } else if (currentTheme === 'ocean') {
+        for (let i = 0; i < 50; i++) particles.push(new Particle('bubble'));
+      } else if (currentTheme === 'sakura') {
+        for (let i = 0; i < 35; i++) particles.push(new Particle('petal'));
+        for (let i = 0; i < 5; i++) particles.push(new Particle('butterfly'));
+        initSakuraFlowers();
+      } else if (currentTheme === 'aurora') {
+        for (let i = 0; i < 80; i++) particles.push(new Particle('star'));
+      } else {
+        for (let i = 0; i < 60; i++) particles.push(new Particle('default'));
+      }
+    }
+
+    function createFirework() {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height * 0.6;
+      const colors = ['#ff66aa', '#66ccff', '#ffcc00', '#66ffaa', '#cc66ff', '#ff9966'];
+      fireworks.push({
+        x, y,
+        radius: 0,
+        maxRadius: Math.random() * 60 + 40,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        opacity: 1,
+        speed: Math.random() * 2 + 1
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (currentTheme === 'aurora') {
+        drawAurora();
+      }
+
+      particles.forEach(p => { p.update(); p.draw(); });
+
+      if (currentTheme === 'ocean') {
+        drawOceanWaves();
+      }
+
+      if (currentTheme === 'sakura') {
+        sakuraFlowers.forEach(drawSakuraFlower);
+      }
+
+      if (currentTheme === 'stars') {
+        if (Math.random() < 0.005 && comets.length < 3) {
+          comets.push(new Comet());
+        }
+        comets = comets.filter(c => {
+          c.update();
+          c.draw();
+          return c.active;
+        });
+      }
+
+      if (currentTheme === 'fireworks') {
+        if (Math.random() < 0.02) createFirework();
+        fireworks = fireworks.filter(fw => {
+          fw.radius += fw.speed;
+          fw.opacity = 1 - (fw.radius / fw.maxRadius);
+          if (fw.opacity <= 0) return false;
+          ctx.globalAlpha = fw.opacity;
+          ctx.beginPath();
+          ctx.arc(fw.x, fw.y, fw.radius, 0, Math.PI * 2);
+          ctx.strokeStyle = fw.color;
+          ctx.lineWidth = 3;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+          return true;
+        });
+      }
+
+      requestAnimationFrame(animateParticles);
+    }
+
+    initParticles();
+    animateParticles();
+
+    // ==========================================
+    // THEME SYSTEM
+    // ==========================================
+    const THEMES = [
+      { id: 'light', name: 'Светлая', icon: '☀️', colors: ['#fdf6e3', '#d4a853', '#c77d8a'] },
+      { id: 'dark', name: 'Тёмная', icon: '🌙', colors: ['#1f1a15', '#e0b865', '#d8909c'] },
+      { id: 'stars', name: 'Звёздная ночь', icon: '✨', colors: ['#0a0a1f', '#ffd700', '#ffffff'] },
+      { id: 'spring', name: 'Весенний лес', icon: '🌿', colors: ['#f0f8e8', '#6aaa5a', '#8bc34a'] },
+      { id: 'winter', name: 'Зимняя сказка', icon: '❄️', colors: ['#e8f0f8', '#78a8c8', '#ffffff'] },
+      { id: 'fireworks', name: 'Салютами', icon: '🎆', colors: ['#1a1020', '#ff66aa', '#ffcc00'] },
+      { id: 'bird', name: 'Птица', icon: '🕊️', colors: ['#e8f4ff', '#68a8d8', '#ffffff'] },
+      { id: 'ocean', name: 'Океан', icon: '🌊', colors: ['#0a2540', '#4ecdc4', '#95e1d3'] },
+      { id: 'sakura', name: 'Сакура', icon: '🌸', colors: ['#fff5f7', '#ff69b4', '#ffb7c5'] },
+      { id: 'aurora', name: 'Северное сияние', icon: '🌌', colors: ['#0a1628', '#4ade80', '#a78bfa'] }
+    ];
+
+    function applyTheme(themeId) {
+      currentTheme = themeId;
+      document.documentElement.setAttribute('data-theme', themeId);
+      localStorage.setItem('dreamboard_theme', themeId);
+      initParticles();
+    }
+
+    function openThemePicker() {
+      const activeTheme = currentTheme;
+      showGenericModal(`
+    <h3 class="modal-title">🎨 Выбери атмосферу</h3>
+    <div class="modal-subtitle">Каждая тема — это своё настроение. Найди ту, что откликается.</div>
+    <div class="theme-grid">
+      ${THEMES.map(t => `
+        <div class="theme-card ${t.id === activeTheme ? 'active' : ''}" onclick="selectTheme('${t.id}')">
+          <div class="theme-icon">${t.icon}</div>
+          <div class="theme-name">${t.name}</div>
+          <div class="theme-preview">
+            ${t.colors.map(c => `<div class="theme-preview-dot" style="background:${c}"></div>`).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary" onclick="closeGenericModal()">Готово</button>
+    </div>
+  `);
+    }
+
+    function selectTheme(themeId) {
+      applyTheme(themeId);
+      closeGenericModal();
+      setTimeout(openThemePicker, 300);
+    }
+
+    (function initTheme() {
+      const saved = localStorage.getItem('dreamboard_theme') || 'light';
+      applyTheme(saved);
+    })();
+
+    // ==========================================
+    // PASSWORD TOGGLE
+    // ==========================================
+    function togglePasswordVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+      else { input.type = 'password'; btn.textContent = '👁️'; }
+    }
+
+    // ==========================================
+    // DATA LAYER
+    // ==========================================
+    const DEFAULT_CATEGORIES = [
+      { id: 'life', name: 'Жизнь', emoji: '🌱', color: 'mint' },
+      { id: 'travel', name: 'Путешествия', emoji: '✈️', color: 'sky' },
+      { id: 'career', name: 'Карьера', emoji: '💼', color: 'gold' },
+      { id: 'love', name: 'Любовь', emoji: '💕', color: 'rose' },
+      { id: 'creative', name: 'Творчество', emoji: '🎨', color: 'lavender' },
+      { id: 'health', name: 'Здоровье', emoji: '🧘', color: 'mint' },
+      { id: 'finance', name: 'Финансы', emoji: '💰', color: 'gold' },
+      { id: 'other', name: 'Другое', emoji: '🌈', color: 'sunset' }
+    ];
+
+    function getUsers() { return JSON.parse(localStorage.getItem('dreamboard_users') || '{}'); }
+    function saveUsers(users) { localStorage.setItem('dreamboard_users', JSON.stringify(users)); }
+
+    function getCurrentUser() {
+      const login = localStorage.getItem('dreamboard_current_user');
+      if (!login) return null;
+      return getUsers()[login] || null;
+    }
+
+    function saveCurrentUser(user) {
+      const users = getUsers();
+      users[user.login] = user;
+      saveUsers(users);
+    }
+
+    function getDreams() { const u = getCurrentUser(); return u ? (u.dreams || []) : []; }
+    function saveDreams(dreams) { const u = getCurrentUser(); if (u) { u.dreams = dreams; saveCurrentUser(u); } }
+
+    function getThoughts() { const u = getCurrentUser(); return u ? (u.thoughts || []) : []; }
+    function saveThoughts(thoughts) { const u = getCurrentUser(); if (u) { u.thoughts = thoughts; saveCurrentUser(u); } }
+
+    function getCategories() {
+      const u = getCurrentUser();
+      if (!u) return [];
+      if (!u.categories || u.categories.length === 0) {
+        u.categories = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+        saveCurrentUser(u);
+      }
+      return u.categories;
+    }
+
+    function saveCategories(cats) { const u = getCurrentUser(); if (u) { u.categories = cats; saveCurrentUser(u); } }
+    function getCategoryById(id) { return getCategories().find(c => c.id === id) || { id: 'other', name: 'Другое', emoji: '🌈', color: 'sunset' }; }
+
+    // ==========================================
+    // CUSTOM MODAL SYSTEM
+    // ==========================================
+    function showGenericModal(html) {
+      document.getElementById('genericModalContent').innerHTML = html;
+      document.getElementById('genericModal').classList.add('show');
+    }
+
+    function closeGenericModal() { document.getElementById('genericModal').classList.remove('show'); }
+
+    document.getElementById('genericModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('genericModal')) closeGenericModal();
+    });
+
+    function customConfirm({ title = 'Подтвердите', message = '', icon = '🤔', confirmText = 'Да', cancelText = 'Отмена', danger = false }) {
+      return new Promise(resolve => {
+        showGenericModal(`
+      <h3 class="modal-title">${icon} ${escapeHtml(title)}</h3>
+      <div class="modal-subtitle">${escapeHtml(message)}</div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="window.__resolveModal(false)">${cancelText}</button>
+        <button class="btn ${danger ? 'btn-danger' : 'btn-primary'}" onclick="window.__resolveModal(true)">${confirmText}</button>
+      </div>
+    `);
+        window.__resolveModal = (val) => { closeGenericModal(); resolve(val); };
+      });
+    }
+
+    // ==========================================
+    // TIME-BASED GREETING
+    // ==========================================
+    let currentTimeEmoji = '', currentTimeGreeting = '';
+
+    function initGreeting() {
+      const hour = new Date().getHours();
+      if (hour >= 5 && hour < 12) { currentTimeGreeting = 'Доброе утро'; currentTimeEmoji = '🌅'; }
+      else if (hour >= 12 && hour < 17) { currentTimeGreeting = 'Добрый день'; currentTimeEmoji = '☀️'; }
+      else if (hour >= 17 && hour < 22) { currentTimeGreeting = 'Добрый вечер'; currentTimeEmoji = '🌇'; }
+      else { currentTimeGreeting = 'Доброй ночи'; currentTimeEmoji = '🌙'; }
+    }
+
+    function getGreeting() {
+      const u = getCurrentUser();
+      if (!u) return '';
+      return `${currentTimeGreeting}, <strong>${escapeHtml(u.name)}</strong> <span class="greeting-emoji">${currentTimeEmoji}</span>`;
+    }
+
+    // ==========================================
+    // WARM PHRASES
+    // ==========================================
+    const warmPhrases = [
+      "{name}, помни: каждая мечта — это маленькая вселенная ✨",
+      "Ты удивительный человек, {name} 🌙",
+      "{name}, даже самые смелые мечты начинаются с шага 🌱",
+      "Сегодня отличный день, чтобы верить в чудеса, {name} 💫",
+      "{name}, твои мечты важны 🌟",
+      "Вселенная любит тех, кто мечтает, {name} 🌌",
+      "{name}, не торопись. Всё приходит в своё время 🌸",
+      "Ты уже на пути, {name} 💛",
+      "{name}, мечты не стареют 🌿",
+      "Звёзды светят для тех, кто смотрит вверх, {name} ⭐",
+      "{name}, ты делаешь этот мир волшебнее 🌈",
+      "Не бойся мечтать масштабно, {name} 🚀",
+      "Сегодня хороший день для мечтаний, {name} 🌻",
+      "{name}, мечты сбываются у тех, кто верит 💫",
+      "{name}, маленький шаг сегодня — большое чудо завтра 🌱",
+      "Пусть этот день принесёт волшебство, {name} ✨",
+      "{name}, твой внутренний свет делает мечты реальностью 🕯️",
+      "Дыши глубже, {name}. Мечты любят спокойные сердца 🌬️"
+    ];
+
+    let phraseIndex = 0;
+    function showRandomWarmPhrase() {
+      const u = getCurrentUser();
+      const name = u ? u.name : 'друг';
+      const phrase = warmPhrases[phraseIndex % warmPhrases.length].replace('{name}', name);
+      phraseIndex++;
+      const styles = ['', 'warm', 'rose', 'sky'];
+      showToast(phrase, styles[Math.floor(Math.random() * styles.length)]);
+    }
+
+    let warmPhraseTimer = null;
+    function scheduleWarmPhrase() {
+      if (warmPhraseTimer) clearTimeout(warmPhraseTimer);
+      warmPhraseTimer = setTimeout(() => {
+        if (document.getElementById('appScreen').classList.contains('active')) showRandomWarmPhrase();
+        scheduleWarmPhrase();
+      }, (45 + Math.random() * 45) * 1000);
+    }
+
+    // ==========================================
+    // AUTH
+    // ==========================================
+    function switchAuthTab(tab) {
+      document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+      hideAuthError();
+      if (tab === 'login') {
+        document.querySelectorAll('.auth-tab')[0].classList.add('active');
+        document.getElementById('loginForm').classList.add('active');
+      } else {
+        document.querySelectorAll('.auth-tab')[1].classList.add('active');
+        document.getElementById('registerForm').classList.add('active');
+      }
+    }
+
+    function showAuthError(msg) { const el = document.getElementById('authError'); el.textContent = msg; el.classList.add('show'); }
+    function hideAuthError() { document.getElementById('authError').classList.remove('show'); }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const login = document.getElementById('regUsername').value.trim().toLowerCase();
+      const password = document.getElementById('regPassword').value;
+      const users = getUsers();
+      if (users[login]) { showAuthError('Пользователь с таким логином уже существует'); return; }
+      users[login] = { name, login, password, dreams: [], thoughts: [], categories: JSON.parse(JSON.stringify(DEFAULT_CATEGORIES)), createdAt: Date.now() };
+      saveUsers(users);
+      localStorage.setItem('dreamboard_current_user', login);
+      showApp();
+      showToast(`Добро пожаловать в мир мечтаний, ${name}! ✨`, 'warm');
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const login = document.getElementById('loginUsername').value.trim().toLowerCase();
+      const password = document.getElementById('loginPassword').value;
+      const users = getUsers();
+      const user = users[login];
+      if (!user || user.password !== password) { showAuthError('Неверный логин или пароль ⚠️'); return; }
+      localStorage.setItem('dreamboard_current_user', login);
+      showApp();
+      showToast(`С возвращением, ${user.name}! 👋`, 'warm');
+    }
+
+    async function handleLogout() {
+      document.getElementById('userDropdown').classList.remove('show');
+      const confirmed = await customConfirm({ title: 'Выйти из аккаунта?', message: 'Ваши мечты будут ждать вас здесь.', icon: '🚪', confirmText: 'Выйти', cancelText: 'Остаться' });
+      if (!confirmed) return;
+      localStorage.removeItem('dreamboard_current_user');
+      document.getElementById('appScreen').classList.remove('active');
+      document.getElementById('authScreen').classList.add('active');
+      document.getElementById('loginForm').reset();
+      document.getElementById('registerForm').reset();
+      hideAuthError();
+      if (warmPhraseTimer) clearTimeout(warmPhraseTimer);
+    }
+
+    function openForgotPasswordModal() {
+      showGenericModal(`
+    <div class="in-dev-illustration">
+      <span class="big-icon">🔮</span>
+      <div><span class="sub-icon">✨</span><span class="sub-icon">🛠️</span><span class="sub-icon">💫</span></div>
+    </div>
+    <h3 class="modal-title" style="text-align:center;">Наша общая мечта</h3>
+    <div class="in-dev-quote">«Восстановление пароля —<br>это тоже мечта, которая скоро сбудется»</div>
+    <div class="in-dev-text">Мы уже работаем над этой функцией. Наши мастера-волшебники колдуют над ней день и ночь.</div>
+    <div class="in-dev-progress"></div>
+    <div class="in-dev-text" style="font-size:14px; opacity:0.8;">А пока — помни: мечты сбываются у тех, кто в них верит ✨</div>
+    <div class="modal-actions"><button class="btn btn-primary" onclick="closeGenericModal()">Понятно, жду ✨</button></div>
+  `);
+    }
+
+    function openInfoModal() {
+      document.getElementById('userDropdown').classList.remove('show');
+      showGenericModal(`
+    <div class="info-modal-content">
+      <span class="info-logo">🌙</span>
+      <div class="info-title">DreamBoard</div>
+      <div class="info-tagline">Книга мечтаний — место, где мечты становятся ближе ✨</div>
+      <div class="info-credits">
+        <div class="info-credits-title">✨ Для вас старались</div>
+        <div class="info-credit-row"><span class="label">Автор идеи и креатив</span><span class="value">MylnikCode</span></div>
+        <div class="info-credit-row"><span class="label">Реализация</span><span class="value">Qwen 3.7 Plus</span></div>
+        <div class="info-credit-row"><span class="label">Версия платформы</span><span class="value">v5.2</span></div>
+      </div>
+      <div class="info-roadmap">
+        <div class="info-roadmap-title">🔮 Наши мечты о платформе</div>
+        <div class="roadmap-item">
+          <div class="roadmap-icon">👣</div>
+          <div class="roadmap-content">
+            <div class="roadmap-name">Шаги для достижения</div>
+            <div class="roadmap-desc">Разбей большую мечту на маленькие шаги и отмечай выполненные — путь станет видимым.</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-icon">📊</div>
+          <div class="roadmap-content">
+            <div class="roadmap-name">Прогресс-бар мечты</div>
+            <div class="roadmap-desc">Визуально увидишь, насколько мечта близка к воплощению.</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-icon">☁️</div>
+          <div class="roadmap-content">
+            <div class="roadmap-name">Синхронизация между устройствами</div>
+            <div class="roadmap-desc">Облачное хранение — мечты всегда с тобой, на любом устройстве.</div>
+          </div>
+        </div>
+      </div>
+      <div class="info-version">Создано с любовью к мечтателям <span class="ver-num">♥</span></div>
+    </div>
+    <div class="modal-actions"><button class="btn btn-primary" onclick="closeGenericModal()">Закрыть</button></div>
+  `);
+    }
+
+    // ==========================================
+    // MODE SWITCHING
+    // ==========================================
+    let currentMode = 'dreams';
+
+    function switchMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+      if (mode === 'dreams') {
+        document.querySelectorAll('.mode-tab')[0].classList.add('active');
+        document.getElementById('dreamsMode').style.display = '';
+        document.getElementById('thoughtsMode').style.display = 'none';
+        document.getElementById('mainFab').style.display = '';
+        document.getElementById('mainFab').onclick = openCreateModal;
+        document.getElementById('mainFab').title = 'Новая мечта';
+        document.getElementById('mainFab').textContent = '✦';
+      } else {
+        document.querySelectorAll('.mode-tab')[1].classList.add('active');
+        document.getElementById('dreamsMode').style.display = 'none';
+        document.getElementById('thoughtsMode').style.display = '';
+        document.getElementById('mainFab').style.display = '';
+        document.getElementById('mainFab').onclick = openCreateThoughtModal;
+        document.getElementById('mainFab').title = 'Новая мысль';
+        document.getElementById('mainFab').textContent = '✎';
+        renderDiary();
+      }
+    }
+
+    // ==========================================
+    // APP
+    // ==========================================
+    let currentFilter = 'all';
+    let hideFulfilled = false;
+
+    function showApp() {
+      initGreeting();
+      document.getElementById('authScreen').classList.remove('active');
+      document.getElementById('appScreen').classList.add('active');
+      const u = getCurrentUser();
+      document.getElementById('userAvatar').textContent = u.name.charAt(0).toUpperCase();
+      document.getElementById('dropdownName').textContent = u.name;
+      document.getElementById('dropdownLogin').textContent = '@' + u.login;
+      switchMode('dreams');
+      renderDreams();
+      scheduleWarmPhrase();
+    }
+
+    function toggleUserMenu() { document.getElementById('userDropdown').classList.toggle('show'); }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.user-menu')) document.getElementById('userDropdown').classList.remove('show');
+    });
+
+    function renderDreams() {
+      const allDreams = getDreams();
+      const dreams = allDreams.filter(d => !d.archived);
+      const categories = getCategories();
+      const fulfilledCount = dreams.filter(d => d.fulfilled).length;
+      const archivedCount = allDreams.filter(d => d.archived).length;
+
+      document.getElementById('greeting').innerHTML = getGreeting();
+
+      document.getElementById('statsBar').innerHTML = `
+    <div class="stat-chip"><span class="stat-num">${dreams.length}</span><span>всего мечтаний</span></div>
+    <div class="stat-chip"><span class="stat-num">${fulfilledCount}</span><span>исполнилось ✨</span></div>
+    <div class="stat-chip"><span class="stat-num">${dreams.length - fulfilledCount}</span><span>в пути 🌟</span></div>
+    ${archivedCount > 0 ? `<div class="stat-chip" style="cursor:pointer;" onclick="openArchiveModal()"><span class="stat-num">${archivedCount}</span><span>в архиве 📦</span></div>` : ''}
+  `;
+
+      const usedCats = [...new Set(dreams.map(d => d.category))];
+      let filterHTML = `<button class="filter-chip ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">Все</button>`;
+      filterHTML += `<button class="filter-chip ${currentFilter === 'fulfilled' ? 'active' : ''}" onclick="setFilter('fulfilled')">✨ Исполнившиеся</button>`;
+      filterHTML += `<button class="filter-chip ${currentFilter === 'priority' ? 'active' : ''}" onclick="setFilter('priority')">🔥 Приоритет</button>`;
+      usedCats.forEach(catId => {
+        const c = categories.find(cat => cat.id === catId) || getCategoryById(catId);
+        const activeClass = currentFilter === catId ? `active-${c.color}` : '';
+        filterHTML += `<button class="filter-chip ${activeClass}" onclick="setFilter('${catId}')">${c.emoji} ${escapeHtml(c.name)}</button>`;
+      });
+      filterHTML += `<div class="filter-divider"></div>`;
+      filterHTML += `<label class="filter-toggle ${hideFulfilled ? 'active' : ''}" onclick="toggleHideFulfilled(event)"><input type="checkbox" ${hideFulfilled ? 'checked' : ''}><span class="check-box">✓</span><span>Скрыть исполненные</span></label>`;
+
+      document.getElementById('filterBar').innerHTML = filterHTML;
+
+      let filtered = dreams;
+      if (hideFulfilled) filtered = filtered.filter(d => !d.fulfilled);
+      if (currentFilter === 'fulfilled') filtered = filtered.filter(d => d.fulfilled);
+      else if (currentFilter === 'priority') filtered = filtered.filter(d => d.priority);
+      else if (currentFilter !== 'all') filtered = filtered.filter(d => d.category === currentFilter);
+
+      filtered.sort((a, b) => {
+        if (a.priority !== b.priority) return a.priority ? -1 : 1;
+        if (a.fulfilled !== b.fulfilled) return a.fulfilled ? 1 : -1;
+        return b.createdAt - a.createdAt;
+      });
+
+      if (filtered.length === 0) {
+        const u = getCurrentUser();
+        const name = u ? u.name : 'друг';
+        let emptyMsg;
+        if (dreams.length === 0) emptyMsg = { icon: '🌙', title: 'Пока здесь тихо...', text: `${name}, запиши свою первую мечту ✨` };
+        else if (currentFilter === 'priority') emptyMsg = { icon: '🔥', title: 'Нет приоритетной мечты', text: `${name}, выбери одну мечту — нажми на ❗ на карточке` };
+        else if (hideFulfilled && dreams.length > 0 && dreams.every(d => d.fulfilled)) emptyMsg = { icon: '🎉', title: 'Все мечты исполнились!', text: `${name}, это невероятно! 🌟` };
+        else emptyMsg = { icon: '🔍', title: 'Ничего не найдено', text: 'Попробуй другой фильтр' };
+
+        document.getElementById('dreamsGrid').innerHTML = `
+      <div class="empty-state" style="grid-column: 1/-1;">
+        <div class="empty-icon">${emptyMsg.icon}</div>
+        <h3>${emptyMsg.title}</h3>
+        <p>${emptyMsg.text}</p>
+        ${dreams.length === 0 ? '<button class="btn btn-primary" onclick="openCreateModal()" style="width:auto;">✦ Записать мечту</button>' : ''}
+      </div>
+    `;
+        return;
+      }
+
+      document.getElementById('dreamsGrid').innerHTML = filtered.map((dream, i) => {
+        const cat = getCategoryById(dream.category);
+        return `
+      <div class="dream-card ${dream.fulfilled ? 'fulfilled' : ''} ${dream.priority ? 'priority' : ''}" data-color="${dream.color || 'gold'}" style="animation-delay: ${i * 0.05}s">
+        ${dream.priority ? '<div class="priority-badge">🔥 Приоритет</div>' : ''}
+        <div class="dream-card-header">
+          <span class="dream-category cat-${cat.color}">${cat.emoji} ${escapeHtml(cat.name)}</span>
+          <div class="dream-actions">
+            <button class="dream-action-btn priority-btn ${dream.priority ? 'active' : ''}" onclick="togglePriority('${dream.id}')" title="${dream.priority ? 'Снять приоритет' : 'Сделать приоритетной'}">${dream.priority ? '🔥' : '❗'}</button>
+            <button class="dream-action-btn fulfill-btn" onclick="toggleFulfill('${dream.id}')" title="${dream.fulfilled ? 'Вернуть в мечты' : 'Исполнено!'}">${dream.fulfilled ? '↩️' : '⭐'}</button>
+            <button class="dream-action-btn archive-btn" onclick="archiveDream('${dream.id}')" title="В архив">📦</button>
+            <button class="dream-action-btn" onclick="openEditModal('${dream.id}')" title="Редактировать">✏️</button>
+            <button class="dream-action-btn delete-btn" onclick="deleteDream('${dream.id}')" title="Удалить">🗑️</button>
+          </div>
+        </div>
+        <div class="dream-title">${escapeHtml(dream.title)}</div>
+        ${dream.text ? `<div class="dream-text">${escapeHtml(dream.text)}</div>` : ''}
+        <div class="dream-footer">
+          ${dream.fulfilled ? '<span class="dream-fulfilled-badge">✨ Исполнено</span>' : ''}
+        </div>
+      </div>
+    `;
+      }).join('');
+    }
+
+    function setFilter(filter) { currentFilter = filter; renderDreams(); }
+    function toggleHideFulfilled(e) { e.preventDefault(); hideFulfilled = !hideFulfilled; renderDreams(); }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ==========================================
+    // DREAM CRUD
+    // ==========================================
+    function populateCategorySelect() {
+      const categories = getCategories();
+      document.getElementById('dreamCategory').innerHTML = categories.map(c => `<option value="${c.id}">${c.emoji} ${escapeHtml(c.name)}</option>`).join('');
+    }
+
+    function openCreateModal() {
+      populateCategorySelect();
+      document.getElementById('modalTitle').textContent = '✨ Новая мечта';
+      document.getElementById('modalSubmitBtn').textContent = '💫 Записать мечту';
+      document.getElementById('dreamId').value = '';
+      document.getElementById('dreamTitleInput').value = '';
+      document.getElementById('dreamTextInput').value = '';
+      document.getElementById('dreamCategory').value = getCategories()[0]?.id || 'other';
+      selectColor(document.querySelector('#colorPicker .color-option.color-gold'));
+      document.getElementById('dreamModal').classList.add('show');
+      setTimeout(() => document.getElementById('dreamTitleInput').focus(), 300);
+    }
+
+    function openEditModal(id) {
+      populateCategorySelect();
+      const dream = getDreams().find(d => d.id === id);
+      if (!dream) return;
+      document.getElementById('modalTitle').textContent = '✏️ Редактировать мечту';
+      document.getElementById('modalSubmitBtn').textContent = '💾 Сохранить';
+      document.getElementById('dreamId').value = dream.id;
+      document.getElementById('dreamTitleInput').value = dream.title;
+      document.getElementById('dreamTextInput').value = dream.text || '';
+      document.getElementById('dreamCategory').value = dream.category;
+      const colorEl = document.querySelector(`#colorPicker .color-option[data-color="${dream.color || 'gold'}"]`);
+      if (colorEl) selectColor(colorEl);
+      document.getElementById('dreamModal').classList.add('show');
+    }
+
+    function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+    document.getElementById('dreamModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('dreamModal')) closeModal('dreamModal');
+    });
+
+    function selectColor(el) {
+      document.querySelectorAll('#colorPicker .color-option').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function handleSaveDream(e) {
+      e.preventDefault();
+      const id = document.getElementById('dreamId').value;
+      const title = document.getElementById('dreamTitleInput').value.trim();
+      const text = document.getElementById('dreamTextInput').value.trim();
+      const category = document.getElementById('dreamCategory').value;
+      const color = document.querySelector('#colorPicker .color-option.selected')?.dataset.color || 'gold';
+      const dreams = getDreams();
+
+      if (id) {
+        const dream = dreams.find(d => d.id === id);
+        if (dream) {
+          dream.title = title; dream.text = text; dream.category = category; dream.color = color;
+          dream.updatedAt = Date.now();
+          showToast('Мечта обновлена ✏️');
+        }
+      } else {
+        dreams.push({
+          id: 'dream_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          title, text, category, color, fulfilled: false, priority: false, archived: false, createdAt: Date.now()
+        });
+        showToast('Мечта записана! ✨', 'warm');
+      }
+
+      saveDreams(dreams);
+      closeModal('dreamModal');
+      renderDreams();
+    }
+
+    async function deleteDream(id) {
+      const confirmed = await customConfirm({ title: 'Удалить мечту?', message: 'Это действие нельзя отменить.', icon: '💔', confirmText: 'Удалить', cancelText: 'Оставить', danger: true });
+      if (!confirmed) return;
+      saveDreams(getDreams().filter(d => d.id !== id));
+      renderDreams();
+      showToast('Мечта удалена');
+    }
+
+    function toggleFulfill(id) {
+      const dreams = getDreams();
+      const dream = dreams.find(d => d.id === id);
+      if (!dream) return;
+      dream.fulfilled = !dream.fulfilled;
+      saveDreams(dreams);
+      renderDreams();
+      if (dream.fulfilled) {
+        const u = getCurrentUser();
+        showToast(`Мечта исполнилась, ${u.name}! 🎉🌟`, 'warm');
+        launchConfetti();
+      } else {
+        showToast('Мечта снова в пути 🚀');
+      }
+    }
+
+    async function togglePriority(id) {
+      const dreams = getDreams();
+      const dream = dreams.find(d => d.id === id);
+      if (!dream) return;
+
+      if (dream.priority) {
+        dream.priority = false;
+        saveDreams(dreams);
+        renderDreams();
+        showToast('Приоритет снят');
+        return;
+      }
+
+      const currentPriority = dreams.find(d => d.priority && d.id !== id);
+      if (currentPriority) {
+        const confirmed = await customConfirm({
+          title: 'Сменить приоритет?',
+          message: `У тебя уже есть приоритетная мечта: «${currentPriority.title}». Она перестанет быть приоритетной.`,
+          icon: '🔥', confirmText: 'Да, сменить', cancelText: 'Отмена'
+        });
+        if (!confirmed) return;
+        currentPriority.priority = false;
+      }
+
+      dream.priority = true;
+      saveDreams(dreams);
+      renderDreams();
+      showToast('Мечта стала приоритетной 🔥', 'warm');
+    }
+
+    async function archiveDream(id) {
+      const confirmed = await customConfirm({ title: 'В архив?', message: 'Мечта переместится в архив. Ты всегда сможешь вернуть её.', icon: '📦', confirmText: 'В архив', cancelText: 'Оставить' });
+      if (!confirmed) return;
+      const dreams = getDreams();
+      const dream = dreams.find(d => d.id === id);
+      if (!dream) return;
+      dream.archived = true;
+      dream.priority = false;
+      saveDreams(dreams);
+      renderDreams();
+      showToast('Мечта в архиве 📦');
+    }
+
+    async function unarchiveDream(id) {
+      const dreams = getDreams();
+      const dream = dreams.find(d => d.id === id);
+      if (!dream) return;
+      dream.archived = false;
+      saveDreams(dreams);
+      renderArchiveList();
+      renderDreams();
+      showToast('Мечта вернулась ✨', 'warm');
+    }
+
+    async function deleteArchivedDream(id) {
+      const confirmed = await customConfirm({ title: 'Удалить навсегда?', message: 'Удаление необратимо.', icon: '💔', confirmText: 'Удалить', cancelText: 'Оставить', danger: true });
+      if (!confirmed) return;
+      saveDreams(getDreams().filter(d => d.id !== id));
+      renderArchiveList();
+      renderDreams();
+      showToast('Мечта удалена');
+    }
+
+    function openArchiveModal() {
+      document.getElementById('userDropdown').classList.remove('show');
+      renderArchiveList();
+    }
+
+    function renderArchiveList() {
+      const archived = getDreams().filter(d => d.archived);
+      let listHTML = '';
+      if (archived.length === 0) {
+        listHTML = `<div class="empty-state" style="padding: 40px 20px;"><div class="empty-icon" style="font-size: 48px;">📦</div><h3 style="font-size: 24px;">Архив пуст</h3><p>Здесь будут мечты, которые ты решил отложить</p></div>`;
+      } else {
+        listHTML = `<div class="archive-list">` + archived.map(dream => {
+          const cat = getCategoryById(dream.category);
+          return `
+        <div class="archive-item">
+          <div class="archive-item-content">
+            <div class="archive-item-title">${cat.emoji} ${escapeHtml(dream.title)}</div>
+            <div class="archive-item-cat">${escapeHtml(cat.name)}${dream.fulfilled ? ' · ✨ исполнено' : ''}</div>
+          </div>
+          <div class="archive-item-actions">
+            <button class="archive-action-btn restore-btn" onclick="unarchiveDream('${dream.id}')" title="Вернуть">↩️</button>
+            <button class="archive-action-btn delete-btn" onclick="deleteArchivedDream('${dream.id}')" title="Удалить">🗑️</button>
+          </div>
+        </div>
+      `;
+        }).join('') + `</div>`;
+      }
+      showGenericModal(`
+    <h3 class="modal-title">📦 Архивные мечты</h3>
+    <div class="modal-subtitle">Мечты, которые ты отложил. Их можно вернуть или удалить окончательно.</div>
+    ${listHTML}
+    <div class="modal-actions"><button class="btn btn-primary" onclick="closeGenericModal()">Закрыть</button></div>
+  `);
+    }
+
+    // ==========================================
+    // RANDOM DREAM
+    // ==========================================
+    function openRandomDream() {
+      const dreams = getDreams().filter(d => !d.archived);
+      if (dreams.length === 0) {
+        showToast('Сначала запиши хотя бы одну мечту ✨', 'rose');
+        return;
+      }
+      document.getElementById('userDropdown').classList.remove('show');
+      const dream = dreams[Math.floor(Math.random() * dreams.length)];
+      const cat = getCategoryById(dream.category);
+
+      const modal = document.getElementById('randomDreamModal');
+      const catEl = document.getElementById('randomDreamCategory');
+      const titleEl = document.getElementById('randomDreamTitle');
+      const textEl = document.getElementById('randomDreamText');
+
+      catEl.className = `random-dream-category cat-${cat.color}`;
+      catEl.innerHTML = `${cat.emoji} ${escapeHtml(cat.name)}`;
+
+      titleEl.innerHTML = '';
+      textEl.innerHTML = '';
+
+      modal.classList.add('show');
+
+      setTimeout(() => {
+        typewriterEffect(titleEl, dream.title, 40);
+        setTimeout(() => {
+          if (dream.text) typewriterEffect(textEl, dream.text, 20);
+        }, dream.title.length * 40 + 200);
+      }, 400);
+    }
+
+    function typewriterEffect(element, text, speed) {
+      element.innerHTML = '';
+      for (let i = 0; i < text.length; i++) {
+        const span = document.createElement('span');
+        span.className = 'typewriter-char';
+        span.textContent = text.charAt(i) === ' ' ? '\u00A0' : text.charAt(i);
+        span.style.animationDelay = (i * speed) + 'ms';
+        element.appendChild(span);
+      }
+    }
+
+    function closeRandomDream() {
+      document.getElementById('randomDreamModal').classList.remove('show');
+    }
+
+    document.getElementById('randomDreamModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('randomDreamModal')) closeRandomDream();
+    });
+
+    // ==========================================
+    // PROFILE EDIT
+    // ==========================================
+    function openProfileEditModal() {
+      document.getElementById('userDropdown').classList.remove('show');
+      const u = getCurrentUser();
+      showGenericModal(`
+    <h3 class="modal-title">👤 Редактировать профиль</h3>
+    <div class="modal-subtitle">Измени свои данные — имя, логин или пароль.</div>
+    <form onsubmit="handleProfileSave(event)">
+      <div class="form-group"><label>🌟 Ваше имя</label><input type="text" id="profileName" value="${escapeHtml(u.name)}" required></div>
+      <div class="form-group"><label>👤 Логин</label><input type="text" id="profileLogin" value="${escapeHtml(u.login)}" required></div>
+      <div class="form-group">
+        <label>🔑 Пароль</label>
+        <div class="password-field">
+          <input type="password" id="profilePassword" value="${escapeHtml(u.password)}" required minlength="4">
+          <button type="button" class="password-toggle" onclick="togglePasswordVisibility('profilePassword', this)">👁️</button>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button>
+        <button type="submit" class="btn btn-primary">💾 Сохранить</button>
+      </div>
+    </form>
+  `);
+    }
+
+    function handleProfileSave(e) {
+      e.preventDefault();
+      const newName = document.getElementById('profileName').value.trim();
+      const newLogin = document.getElementById('profileLogin').value.trim().toLowerCase();
+      const newPassword = document.getElementById('profilePassword').value;
+      const users = getUsers();
+      const oldUser = getCurrentUser();
+
+      if (newLogin !== oldUser.login && users[newLogin]) {
+        showToast('Такой логин уже занят', 'rose');
+        return;
+      }
+
+      if (newLogin !== oldUser.login) {
+        delete users[oldUser.login];
+        localStorage.setItem('dreamboard_current_user', newLogin);
+      }
+
+      users[newLogin] = { ...oldUser, name: newName, login: newLogin, password: newPassword };
+      saveUsers(users);
+      closeGenericModal();
+      document.getElementById('userAvatar').textContent = newName.charAt(0).toUpperCase();
+      document.getElementById('dropdownName').textContent = newName;
+      document.getElementById('dropdownLogin').textContent = '@' + newLogin;
+      renderDreams();
+      showToast('Профиль обновлён ✨', 'warm');
+    }
+
+    // ==========================================
+    // CATEGORIES MODAL
+    // ==========================================
+    const EMOJI_OPTIONS = ['🌱', '🌿', '🌳', '🌲', '🌴', '🍀', '🌾', '🌷', '🌹', '🌺', '🌸', '💐', '🌻', '🌼', '🌵', '🎋', '🍄', '🌰', '🍃', '🍂', '🍁', '☀️', '🌙', '⭐', '🌟', '✨', '💫', '🌈', '⚡', '❄️', '🔥', '💧', '🌊', '☁️', '⛅', '🌤️', '🌌', '🪐', '💥', '☄️', '🌠', '🌍', '🌎', '🌏', '✈️', '🚀', '🚢', '🚗', '🚂', '🚁', '🛸', '🏔️', '🏖️', '🏝️', '🗺️', '🗼', '🏰', '🏯', '🗽', '⛩️', '🕌', '⛪', '🏛️', '🎡', '🎢', '🎨', '🎭', '🎬', '🎸', '🎹', '🎺', '🎻', '🥁', '🎮', '📚', '✍️', '📷', '🎯', '🏆', '🎪', '🎤', '🎧', '🎵', '🎶', '⚽', '🏀', '🏈', '⚾', '🎾', '🏐', '🎱', '🏓', '🏸', '🥊', '🏋️', '🏃', '🚴', '🧗', '🏊', '⛷️', '🏂', '🧘', '🍰', '🍕', '🍣', '🍷', '☕', '🍵', '🍫', '🍎', '🥐', '🧀', '🥗', '🌮', '🍱', '🍜', '🍝', '🍦', '🍩', '🍪', '🎂', '🧁', '🥧', '🍯', '💕', '💖', '💝', '💗', '💓', '❤️', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🤍', '🥰', '😊', '😇', '🤩', '😍', '💼', '💰', '💎', '👑', '🏢', '📈', '🎓', '💡', '🔑', '🗝️', '💻', '📱', '⌚', '📊', '🧮', '🧘', '💪', '🌞', '🌅', '🌄', '🧖', '💆', '🦋', '🐝', '🦄', '🐬', '🦅', '🐼', '🦊', '🐺', '🦁', '🐯', '🐨', '🐻', '🦆', '🦉', '🐴', '🦓', '🦒', '🐘', '🐿️', '🦔', '🐢', '🐍', '🦎', '🐙', '🦑', '🦀', '🐠', '🐳', '🦈', '🎁', '🎈', '🎉', '🎊', '🔮', '🕯️', '📜', '🎀', '🧿', '💠', '🔷', '🔶', '♾️', '❇️', '✳️', '🏵️', '🎗️', '🎖️', '🏅', '🥇', '🥈', '🥉', '🚩', '🏁', '🪄', '🧞', '🧚', '🧜', '🧝', '🧙', '👼', '🪽', '🎇', '🎆'];
+
+    let tempCategories = [];
+    let activeEmojiPickerIdx = null;
+
+    function openCategoriesModal() {
+      document.getElementById('userDropdown').classList.remove('show');
+      tempCategories = JSON.parse(JSON.stringify(getCategories()));
+      renderCategoriesEditor();
+    }
+
+    function renderCategoriesEditor() {
+      showGenericModal(`
+    <h3 class="modal-title">📂 Мои категории</h3>
+    <div class="modal-subtitle">Настрой категории под себя.</div>
+    <div class="cat-list" id="catList"></div>
+    <button class="add-cat-btn" onclick="addNewCategory()">+ Добавить категорию</button>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button>
+      <button class="btn btn-primary" onclick="saveCategoriesFromModal()">💾 Сохранить</button>
+    </div>
+  `);
+      renderCategoriesList();
+    }
+
+    function renderCategoriesList() {
+      const list = document.getElementById('catList');
+      if (!list) return;
+      const dreams = getDreams();
+      list.innerHTML = tempCategories.map((cat, idx) => {
+        const isUsed = dreams.some(d => d.category === cat.id);
+        const canDelete = tempCategories.length > 1 && !isUsed;
+        const deleteTitle = tempCategories.length === 1 ? 'Должна остаться хотя бы одна' : isUsed ? 'Нельзя: есть мечты' : 'Удалить';
+        return `
+      <div class="cat-item" data-idx="${idx}">
+        <span class="cat-emoji" onclick="toggleEmojiPicker(event, ${idx})" title="Сменить эмодзи">${cat.emoji}</span>
+        <input class="cat-name-input" type="text" value="${escapeHtml(cat.name)}" oninput="updateCatName(${idx}, this.value)" maxlength="30">
+        <div class="cat-color-dot" style="background: var(--${cat.color}); width:22px; height:22px; border-radius:50%; cursor:pointer;" onclick="cycleCatColor(${idx})" title="Сменить цвет"></div>
+        <button class="cat-delete-btn" onclick="deleteCategory(${idx})" title="${deleteTitle}" ${!canDelete ? 'disabled' : ''}>🗑️</button>
+      </div>
+    `;
+      }).join('');
+    }
+
+    function toggleEmojiPicker(event, idx) {
+      event.stopPropagation();
+      const existing = document.querySelector('.emoji-picker-popup');
+      if (existing) { existing.remove(); if (activeEmojiPickerIdx === idx) { activeEmojiPickerIdx = null; return; } }
+      activeEmojiPickerIdx = idx;
+      const catItem = event.target.closest('.cat-item');
+      const picker = document.createElement('div');
+      picker.className = 'emoji-picker-popup';
+      picker.innerHTML = `<div class="emoji-picker-title">Выберите эмодзи</div>` + EMOJI_OPTIONS.map(e => `<button type="button" class="emoji-option" onclick="selectEmoji(${idx}, '${e}')">${e}</button>`).join('');
+      catItem.appendChild(picker);
+      setTimeout(() => document.addEventListener('click', closeEmojiPickerOnOutsideClick, { once: true }), 0);
+    }
+
+    function closeEmojiPickerOnOutsideClick(e) {
+      const picker = document.querySelector('.emoji-picker-popup');
+      if (picker && !picker.contains(e.target) && !e.target.classList.contains('cat-emoji')) { picker.remove(); activeEmojiPickerIdx = null; }
+    }
+
+    function selectEmoji(idx, emoji) {
+      tempCategories[idx].emoji = emoji;
+      const picker = document.querySelector('.emoji-picker-popup');
+      if (picker) picker.remove();
+      activeEmojiPickerIdx = null;
+      renderCategoriesList();
+    }
+
+    function updateCatName(idx, value) { tempCategories[idx].name = value.trim() || 'Без названия'; }
+
+    function cycleCatColor(idx) {
+      const colors = ['gold', 'rose', 'sky', 'mint', 'lavender', 'sunset'];
+      tempCategories[idx].color = colors[(colors.indexOf(tempCategories[idx].color) + 1) % colors.length];
+      renderCategoriesList();
+    }
+
+    async function deleteCategory(idx) {
+      const cat = tempCategories[idx];
+      const dreams = getDreams();
+      const isUsed = dreams.some(d => d.category === cat.id);
+      if (isUsed) { showToast('Нельзя: есть мечты в этой категории', 'rose'); return; }
+      if (tempCategories.length <= 1) { showToast('Должна остаться хотя бы одна категория', 'rose'); return; }
+      const confirmed = await customConfirm({
+        title: 'Удалить категорию?',
+        message: `Категория «${cat.emoji} ${cat.name}» будет удалена.`,
+        icon: '🗑️', confirmText: 'Удалить', cancelText: 'Оставить', danger: true
+      });
+      if (!confirmed) { renderCategoriesEditor(); return; }
+      tempCategories.splice(idx, 1);
+      renderCategoriesEditor();
+      showToast('Категория удалена');
+    }
+
+    function addNewCategory() {
+      const emojis = ['🌟', '💫', '✨', '🎯', '🌺', '🦋', '🌊', '🏔️', '🎭', '🎨', '🎬', '🎸', '📚', '🍀', '🔮', '💎', '🌠', '🪄', '🧚'];
+      const colors = ['gold', 'rose', 'sky', 'mint', 'lavender', 'sunset'];
+      tempCategories.push({
+        id: 'cat_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+        name: 'Новая категория',
+        emoji: emojis[Math.floor(Math.random() * emojis.length)],
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+      renderCategoriesList();
+      setTimeout(() => {
+        const inputs = document.querySelectorAll('.cat-name-input');
+        if (inputs.length) { const last = inputs[inputs.length - 1]; last.focus(); last.select(); }
+      }, 50);
+    }
+
+    function saveCategoriesFromModal() {
+      tempCategories = tempCategories.map(c => ({ ...c, name: c.name.trim() || 'Без названия' }));
+      saveCategories(tempCategories);
+      closeGenericModal();
+      renderDreams();
+      showToast('Категории сохранены 📂');
+    }
+
+    // ==========================================
+    // RESET MODAL
+    // ==========================================
+    function openResetModal() {
+      document.getElementById('userDropdown').classList.remove('show');
+      const u = getCurrentUser();
+      showGenericModal(`
+    <h3 class="modal-title">🗑️ Удалить профиль</h3>
+    <div class="modal-subtitle">${escapeHtml(u.name)}, это действие навсегда удалит твой аккаунт и все данные из системы.</div>
+    <div class="reset-warning">⚠️ Будут удалены <strong>все мечты, мысли, категории и сам профиль</strong>. Восстановить их будет невозможно.</div>
+    <div class="form-group">
+      <label>Чтобы подтвердить, введи фразу ниже:</label>
+      <div class="reset-input-wrapper"><input type="text" id="resetConfirmInput" placeholder="Удалить профиль" oninput="checkResetInput()"></div>
+      <div class="reset-hint">Введи точно: <strong>Удалить профиль</strong></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button>
+      <button class="btn btn-danger" id="resetConfirmBtn" disabled onclick="performReset()">🗑️ Удалить навсегда</button>
+    </div>
+  `);
+    }
+
+    function checkResetInput() {
+      const input = document.getElementById('resetConfirmInput');
+      const btn = document.getElementById('resetConfirmBtn');
+      btn.disabled = input.value.trim() !== 'Удалить профиль';
+    }
+
+    async function performReset() {
+      const u = getCurrentUser();
+      if (!u) return;
+
+      const doubleConfirm = await customConfirm({
+        title: 'Точно-точно?', message: `${u.name}, твой профиль и все данные будут удалены навсегда. Это действие нельзя отменить.`,
+        icon: '⚠️', confirmText: 'Да, удалить', cancelText: 'Нет, отменить', danger: true
+      });
+      if (!doubleConfirm) return;
+
+      const users = getUsers();
+      delete users[u.login];
+      saveUsers(users);
+      localStorage.removeItem('dreamboard_current_user');
+
+      closeGenericModal();
+
+      document.getElementById('appScreen').classList.remove('active');
+      document.getElementById('authScreen').classList.add('active');
+      document.getElementById('loginForm').reset();
+      document.getElementById('registerForm').reset();
+      hideAuthError();
+
+      if (warmPhraseTimer) clearTimeout(warmPhraseTimer);
+
+      showToast(`Профиль удалён. Будем скучать, ${u.name} 🌙`);
+    }
+
+    // ==========================================
+    // EXPORT / IMPORT
+    // ==========================================
+    const EXPORT_FORMAT_VERSION = 1;
+    const EXPORT_MAGIC = 'DREAMBOARD_EXPORT';
+
+    function exportUserData() {
+      document.getElementById('userDropdown').classList.remove('show');
+      const u = getCurrentUser();
+      if (!u) return;
+
+      const exportData = {
+        __magic: EXPORT_MAGIC,
+        __version: EXPORT_FORMAT_VERSION,
+        exportedAt: new Date().toISOString(),
+        user: {
+          name: u.name,
+          login: u.login,
+          password: u.password,
+          createdAt: u.createdAt || Date.now()
+        },
+        dreams: Array.isArray(u.dreams) ? u.dreams : [],
+        thoughts: Array.isArray(u.thoughts) ? u.thoughts : [],
+        categories: Array.isArray(u.categories) ? u.categories : JSON.parse(JSON.stringify(DEFAULT_CATEGORIES))
+      };
+
+      const json = JSON.stringify(exportData, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      const safeLogin = (u.login || 'user').replace(/[^a-z0-9а-я_-]/gi, '_');
+      const dateStr = new Date().toISOString().slice(0, 10);
+      const filename = `dreamboard_${safeLogin}_${dateStr}.json`;
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      showToast(`Файл «${filename}» сохранён 💾`, 'warm');
+    }
+
+    function openImportModal() {
+      showGenericModal(`
+    <h3 class="modal-title">📥 Импорт данных</h3>
+    <div class="modal-subtitle">Загрузи файл, который ты ранее экспортировал из DreamBoard. Все мечты, мысли и категории вернутся к тебе ✨</div>
+    <div class="import-drop-zone" id="importDropZone">
+      <span class="drop-icon">📁</span>
+      <div class="drop-title">Перетащи файл сюда или нажми</div>
+      <div class="drop-hint">Подойдёт файл .json, созданный в DreamBoard</div>
+      <input type="file" id="importFileInput" accept=".json,application/json" style="display:none;">
+    </div>
+    <div class="import-file-info" id="importFileInfo">
+      <span class="file-icon">📄</span>
+      <span class="file-name" id="importFileName"></span>
+      <button class="file-clear" onclick="clearImportFile()" title="Убрать файл">✕</button>
+    </div>
+    <div id="importError" class="auth-error" style="margin-bottom:12px;"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button>
+      <button class="btn btn-primary" id="importConfirmBtn" disabled onclick="performImport()">📥 Импортировать</button>
+    </div>
+  `);
+
+      window.__importFile = null;
+      window.__importData = null;
+
+      const dropZone = document.getElementById('importDropZone');
+      const fileInput = document.getElementById('importFileInput');
+
+      dropZone.addEventListener('click', () => fileInput.click());
+
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drag-over');
+      });
+
+      dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('drag-over');
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drag-over');
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          handleImportFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          handleImportFile(e.target.files[0]);
+        }
+      });
+    }
+
+    function handleImportFile(file) {
+      const errorEl = document.getElementById('importError');
+      errorEl.classList.remove('show');
+      errorEl.textContent = '';
+
+      if (!file) return;
+
+      if (!file.name.toLowerCase().endsWith('.json') && file.type !== 'application/json') {
+        errorEl.textContent = 'Пожалуйста, выбери файл в формате .json';
+        errorEl.classList.add('show');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const text = e.target.result;
+          let data;
+          try {
+            data = JSON.parse(text);
+          } catch (err) {
+            throw new Error('Файл повреждён или содержит некорректный JSON');
+          }
+
+          if (!data || data.__magic !== EXPORT_MAGIC) {
+            throw new Error('Это не файл экспорта DreamBoard. Выбери правильный файл.');
+          }
+
+          if (!data.__version || data.__version > EXPORT_FORMAT_VERSION) {
+            throw new Error('Файл создан в более новой версии DreamBoard. Обнови платформу.');
+          }
+
+          if (!data.user || typeof data.user !== 'object' || !data.user.login || !data.user.name) {
+            throw new Error('В файле отсутствуют обязательные данные профиля.');
+          }
+
+          window.__importFile = file;
+          window.__importData = data;
+
+          const info = document.getElementById('importFileInfo');
+          const nameEl = document.getElementById('importFileName');
+          nameEl.textContent = `${file.name} · ${data.user.name} (@${data.user.login})`;
+          info.classList.add('show');
+
+          document.getElementById('importConfirmBtn').disabled = false;
+        } catch (err) {
+          errorEl.textContent = err.message || 'Не удалось прочитать файл';
+          errorEl.classList.add('show');
+          window.__importFile = null;
+          window.__importData = null;
+          document.getElementById('importConfirmBtn').disabled = true;
+        }
+      };
+
+      reader.onerror = () => {
+        const errorEl = document.getElementById('importError');
+        errorEl.textContent = 'Не удалось прочитать файл. Попробуй ещё раз.';
+        errorEl.classList.add('show');
+      };
+
+      reader.readAsText(file);
+    }
+
+    function clearImportFile() {
+      window.__importFile = null;
+      window.__importData = null;
+      const info = document.getElementById('importFileInfo');
+      if (info) info.classList.remove('show');
+      const fileInput = document.getElementById('importFileInput');
+      if (fileInput) fileInput.value = '';
+      const btn = document.getElementById('importConfirmBtn');
+      if (btn) btn.disabled = true;
+      const errorEl = document.getElementById('importError');
+      if (errorEl) { errorEl.classList.remove('show'); errorEl.textContent = ''; }
+    }
+
+    async function performImport() {
+      const data = window.__importData;
+      if (!data) return;
+
+      const users = getUsers();
+      const login = String(data.user.login).trim().toLowerCase();
+      const name = String(data.user.name).trim();
+      const password = String(data.user.password || '');
+
+      if (!login || !name) {
+        showToast('В файле нет имени или логина', 'rose');
+        return;
+      }
+
+      const dreams = Array.isArray(data.dreams) ? data.dreams : [];
+      const thoughts = Array.isArray(data.thoughts) ? data.thoughts : [];
+      const categories = Array.isArray(data.categories) && data.categories.length > 0
+        ? data.categories
+        : JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+
+      let finalLogin = login;
+
+      if (users[finalLogin]) {
+        const confirmed = await customConfirm({
+          title: 'Пользователь уже существует',
+          message: `Логин «@${finalLogin}» уже занят. Импортировать данные в этот аккаунт? Текущие данные будут перезаписаны.`,
+          icon: '⚠️',
+          confirmText: 'Перезаписать',
+          cancelText: 'Отмена',
+          danger: true
+        });
+        if (!confirmed) return;
+
+        users[finalLogin] = {
+          ...users[finalLogin],
+          name,
+          password: password || users[finalLogin].password,
+          dreams,
+          thoughts,
+          categories,
+          importedAt: Date.now()
+        };
+        saveUsers(users);
+        localStorage.setItem('dreamboard_current_user', finalLogin);
+        closeGenericModal();
+        showApp();
+        showToast(`Данные импортированы в @${finalLogin} ✨`, 'warm');
+        return;
+      }
+
+      users[finalLogin] = {
+        name,
+        login: finalLogin,
+        password,
+        dreams,
+        thoughts,
+        categories,
+        createdAt: data.user.createdAt || Date.now(),
+        importedAt: Date.now()
+      };
+      saveUsers(users);
+      localStorage.setItem('dreamboard_current_user', finalLogin);
+      closeGenericModal();
+      showApp();
+      showToast(`Добро пожаловать, ${name}! Данные импортированы ✨`, 'warm');
+    }
+
+    // ==========================================
+    // DIARY (THOUGHTS)
+    // ==========================================
+    const THOUGHT_COLORS = ['yellow', 'pink', 'blue', 'green', 'purple', 'orange'];
+    const THOUGHTS_PER_PAGE = 6;
+    let currentDiaryPage = 0;
+
+    function openCreateThoughtModal(editId = null) {
+      const thoughts = getThoughts();
+      const thought = editId ? thoughts.find(t => t.id === editId) : null;
+      const currentColor = thought ? thought.color : THOUGHT_COLORS[Math.floor(Math.random() * THOUGHT_COLORS.length)];
+
+      showGenericModal(`
+    <h3 class="modal-title">${thought ? '✏️ Редактировать мысль' : '💭 Новая мысль'}</h3>
+    <div class="modal-subtitle">${thought ? 'Измени свою запись.' : 'Запиши то, что крутится в голове. Это только твоё.'}</div>
+    <form onsubmit="handleSaveThought(event, ${editId ? `'${editId}'` : 'null'})">
+      <div class="form-group">
+        <label>📝 Твоя мысль</label>
+        <textarea id="thoughtText" placeholder="О чём ты думаешь?" required style="min-height:140px;">${thought ? escapeHtml(thought.text) : ''}</textarea>
+      </div>
+      <div class="form-group">
+        <label>🎨 Цвет стикера</label>
+        <div class="diary-color-picker">
+          ${THOUGHT_COLORS.map(c => `<div class="diary-color-option ${c} ${c === currentColor ? 'selected' : ''}" data-color="${c}" onclick="selectThoughtColor(this)"></div>`).join('')}
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button>
+        <button type="submit" class="btn btn-primary">${thought ? '💾 Сохранить' : '✨ Записать'}</button>
+      </div>
+    </form>
+  `);
+    }
+
+    function selectThoughtColor(el) {
+      document.querySelectorAll('.diary-color-option').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function handleSaveThought(e, editId) {
+      e.preventDefault();
+      const text = document.getElementById('thoughtText').value.trim();
+      const color = document.querySelector('.diary-color-option.selected')?.dataset.color || 'yellow';
+      const thoughts = getThoughts();
+
+      if (editId) {
+        const thought = thoughts.find(t => t.id === editId);
+        if (thought) { thought.text = text; thought.color = color; thought.updatedAt = Date.now(); }
+        showToast('Мысль обновлена ✏️');
+      } else {
+        thoughts.push({
+          id: 'thought_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          text, color, createdAt: Date.now()
+        });
+        showToast('Мысль записана 💭', 'warm');
+      }
+
+      saveThoughts(thoughts);
+      closeGenericModal();
+      renderDiary();
+    }
+
+    async function deleteThought(id) {
+      const confirmed = await customConfirm({
+        title: 'Удалить мысль?', message: 'Эта запись исчезнет навсегда.',
+        icon: '💭', confirmText: 'Удалить', cancelText: 'Оставить', danger: true
+      });
+      if (!confirmed) return;
+      saveThoughts(getThoughts().filter(t => t.id !== id));
+      renderDiary();
+      showToast('Мысль удалена');
+    }
+
+    function renderDiary() {
+      const thoughts = getThoughts();
+      const totalPages = Math.max(1, Math.ceil(thoughts.length / THOUGHTS_PER_PAGE));
+      if (currentDiaryPage >= totalPages) currentDiaryPage = totalPages - 1;
+      if (currentDiaryPage < 0) currentDiaryPage = 0;
+
+      const start = currentDiaryPage * THOUGHTS_PER_PAGE;
+      const pageThoughts = thoughts.slice(start, start + THOUGHTS_PER_PAGE);
+
+      const stickersEl = document.getElementById('diaryStickers');
+      let html = '';
+
+      pageThoughts.forEach(thought => {
+        html += `
+      <div class="diary-sticker ${thought.color}">
+        <div class="diary-sticker-text">${escapeHtml(thought.text)}</div>
+        <div class="diary-sticker-actions">
+          <button class="diary-sticker-btn" onclick="openCreateThoughtModal('${thought.id}')" title="Редактировать">✏️</button>
+          <button class="diary-sticker-btn" onclick="deleteThought('${thought.id}')" title="Удалить">🗑️</button>
+        </div>
+      </div>
+    `;
+      });
+
+      const emptySlots = THOUGHTS_PER_PAGE - pageThoughts.length;
+      for (let i = 0; i < emptySlots; i++) {
+        html += `<div class="diary-sticker diary-empty-sticker" onclick="openCreateThoughtModal()">+</div>`;
+      }
+
+      stickersEl.innerHTML = html;
+
+      document.getElementById('pageIndicator').textContent = `Страница ${currentDiaryPage + 1} из ${totalPages}`;
+      document.getElementById('prevPageBtn').disabled = currentDiaryPage === 0;
+      document.getElementById('nextPageBtn').disabled = currentDiaryPage >= totalPages - 1;
+    }
+
+    function prevDiaryPage() {
+      if (currentDiaryPage > 0) {
+        const page = document.getElementById('diaryPage');
+        page.classList.add('flip-right');
+        setTimeout(() => {
+          currentDiaryPage--;
+          renderDiary();
+          page.classList.remove('flip-right');
+        }, 300);
+      }
+    }
+
+    function nextDiaryPage() {
+      const thoughts = getThoughts();
+      const totalPages = Math.max(1, Math.ceil(thoughts.length / THOUGHTS_PER_PAGE));
+      if (currentDiaryPage < totalPages - 1) {
+        const page = document.getElementById('diaryPage');
+        page.classList.add('flip-left');
+        setTimeout(() => {
+          currentDiaryPage++;
+          renderDiary();
+          page.classList.remove('flip-left');
+        }, 300);
+      }
+    }
+
+    // ==========================================
+    // CONFETTI
+    // ==========================================
+    function launchConfetti() {
+      const container = document.createElement('div');
+      container.className = 'confetti-container';
+      document.body.appendChild(container);
+      const colors = ['#d4a853', '#c77d8a', '#8ab4c7', '#9b8ec4', '#7db89e', '#f0d48a', '#d4845a'];
+      for (let i = 0; i < 60; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = (Math.random() * 100) + 'vw';
+        piece.style.top = (Math.random() * 30 + 10) + 'vh';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.width = (Math.random() * 8 + 4) + 'px';
+        piece.style.height = (Math.random() * 8 + 4) + 'px';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.animationDuration = (Math.random() * 1 + 1) + 's';
+        piece.style.animationDelay = (Math.random() * 0.5) + 's';
+        container.appendChild(piece);
+      }
+      setTimeout(() => container.remove(), 3000);
+    }
+
+    // ==========================================
+    // TOAST
+    // ==========================================
+    function showToast(msg, style = '') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast' + (style ? ' ' + style : '');
+      toast.textContent = msg;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 4000);
+    }
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((reg) => console.log('SW registered:', reg.scope))
+          .catch((err) => console.warn('SW failed:', err));
+      });
+    }
+  </script>
+</body>
+
+</html>
