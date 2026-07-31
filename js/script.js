@@ -456,14 +456,14 @@ function applyTheme(themeId) {
 }
 function openThemePicker() {
     const activeTheme = currentTheme;
-    showGenericModal(`<h3 class="modal-title">🎨 Выбери атмосферу</h3> <div class="modal-subtitle">Каждая тема — это своё настроение. Найди ту, что откликается.</div> <div class="theme-grid"> ${THEMES.map(t => ` <div class= "theme-card ${t.id === activeTheme ? 'active' : ''} " onclick= "selectTheme('${t.id}') " >
- <div class= "theme-icon " >${t.icon} </div >
- <div class= "theme-name " >${t.name} </div >
- <div class= "theme-preview " >
-${t.colors.map(c => `<div class="theme-preview-dot" style="background:${c}"></div>`).join('')}
+    showGenericModal(`<h3 class="modal-title">🎨 Выбери атмосферу</h3> <div class="modal-subtitle">Каждая тема — это своё настроение. Найди ту, что откликается.</div> <div class="theme-grid"> ${THEMES.map(t => ` <div class="theme-card ${t.id === activeTheme ? 'active' : ''}"onclick="selectTheme('${t.id}')">
+ <div class="theme-icon">${t.icon} </div >
+ <div class="theme-name">${t.name} </div >
+ <div class="theme-preview">
+${t.colors.map(c => `<div class="theme-preview-dot"style="background:${c}"></div>`).join('')}
  </div >
  </div >
- `).join('')} </div> <div class="modal-actions"> <button class="btn btn-primary" onclick="closeGenericModal()">Готово</button> </div>`);
+ `).join('')} </div> <div class="modal-actions"> <button class="btn btn-primary"onclick="closeGenericModal()">Готово</button> </div>`);
 }
 function selectTheme(themeId) {
     applyTheme(themeId);
@@ -526,7 +526,7 @@ document.getElementById('genericModal').addEventListener('click', (e) => {
 });
 function customConfirm({ title = 'Подтвердите', message = '', icon = '🤔', confirmText = 'Да', cancelText = 'Отмена', danger = false }) {
     return new Promise(resolve => {
-        showGenericModal(`<h3 class="modal-title">${icon} ${escapeHtml(title)}</h3> <div class="modal-subtitle">${escapeHtml(message)}</div> <div class="modal-actions"> <button class="btn btn-secondary" onclick="window.__resolveModal(false)">${cancelText}</button> <button class="btn ${danger ? 'btn-danger' : 'btn-primary'}" onclick="window.__resolveModal(true)">${confirmText}</button> </div>`);
+        showGenericModal(`<h3 class="modal-title">${icon} ${escapeHtml(title)}</h3> <div class="modal-subtitle">${escapeHtml(message)}</div> <div class="modal-actions"> <button class="btn btn-secondary"onclick="window.__resolveModal(false)">${cancelText}</button> <button class="btn ${danger ? 'btn-danger' : 'btn-primary'}"onclick="window.__resolveModal(true)">${confirmText}</button> </div>`);
         window.__resolveModal = (val) => { closeGenericModal(); resolve(val); };
     });
 }
@@ -544,24 +544,24 @@ function getGreeting() {
     return `${currentTimeGreeting}, <strong>${escapeHtml(u.name)}</strong> <span class="greeting-emoji">${currentTimeEmoji}</span>`;
 }
 const warmPhrases = [
-    "{name}, помни: каждая мечта — это маленькая вселенная ✨ ",
-    "Ты удивительный человек, {name} 🌙 ",
-    "{name}, даже самые смелые мечты начинаются с шага 🌱 ",
-    "Сегодня отличный день, чтобы верить в чудеса, {name} 💫 ",
-    "{name}, твои мечты важны 🌟 ",
-    "Вселенная любит тех, кто мечтает, {name} 🌌 ",
-    "{name}, не торопись. Всё приходит в своё время 🌸 ",
-    "Ты уже на пути, {name} 💛 ",
-    "{name}, мечты не стареют 🌿 ",
-    "Звёзды светят для тех, кто смотрит вверх, {name} ⭐ ",
-    "{name}, ты делаешь этот мир волшебнее 🌈 ",
-    "Не бойся мечтать масштабно, {name} 🚀 ",
-    "Сегодня хороший день для мечтаний, {name} 🌻 ",
-    "{name}, мечты сбываются у тех, кто верит 💫 ",
-    "{name}, маленький шаг сегодня — большое чудо завтра 🌱 ",
-    "Пусть этот день принесёт волшебство, {name} ✨ ",
-    "{name}, твой внутренний свет делает мечты реальностью 🕯️ ",
-    "Дыши глубже, {name}. Мечты любят спокойные сердца 🌬️ "
+    "{name}, помни: каждая мечта — это маленькая вселенная ✨",
+    "Ты удивительный человек, {name} 🌙",
+    "{name}, даже самые смелые мечты начинаются с шага 🌱",
+    "Сегодня отличный день, чтобы верить в чудеса, {name} 💫",
+    "{name}, твои мечты важны 🌟",
+    "Вселенная любит тех, кто мечтает, {name} 🌌",
+    "{name}, не торопись. Всё приходит в своё время 🌸",
+    "Ты уже на пути, {name} 💛",
+    "{name}, мечты не стареют 🌿",
+    "Звёзды светят для тех, кто смотрит вверх, {name} ⭐",
+    "{name}, ты делаешь этот мир волшебнее 🌈",
+    "Не бойся мечтать масштабно, {name} 🚀",
+    "Сегодня хороший день для мечтаний, {name} 🌻",
+    "{name}, мечты сбываются у тех, кто верит 💫",
+    "{name}, маленький шаг сегодня — большое чудо завтра 🌱",
+    "Пусть этот день принесёт волшебство, {name} ✨",
+    "{name}, твой внутренний свет делает мечты реальностью 🕯️",
+    "Дыши глубже, {name}. Мечты любят спокойные сердца 🌬️"
 ];
 let phraseIndex = 0;
 function showRandomWarmPhrase() {
@@ -631,55 +631,55 @@ async function handleLogout() {
     if (warmPhraseTimer) clearTimeout(warmPhraseTimer);
 }
 function openForgotPasswordModal() {
-    showGenericModal(`<div class="in-dev-illustration"> <span class="big-icon">🔮</span> <div><span class="sub-icon">✨</span><span class="sub-icon">🛠️</span><span class="sub-icon">💫</span></div> </div> <h3 class="modal-title" style="text-align:center;">Наша общая мечта</h3> <div class="in-dev-quote">«Восстановление пароля —<br>это тоже мечта, которая скоро сбудется»</div> <div class="in-dev-text">Мы уже работаем над этой функцией. Наши мастера-волшебники колдуют над ней день и ночь.</div> <div class="in-dev-progress"></div> <div class="in-dev-text" style="font-size:14px; opacity:0.8;">А пока — помни: мечты сбываются у тех, кто в них верит ✨</div> <div class="modal-actions"><button class="btn btn-primary" onclick="closeGenericModal()">Понятно, жду ✨</button></div>`);
+    showGenericModal(`<div class="in-dev-illustration"> <span class="big-icon">🔮</span> <div><span class="sub-icon">✨</span><span class="sub-icon">🛠️</span><span class="sub-icon">💫</span></div> </div> <h3 class="modal-title"style="text-align:center;">Наша общая мечта</h3> <div class="in-dev-quote">«Восстановление пароля —<br>это тоже мечта, которая скоро сбудется»</div> <div class="in-dev-text">Мы уже работаем над этой функцией. Наши мастера-волшебники колдуют над ней день и ночь.</div> <div class="in-dev-progress"></div> <div class="in-dev-text"style="font-size:14px; opacity:0.8;">А пока — помни: мечты сбываются у тех, кто в них верит ✨</div> <div class="modal-actions"><button class="btn btn-primary"onclick="closeGenericModal()">Понятно, жду ✨</button></div>`);
 }
 function openInfoModal() {
     document.getElementById('userDropdown').classList.remove('show');
     showGenericModal(`
- <div class= "info-modal-content " >
- <span class= "info-logo " >🌙 </span >
- <div class= "info-title " >DreamBoard </div >
- <div class= "info-tagline " >Книга мечтаний — место, где мечты становятся ближе ✨ </div >
- <div class= "info-credits " >
- <div class= "info-credits-title " >✨ Для вас старались </div >
- <div class= "info-credit-row " > <span class= "label " >Автор идеи и креатив </span > <span class= "value " >MylnikCode </span > </div >
- <div class= "info-credit-row " > <span class= "label " >Реализация </span > <span class= "value " >Qwen 3.7 Plus </span > </div >
- <div class= "info-credit-row " > <span class= "label " >Версия платформы </span > <span class= "value " >v7.1 </span > </div >
+ <div class="info-modal-content">
+ <span class="info-logo">🌙 </span >
+ <div class="info-title">DreamBoard </div >
+ <div class="info-tagline">Книга мечтаний — место, где мечты становятся ближе ✨ </div >
+ <div class="info-credits">
+ <div class="info-credits-title">✨ Для вас старались </div >
+ <div class="info-credit-row"> <span class="label">Автор идеи и креатив </span > <span class="value">MylnikCode </span > </div >
+ <div class="info-credit-row"> <span class="label">Реализация </span > <span class="value">Qwen 3.7 Plus </span > </div >
+ <div class="info-credit-row"> <span class="label">Версия платформы </span > <span class="value">v7.1 </span > </div >
  </div >
-<div class= "info-roadmap " >
- <div class= "info-roadmap-title " >🔮 Наши мечты о платформе </div >
- <div class= "roadmap-item " >
- <div class= "roadmap-icon " >🖌️ </div >
- <div class= "roadmap-content " >
- <div class= "roadmap-name " >Персонализация </div >
- <div class= "roadmap-desc " >Предоставить пользователям максимальную свободу творчества: аватарки, собственные темы, цвета градиентов для карточек✨ </div >
- </div >
- </div >
- <div class= "roadmap-item " >
- <div class= "roadmap-icon " >☁️ </div >
- <div class= "roadmap-content " >
- <div class= "roadmap-name " >Синхронизация между устройствами </div >
- <div class= "roadmap-desc " >Облачное хранение — мечты всегда с тобой, на любом устройстве, в любое время, в любом месте🌐 </div >
+<div class="info-roadmap">
+ <div class="info-roadmap-title">🔮 Наши мечты о платформе </div >
+ <div class="roadmap-item">
+ <div class="roadmap-icon">🖌️ </div >
+ <div class="roadmap-content">
+ <div class="roadmap-name">Персонализация </div >
+ <div class="roadmap-desc">Предоставить пользователям максимальную свободу творчества: аватарки, собственные темы, цвета градиентов для карточек✨ </div >
  </div >
  </div >
- <div class= "roadmap-item " >
- <div class= "roadmap-icon " >⏳ </div >
- <div class= "roadmap-content " >
- <div class= "roadmap-name " >Капсула времени </div >
- <div class= "roadmap-desc " >Запечатай мечту до определённой даты. Пусть она живёт в тишине, пока не придёт её час раскрыться🎁 </div >
+ <div class="roadmap-item">
+ <div class="roadmap-icon">☁️ </div >
+ <div class="roadmap-content">
+ <div class="roadmap-name">Синхронизация между устройствами </div >
+ <div class="roadmap-desc">Облачное хранение — мечты всегда с тобой, на любом устройстве, в любое время, в любом месте🌐 </div >
  </div >
  </div >
- <div class= "roadmap-item " >
- <div class= "roadmap-icon " >🗺️ </div >
- <div class= "roadmap-content " >
- <div class= "roadmap-name " >Карта желаний </div >
- <div class= "roadmap-desc " >Бесконечное пространство, на котором человек может пркреплять фотокарточки, располагать дополнительные элементы и получать за это достиженя🏆 </div >
+ <div class="roadmap-item">
+ <div class="roadmap-icon">⏳ </div >
+ <div class="roadmap-content">
+ <div class="roadmap-name">Капсула времени </div >
+ <div class="roadmap-desc">Запечатай мечту до определённой даты. Пусть она живёт в тишине, пока не придёт её час раскрыться🎁 </div >
+ </div >
+ </div >
+ <div class="roadmap-item">
+ <div class="roadmap-icon">🗺️ </div >
+ <div class="roadmap-content">
+ <div class="roadmap-name">Карта желаний </div >
+ <div class="roadmap-desc">Бесконечное пространство, на котором человек может пркреплять фотокарточки, располагать дополнительные элементы и получать за это достиженя🏆 </div >
  </div >
  </div >
  </div >
- <div class= "info-version " >Создано с любовью к мечтателям  <span class= "ver-num " >♥ </span > </div >
+ <div class="info-version">Создано с любовью к мечтателям  <span class="ver-num">♥ </span > </div >
  </div >
- <div class= "modal-actions " > <button class= "btn btn-primary " onclick= "closeGenericModal() " >Закрыть </button > </div >
+ <div class="modal-actions"> <button class="btn btn-primary"onclick="closeGenericModal()">Закрыть </button > </div >
 `);
 }
 let currentMode = 'dreams';
@@ -735,19 +735,19 @@ function renderDreams() {
 <div class="stat-chip"><span class="stat-num">${dreams.length}</span><span>всего мечтаний</span></div>
 <div class="stat-chip"><span class="stat-num">${fulfilledCount}</span><span>исполнилось ✨</span></div>
 <div class="stat-chip"><span class="stat-num">${dreams.length - fulfilledCount}</span><span>в пути 🌟</span></div>
-${archivedCount > 0 ? `<div class="stat-chip" style="cursor:pointer;" onclick="openArchiveModal()"><span class="stat-num">${archivedCount}</span><span>в архиве 📦</span></div>` : ''}
+${archivedCount > 0 ? `<div class="stat-chip"style="cursor:pointer;"onclick="openArchiveModal()"><span class="stat-num">${archivedCount}</span><span>в архиве 📦</span></div>` : ''}
 `;
     const usedCats = [...new Set(dreams.map(d => d.category))];
-    let filterHTML = `<button class="filter-chip ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">Все</button>`;
-    filterHTML += `<button class="filter-chip ${currentFilter === 'fulfilled' ? 'active' : ''}" onclick="setFilter('fulfilled')">✨ Исполнившиеся</button>`;
-    filterHTML += `<button class="filter-chip ${currentFilter === 'priority' ? 'active' : ''}" onclick="setFilter('priority')">🔥 Приоритет</button>`;
+    let filterHTML = `<button class="filter-chip ${currentFilter === 'all' ? 'active' : ''}"onclick="setFilter('all')">Все</button>`;
+    filterHTML += `<button class="filter-chip ${currentFilter === 'fulfilled' ? 'active' : ''}"onclick="setFilter('fulfilled')">✨ Исполнившиеся</button>`;
+    filterHTML += `<button class="filter-chip ${currentFilter === 'priority' ? 'active' : ''}"onclick="setFilter('priority')">🔥 Приоритет</button>`;
     usedCats.forEach(catId => {
         const c = categories.find(cat => cat.id === catId) || getCategoryById(catId);
         const activeClass = currentFilter === catId ? `active-${c.color}` : '';
-        filterHTML += `<button class="filter-chip ${activeClass}" onclick="setFilter('${catId}')">${c.emoji} ${escapeHtml(c.name)}</button>`;
+        filterHTML += `<button class="filter-chip ${activeClass}"onclick="setFilter('${catId}')">${c.emoji} ${escapeHtml(c.name)}</button>`;
     });
     filterHTML += `<div class="filter-divider"></div>`;
-    filterHTML += `<label class="filter-toggle ${hideFulfilled ? 'active' : ''}" onclick="toggleHideFulfilled(event)"><input type="checkbox" ${hideFulfilled ? 'checked' : ''}><span class="check-box">✓</span><span>Скрыть исполненные</span></label>`;
+    filterHTML += `<label class="filter-toggle ${hideFulfilled ? 'active' : ''}"onclick="toggleHideFulfilled(event)"><input type="checkbox"${hideFulfilled ? 'checked' : ''}><span class="check-box">✓</span><span>Скрыть исполненные</span></label>`;
     document.getElementById('filterBar').innerHTML = filterHTML;
     let filtered = dreams;
     if (hideFulfilled) filtered = filtered.filter(d => !d.fulfilled);
@@ -768,11 +768,11 @@ ${archivedCount > 0 ? `<div class="stat-chip" style="cursor:pointer;" onclick="o
         else if (hideFulfilled && dreams.length > 0 && dreams.every(d => d.fulfilled)) emptyMsg = { icon: '🎉', title: 'Все мечты исполнились!', text: `${name}, это невероятно! 🌟` };
         else emptyMsg = { icon: '🔍', title: 'Ничего не найдено', text: 'Попробуй другой фильтр' };
         document.getElementById('dreamsGrid').innerHTML = `
-   <div class="empty-state" style="grid-column: 1/-1;">
+   <div class="empty-state"style="grid-column: 1/-1;">
      <div class="empty-icon">${emptyMsg.icon}</div>
      <h3>${emptyMsg.title}</h3>
      <p>${emptyMsg.text}</p>
-     ${dreams.length === 0 ? '<button class="btn btn-primary" onclick="openCreateModal()" style="width:auto;">✦ Записать мечту</button>' : ''}
+     ${dreams.length === 0 ? '<button class="btn btn-primary"onclick="openCreateModal()"style="width:auto;">✦ Записать мечту</button>' : ''}
    </div>
  `;
         return;
@@ -787,37 +787,37 @@ ${archivedCount > 0 ? `<div class="stat-chip" style="cursor:pointer;" onclick="o
         const completedCount = hasSteps ? dream.steps.filter(s => s.completed).length : 0;
         const stepsButtonText = hasSteps ? `👣 Шаги (${completedCount}/${dream.steps.length})` : '';
         return `
-<div class= "dream-card ${dream.fulfilled ? 'fulfilled' : ''} ${dream.priority ? 'priority' : ''} " data-color= "${dream.color || 'gold'} " style= "animation-delay: ${i * 0.05}s " >
- <div class= "dream-progress-bar " >
- <div class= "dream-progress-fill " style= "width: ${progress}% " > </div >
+<div class="dream-card ${dream.fulfilled ? 'fulfilled' : ''} ${dream.priority ? 'priority' : ''}"data-color="${dream.color || 'gold'}"style="animation-delay: ${i * 0.05}s">
+ <div class="dream-progress-bar">
+ <div class="dream-progress-fill"style="width: ${progress}%"> </div >
  </div >
- <div class= "dream-progress-text " >${progressText} </div >
-${dream.priority ? ' <div class= "priority-badge " >🔥 Приоритет </div >' : ''}
- <div class= "dream-card-header " >
- <span class= "dream-category cat-${cat.color} " >${cat.emoji} ${escapeHtml(cat.name)} </span >
- <div class= "dream-actions " >
- <button class= "dream-action-btn priority-btn ${dream.priority ? 'active' : ''} " onclick= "togglePriority('${dream.id}') " title= "${dream.priority ? 'Снять приоритет' : 'Сделать приоритетной'} " >${dream.priority ? '🔥' : '❗'} </button >
- <button class= "dream-action-btn fulfill-btn " onclick= "toggleFulfill('${dream.id}') " title= "${dream.fulfilled ? 'Вернуть в мечты' : 'Исполнено!'} " >${dream.fulfilled ? '↩️' : '⭐'} </button >
- <button class= "dream-action-btn archive-btn " onclick= "archiveDream('${dream.id}') " title= "В архив " >📦 </button >
- <button class= "dream-action-btn share-btn " onclick= "generateShareCard('${dream.id}') " title= "Поделиться мечтой " >📤 </button >
- <button class= "dream-action-btn " onclick= "openEditModal('${dream.id}') " title= "Редактировать " >✏️ </button >
- <button class= "dream-action-btn delete-btn " onclick= "deleteDream('${dream.id}') " title= "Удалить " >🗑️ </button >
+ <div class="dream-progress-text">${progressText} </div >
+${dream.priority ? ' <div class="priority-badge">🔥 Приоритет </div >' : ''}
+ <div class="dream-card-header">
+ <span class="dream-category cat-${cat.color}">${cat.emoji} ${escapeHtml(cat.name)} </span >
+ <div class="dream-actions">
+ <button class="dream-action-btn priority-btn ${dream.priority ? 'active' : ''}"onclick="togglePriority('${dream.id}')"title="${dream.priority ? 'Снять приоритет' : 'Сделать приоритетной'}">${dream.priority ? '🔥' : '❗'} </button >
+ <button class="dream-action-btn fulfill-btn"onclick="toggleFulfill('${dream.id}')"title="${dream.fulfilled ? 'Вернуть в мечты' : 'Исполнено!'}">${dream.fulfilled ? '↩️' : '⭐'} </button >
+ <button class="dream-action-btn archive-btn"onclick="archiveDream('${dream.id}')"title="В архив">📦 </button >
+ <button class="dream-action-btn share-btn"onclick="generateShareCard('${dream.id}')"title="Поделиться мечтой">📤 </button >
+ <button class="dream-action-btn"onclick="openEditModal('${dream.id}')"title="Редактировать">✏️ </button >
+ <button class="dream-action-btn delete-btn"onclick="deleteDream('${dream.id}')"title="Удалить">🗑️ </button >
  </div >
  </div >
- <div class= "dream-title " >${escapeHtml(dream.title)} </div >
-${dream.text ? ` <div class= "dream-text " >${escapeHtml(dream.text)} </div >` : ''}
+ <div class="dream-title">${escapeHtml(dream.title)} </div >
+${dream.text ? ` <div class="dream-text">${escapeHtml(dream.text)} </div >` : ''}
 ${hasSteps ? `
- <div class= "dream-steps-dropdown " >
- <button class= "steps-toggle-btn " onclick= "toggleStepsDropdown('${dream.id}', this) " >
+ <div class="dream-steps-dropdown">
+ <button class="steps-toggle-btn"onclick="toggleStepsDropdown('${dream.id}', this)">
  <span >${stepsButtonText} </span >
- <span class= "arrow " >▼ </span >
+ <span class="arrow">▼ </span >
  </button >
- <div class= "steps-dropdown-content " id= "steps-${dream.id} " >
+ <div class="steps-dropdown-content"id="steps-${dream.id}">
 ${dream.steps.map((step, idx) => `
- <div class= "step-item ${step.completed ? 'completed' : ''} " >
- <span class= "step-item-num " >${idx + 1} </span >
- <span class= "step-item-text " >${escapeHtml(step.description)} </span >
- <button class= "step-item-btn ${step.completed ? 'uncheck' : 'check'} " onclick= "toggleStepComplete('${dream.id}', ${idx}) " title= "${step.completed ? 'Отменить выполнение' : 'Отметить выполненным'} " >
+ <div class="step-item ${step.completed ? 'completed' : ''}">
+ <span class="step-item-num">${idx + 1} </span >
+ <span class="step-item-text">${escapeHtml(step.description)} </span >
+ <button class="step-item-btn ${step.completed ? 'uncheck' : 'check'}"onclick="toggleStepComplete('${dream.id}', ${idx})"title="${step.completed ? 'Отменить выполнение' : 'Отметить выполненным'}">
 ${step.completed ? '✕' : '✓'}
  </button >
  </div >
@@ -825,8 +825,8 @@ ${step.completed ? '✕' : '✓'}
  </div >
  </div >
 ` : ''}
- <div class= "dream-footer " >
-${dream.fulfilled ? ' <span class= "dream-fulfilled-badge " >✨ Исполнено </span >' : ''}
+ <div class="dream-footer">
+${dream.fulfilled ? ' <span class="dream-fulfilled-badge">✨ Исполнено </span >' : ''}
  </div >
  </div >
 `;
@@ -887,16 +887,16 @@ function renderStepsTable() {
     const tbody = document.getElementById('stepsTableBody');
     if (!tbody) return;
     if (currentSteps.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" class="steps-empty">Шаги не добавлены. Нажмите "+ Добавить шаг"</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="3"class="steps-empty">Шаги не добавлены. Нажмите"+ Добавить шаг"</td></tr>';
         return;
     }
     tbody.innerHTML = currentSteps.map((step, idx) => `
 <tr >
- <td class= "step-num " >${idx + 1} </td >
- <td class= "step-desc " >${escapeHtml(step.description)} </td >
- <td class= "step-actions " >
- <button type= "button " class= "step-action-btn " onclick= "openStepModal(${idx}) " title= "Редактировать " >✏️ </button >
- <button type= "button " class= "step-action-btn delete " onclick= "deleteStep(${idx}) " title= "Удалить " >🗑️ </button >
+ <td class="step-num">${idx + 1} </td >
+ <td class="step-desc">${escapeHtml(step.description)} </td >
+ <td class="step-actions">
+ <button type="button"class="step-action-btn"onclick="openStepModal(${idx})"title="Редактировать">✏️ </button >
+ <button type="button"class="step-action-btn delete"onclick="deleteStep(${idx})"title="Удалить">🗑️ </button >
  </td >
  </tr >
 `).join('');
@@ -1098,14 +1098,14 @@ function renderArchiveList() {
     const archived = getDreams().filter(d => d.archived);
     let listHTML = '';
     if (archived.length === 0) {
-        listHTML = `<div class="empty-state" style="padding: 40px 20px;"><div class="empty-icon" style="font-size: 52px;">📦</div><h3 style="font-size: 28px;">Архив пуст</h3><p>Здесь будут мечты, которые ты решил отложить</p></div>`;
+        listHTML = `<div class="empty-state"style="padding: 40px 20px;"><div class="empty-icon"style="font-size: 52px;">📦</div><h3 style="font-size: 28px;">Архив пуст</h3><p>Здесь будут мечты, которые ты решил отложить</p></div>`;
     } else {
         listHTML = `<div class="archive-list">` + archived.map(dream => {
             const cat = getCategoryById(dream.category);
-            return `<div class="archive-item"> <div class="archive-item-content"> <div class="archive-item-title">${cat.emoji} ${escapeHtml(dream.title)}</div> <div class="archive-item-cat">${escapeHtml(cat.name)}${dream.fulfilled ? ' · ✨ исполнено' : ''}</div> </div> <div class="archive-item-actions"> <button class="archive-action-btn restore-btn" onclick="unarchiveDream('${dream.id}')" title="Вернуть">↩️</button> <button class="archive-action-btn delete-btn" onclick="deleteArchivedDream('${dream.id}')" title="Удалить">🗑️</button> </div> </div>`;
+            return `<div class="archive-item"> <div class="archive-item-content"> <div class="archive-item-title">${cat.emoji} ${escapeHtml(dream.title)}</div> <div class="archive-item-cat">${escapeHtml(cat.name)}${dream.fulfilled ? ' · ✨ исполнено' : ''}</div> </div> <div class="archive-item-actions"> <button class="archive-action-btn restore-btn"onclick="unarchiveDream('${dream.id}')"title="Вернуть">↩️</button> <button class="archive-action-btn delete-btn"onclick="deleteArchivedDream('${dream.id}')"title="Удалить">🗑️</button> </div> </div>`;
         }).join('') + `</div>`;
     }
-    showGenericModal(`<h3 class="modal-title">📦 Архивные мечты</h3> <div class="modal-subtitle">Мечты, которые ты отложил. Их можно вернуть или удалить окончательно.</div> ${listHTML} <div class="modal-actions"><button class="btn btn-primary" onclick="closeGenericModal()">Закрыть</button></div>`);
+    showGenericModal(`<h3 class="modal-title">📦 Архивные мечты</h3> <div class="modal-subtitle">Мечты, которые ты отложил. Их можно вернуть или удалить окончательно.</div> ${listHTML} <div class="modal-actions"><button class="btn btn-primary"onclick="closeGenericModal()">Закрыть</button></div>`);
 }
 function openRandomDream() {
     const dreams = getDreams().filter(d => !d.archived);
@@ -1154,7 +1154,7 @@ document.getElementById('stepModal').addEventListener('click', (e) => {
 function openProfileEditModal() {
     document.getElementById('userDropdown').classList.remove('show');
     const u = getCurrentUser();
-    showGenericModal(`<h3 class="modal-title">👤 Редактировать профиль</h3> <div class="modal-subtitle">Измени свои данные — имя, логин или пароль.</div> <form onsubmit="handleProfileSave(event)"> <div class="form-group"><label>🌟 Ваше имя</label><input type="text" id="profileName" value="${escapeHtml(u.name)}" required></div> <div class="form-group"><label>👤 Логин</label><input type="text" id="profileLogin" value="${escapeHtml(u.login)}" required></div> <div class="form-group"> <label>🔑 Пароль</label> <div class="password-field"> <input type="password" id="profilePassword" value="${escapeHtml(u.password)}" required minlength="4"> <button type="button" class="password-toggle" onclick="togglePasswordVisibility('profilePassword', this)">👁️</button> </div> </div> <div class="modal-actions"> <button type="button" class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button> <button type="submit" class="btn btn-primary">💾 Сохранить</button> </div> </form>`);
+    showGenericModal(`<h3 class="modal-title">👤 Редактировать профиль</h3> <div class="modal-subtitle">Измени свои данные — имя, логин или пароль.</div> <form onsubmit="handleProfileSave(event)"> <div class="form-group"><label>🌟 Ваше имя</label><input type="text"id="profileName"value="${escapeHtml(u.name)}"required></div> <div class="form-group"><label>👤 Логин</label><input type="text"id="profileLogin"value="${escapeHtml(u.login)}"required></div> <div class="form-group"> <label>🔑 Пароль</label> <div class="password-field"> <input type="password"id="profilePassword"value="${escapeHtml(u.password)}"required minlength="4"> <button type="button"class="password-toggle"onclick="togglePasswordVisibility('profilePassword', this)">👁️</button> </div> </div> <div class="modal-actions"> <button type="button"class="btn btn-secondary"onclick="closeGenericModal()">Отмена</button> <button type="submit"class="btn btn-primary">💾 Сохранить</button> </div> </form>`);
 }
 function handleProfileSave(e) {
     e.preventDefault();
@@ -1189,7 +1189,7 @@ function openCategoriesModal() {
     renderCategoriesEditor();
 }
 function renderCategoriesEditor() {
-    showGenericModal(`<h3 class="modal-title">📂 Мои категории</h3> <div class="modal-subtitle">Настрой категории под себя.</div> <div class="cat-list" id="catList"></div> <button class="add-cat-btn" onclick="addNewCategory()">+ Добавить категорию</button> <div class="modal-actions"> <button class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button> <button class="btn btn-primary" onclick="saveCategoriesFromModal()">💾 Сохранить</button> </div>`);
+    showGenericModal(`<h3 class="modal-title">📂 Мои категории</h3> <div class="modal-subtitle">Настрой категории под себя.</div> <div class="cat-list"id="catList"></div> <button class="add-cat-btn"onclick="addNewCategory()">+ Добавить категорию</button> <div class="modal-actions"> <button class="btn btn-secondary"onclick="closeGenericModal()">Отмена</button> <button class="btn btn-primary"onclick="saveCategoriesFromModal()">💾 Сохранить</button> </div>`);
     renderCategoriesList();
 }
 function renderCategoriesList() {
@@ -1200,7 +1200,7 @@ function renderCategoriesList() {
         const isUsed = dreams.some(d => d.category === cat.id);
         const canDelete = tempCategories.length > 1 && !isUsed;
         const deleteTitle = tempCategories.length === 1 ? 'Должна остаться хотя бы одна' : isUsed ? 'Нельзя: есть мечты' : 'Удалить';
-        return `<div class="cat-item" data-idx="${idx}"> <span class="cat-emoji" onclick="toggleEmojiPicker(event, ${idx})" title="Сменить эмодзи">${cat.emoji}</span> <input class="cat-name-input" type="text" value="${escapeHtml(cat.name)}" oninput="updateCatName(${idx}, this.value)" maxlength="30"> <div class="cat-color-dot" style="background: var(--${cat.color}); width:22px; height:22px; border-radius:50%; cursor:pointer;" onclick="cycleCatColor(${idx})" title="Сменить цвет"></div> <button class="cat-delete-btn" onclick="deleteCategory(${idx})" title="${deleteTitle}" ${!canDelete ? 'disabled' : ''}>🗑️</button> </div>`;
+        return `<div class="cat-item"data-idx="${idx}"> <span class="cat-emoji"onclick="toggleEmojiPicker(event, ${idx})"title="Сменить эмодзи">${cat.emoji}</span> <input class="cat-name-input"type="text"value="${escapeHtml(cat.name)}"oninput="updateCatName(${idx}, this.value)"maxlength="30"> <div class="cat-color-dot"style="background: var(--${cat.color}); width:22px; height:22px; border-radius:50%; cursor:pointer;"onclick="cycleCatColor(${idx})"title="Сменить цвет"></div> <button class="cat-delete-btn"onclick="deleteCategory(${idx})"title="${deleteTitle}"${!canDelete ? 'disabled' : ''}>🗑️</button> </div>`;
     }).join('');
 }
 function toggleEmojiPicker(event, idx) {
@@ -1211,7 +1211,7 @@ function toggleEmojiPicker(event, idx) {
     const catItem = event.target.closest('.cat-item');
     const picker = document.createElement('div');
     picker.className = 'emoji-picker-popup';
-    picker.innerHTML = `<div class="emoji-picker-title">Выберите эмодзи</div>` + EMOJI_OPTIONS.map(e => `<button type="button" class="emoji-option" onclick="selectEmoji(${idx}, '${e}')">${e}</button>`).join('');
+    picker.innerHTML = `<div class="emoji-picker-title">Выберите эмодзи</div>` + EMOJI_OPTIONS.map(e => `<button type="button"class="emoji-option"onclick="selectEmoji(${idx}, '${e}')">${e}</button>`).join('');
     catItem.appendChild(picker);
     setTimeout(() => document.addEventListener('click', closeEmojiPickerOnOutsideClick, { once: true }), 0);
 }
@@ -1273,7 +1273,7 @@ function saveCategoriesFromModal() {
 function openResetModal() {
     document.getElementById('userDropdown').classList.remove('show');
     const u = getCurrentUser();
-    showGenericModal(`<h3 class="modal-title">🗑️ Удалить профиль</h3> <div class="modal-subtitle">${escapeHtml(u.name)}, это действие навсегда удалит твой аккаунт и все данные из системы.</div> <div class="reset-warning">⚠️ Будут удалены <strong>все мечты, мысли, категории и сам профиль</strong>. Восстановить их будет невозможно.</div> <div class="form-group"> <label>Чтобы подтвердить, введи фразу ниже:</label> <div class="reset-input-wrapper"><input type="text" id="resetConfirmInput" placeholder="Удалить профиль" oninput="checkResetInput()"></div> <div class="reset-hint">Введи точно: <strong>Удалить профиль</strong></div> </div> <div class="modal-actions"> <button class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button> <button class="btn btn-danger" id="resetConfirmBtn" disabled onclick="performReset()">🗑️ Удалить навсегда</button> </div>`);
+    showGenericModal(`<h3 class="modal-title">🗑️ Удалить профиль</h3> <div class="modal-subtitle">${escapeHtml(u.name)}, это действие навсегда удалит твой аккаунт и все данные из системы.</div> <div class="reset-warning">⚠️ Будут удалены <strong>все мечты, мысли, категории и сам профиль</strong>. Восстановить их будет невозможно.</div> <div class="form-group"> <label>Чтобы подтвердить, введи фразу ниже:</label> <div class="reset-input-wrapper"><input type="text"id="resetConfirmInput"placeholder="Удалить профиль"oninput="checkResetInput()"></div> <div class="reset-hint">Введи точно: <strong>Удалить профиль</strong></div> </div> <div class="modal-actions"> <button class="btn btn-secondary"onclick="closeGenericModal()">Отмена</button> <button class="btn btn-danger"id="resetConfirmBtn"disabled onclick="performReset()">🗑️ Удалить навсегда</button> </div>`);
 }
 function checkResetInput() {
     const input = document.getElementById('resetConfirmInput');
@@ -1337,7 +1337,7 @@ function exportUserData() {
     showToast(`Файл «${filename}» сохранён 💾`, 'warm');
 }
 function openImportModal() {
-    showGenericModal(`<h3 class="modal-title">📥 Импорт данных</h3> <div class="modal-subtitle">Загрузи файл, который ты ранее экспортировал из DreamBoard. Все мечты, мысли и категории вернутся к тебе ✨</div> <div class="import-drop-zone" id="importDropZone"> <span class="drop-icon">📁</span> <div class="drop-title">Перетащи файл сюда или нажми</div> <div class="drop-hint">Подойдёт файл .json, созданный в DreamBoard</div> <input type="file" id="importFileInput" accept=".json,application/json" style="display:none;"> </div> <div class="import-file-info" id="importFileInfo"> <span class="file-icon">📄</span> <span class="file-name" id="importFileName"></span> <button class="file-clear" onclick="clearImportFile()" title="Убрать файл">✕</button> </div> <div id="importError" class="auth-error" style="margin-bottom:12px;"></div> <div class="modal-actions"> <button class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button> <button class="btn btn-primary" id="importConfirmBtn" disabled onclick="performImport()">📥 Импортировать</button> </div>`);
+    showGenericModal(`<h3 class="modal-title">📥 Импорт данных</h3> <div class="modal-subtitle">Загрузи файл, который ты ранее экспортировал из DreamBoard. Все мечты, мысли и категории вернутся к тебе ✨</div> <div class="import-drop-zone"id="importDropZone"> <span class="drop-icon">📁</span> <div class="drop-title">Перетащи файл сюда или нажми</div> <div class="drop-hint">Подойдёт файл .json, созданный в DreamBoard</div> <input type="file"id="importFileInput"accept=".json,application/json"style="display:none;"> </div> <div class="import-file-info"id="importFileInfo"> <span class="file-icon">📄</span> <span class="file-name"id="importFileName"></span> <button class="file-clear"onclick="clearImportFile()"title="Убрать файл">✕</button> </div> <div id="importError"class="auth-error"style="margin-bottom:12px;"></div> <div class="modal-actions"> <button class="btn btn-secondary"onclick="closeGenericModal()">Отмена</button> <button class="btn btn-primary"id="importConfirmBtn"disabled onclick="performImport()">📥 Импортировать</button> </div>`);
     window.__importFile = null;
     window.__importData = null;
     const dropZone = document.getElementById('importDropZone');
@@ -1498,17 +1498,17 @@ function openCreateThoughtModal(editId = null) {
  <form onsubmit="handleSaveThought(event, ${editId ? `'${editId}'` : 'null'})">
    <div class="form-group">
      <label>📝 Твоя мысль</label>
-     <textarea id="thoughtText" placeholder="О чём ты думаешь?" required style="min-height:140px;">${thought ? escapeHtml(thought.text) : ''}</textarea>
+     <textarea id="thoughtText"placeholder="О чём ты думаешь?"required style="min-height:140px;">${thought ? escapeHtml(thought.text) : ''}</textarea>
    </div>
    <div class="form-group">
      <label>🎨 Цвет стикера</label>
      <div class="diary-color-picker">
-       ${THOUGHT_COLORS.map(c => `<div class="diary-color-option ${c} ${c === currentColor ? 'selected' : ''}" data-color="${c}" onclick="selectThoughtColor(this)"></div>`).join('')}
+       ${THOUGHT_COLORS.map(c => `<div class="diary-color-option ${c} ${c === currentColor ? 'selected' : ''}"data-color="${c}"onclick="selectThoughtColor(this)"></div>`).join('')}
      </div>
    </div>
    <div class="modal-actions">
-     <button type="button" class="btn btn-secondary" onclick="closeGenericModal()">Отмена</button>
-     <button type="submit" class="btn btn-primary">${thought ? '💾 Сохранить' : '✨ Записать'}</button>
+     <button type="button"class="btn btn-secondary"onclick="closeGenericModal()">Отмена</button>
+     <button type="submit"class="btn btn-primary">${thought ? '💾 Сохранить' : '✨ Записать'}</button>
    </div>
  </form>
 `);
@@ -1561,15 +1561,15 @@ function renderDiary() {
    <div class="diary-sticker ${thought.color}">
      <div class="diary-sticker-text">${escapeHtml(thought.text)}</div>
      <div class="diary-sticker-actions">
-       <button class="diary-sticker-btn" onclick="openCreateThoughtModal('${thought.id}')" title="Редактировать">✏️</button>
-       <button class="diary-sticker-btn" onclick="deleteThought('${thought.id}')" title="Удалить">🗑️</button>
+       <button class="diary-sticker-btn"onclick="openCreateThoughtModal('${thought.id}')"title="Редактировать">✏️</button>
+       <button class="diary-sticker-btn"onclick="deleteThought('${thought.id}')"title="Удалить">🗑️</button>
      </div>
    </div>
  `;
     });
     const emptySlots = THOUGHTS_PER_PAGE - pageThoughts.length;
     for (let i = 0; i < emptySlots; i++) {
-        html += `<div class="diary-sticker diary-empty-sticker" onclick="openCreateThoughtModal()">+</div>`;
+        html += `<div class="diary-sticker diary-empty-sticker"onclick="openCreateThoughtModal()">+</div>`;
     }
     stickersEl.innerHTML = html;
     document.getElementById('pageIndicator').textContent = `Страница ${currentDiaryPage + 1} из ${totalPages}`;
@@ -1639,32 +1639,32 @@ function openPwaModal() {
     showGenericModal(`
 <h3 class="modal-title">📱 Мечты теперь всегда с тобой!</h3>
 <div class="modal-subtitle">Наша команда рада сообщить, что DreamBoard теперь доступна как PWA*!<br>Это значит, что ты можешь пользоваться всеми волшебными удобствами платформы прямо с телефона, как настоящим приложением ✨</div>
-<div class="auth-tabs" style="margin-bottom: 20px;">
-   <button class="auth-tab active" onclick="switchPwaTab('ios', this)">🍏 iOS (iPhone)</button>
-   <button class="auth-tab" onclick="switchPwaTab('android', this)">🤖 Android</button>
+<div class="auth-tabs"style="margin-bottom: 20px;">
+   <button class="auth-tab active"onclick="switchPwaTab('ios', this)">🍏 iOS (iPhone)</button>
+   <button class="auth-tab"onclick="switchPwaTab('android', this)">🤖 Android</button>
  </div>
- <div id="pwa-ios" class="pwa-instruction">
-   <div class="modal-subtitle" style="text-align: left; background: var(--input-bg); padding: 16px; border-radius: 12px; border: 1px solid rgba(212,197,169,0.3);">
+ <div id="pwa-ios"class="pwa-instruction">
+   <div class="modal-subtitle"style="text-align: left; background: var(--input-bg); padding: 16px; border-radius: 12px; border: 1px solid rgba(212,197,169,0.3);">
      <strong>1.</strong> Открой этот сайт в браузере <strong>Safari</strong>.<br><br>
      <strong>2.</strong> Нажми кнопку <strong>«Поделиться»</strong> (квадрат со стрелкой вверх ⬆️) внизу экрана.<br><br>
-     <strong>3.</strong> Пролистай меню вниз и выбери <strong>«На экран "Домой"»</strong>.<br><br>
+     <strong>3.</strong> Пролистай меню вниз и выбери <strong>«На экран"Домой"»</strong>.<br><br>
      <strong>4.</strong> Нажми <strong>«Добавить»</strong>. Готово! Иконка с мечтой появится на твоём рабочем столе 🌙
    </div>
  </div>
- <div id="pwa-android" class="pwa-instruction" style="display: none;">
-   <div class="modal-subtitle" style="text-align: left; background: var(--input-bg); padding: 16px; border-radius: 12px; border: 1px solid rgba(212,197,169,0.3);">
+ <div id="pwa-android"class="pwa-instruction"style="display: none;">
+   <div class="modal-subtitle"style="text-align: left; background: var(--input-bg); padding: 16px; border-radius: 12px; border: 1px solid rgba(212,197,169,0.3);">
      <strong>1.</strong> Открой этот сайт в браузере <strong>Chrome</strong>.<br><br>
      <strong>2.</strong> Нажми на <strong>три точки</strong> (⋮) в правом верхнем углу.<br><br>
      <strong>3.</strong> Выбери пункт <strong>«Добавить на главный экран»</strong> (или «Установить приложение»).<br><br>
      <strong>4.</strong> Подтверди добавление. Волшебство рядом! ✨
    </div>
  </div>
- <div class="modal-subtitle" style="margin-top: 20px; font-style: italic; color: var(--rose);">
+ <div class="modal-subtitle"style="margin-top: 20px; font-style: italic; color: var(--rose);">
    Стараемся для вас! С любовью, команда платформы DreamBoard ❤️<br>
    <span style="font-size: 16px; color: var(--ink-faint);">*PWA — Progressive Web Application (Прогрессивное веб-приложение)</span>
  </div>
  <div class="modal-actions">
-   <button class="btn btn-primary" onclick="closeGenericModal()">Волшебно! ✨</button>
+   <button class="btn btn-primary"onclick="closeGenericModal()">Волшебно! ✨</button>
  </div>
 `);
 }
@@ -1827,9 +1827,9 @@ function openNotificationsModal() {
     const permission = 'Notification' in window ? Notification.permission : 'unsupported';
     let permissionHTML = '';
     if (permission === 'default') {
-        permissionHTML = `<div class="notification-option" style="background: rgba(212, 168, 83, 0.1); border-color: var(--gold);"><div class="notification-option-info"><div class="notification-option-title">🔔 Разрешить уведомления</div><div class="notification-option-desc">Чтобы получать напоминания, нужно разрешить уведомления в браузере</div></div><button class="btn btn-primary" style="width:auto; padding: 8px 16px; font-size: 18px;" onclick="requestNotificationPermission()">Разрешить</button></div>`;
+        permissionHTML = `<div class="notification-option"style="background: rgba(212, 168, 83, 0.1); border-color: var(--gold);"><div class="notification-option-info"><div class="notification-option-title">🔔 Разрешить уведомления</div><div class="notification-option-desc">Чтобы получать напоминания, нужно разрешить уведомления в браузере</div></div><button class="btn btn-primary"style="width:auto; padding: 8px 16px; font-size: 18px;"onclick="requestNotificationPermission()">Разрешить</button></div>`;
     } else if (permission === 'denied') {
-        permissionHTML = `<div class="notification-option" style="background: rgba(199, 125, 138, 0.1); border-color: var(--rose);"><div class="notification-option-info"><div class="notification-option-title">⚠️ Уведомления заблокированы</div><div class="notification-option-desc">Разрешите уведомления в настройках браузера</div></div></div>`;
+        permissionHTML = `<div class="notification-option"style="background: rgba(199, 125, 138, 0.1); border-color: var(--rose);"><div class="notification-option-info"><div class="notification-option-title">⚠️ Уведомления заблокированы</div><div class="notification-option-desc">Разрешите уведомления в настройках браузера</div></div></div>`;
     }
     showGenericModal(`
 <h3 class="modal-title">🔔 Уведомления</h3>
@@ -1842,26 +1842,26 @@ ${permissionHTML}
 <div class="notification-option-title">🌅 Утренние мотивации</div>
 <div class="notification-option-desc">Мотивационные цитаты по утрам (10:00)</div>
 </div>
-<div class="notification-toggle ${settings.morning ? 'active' : ''}" onclick="toggleNotificationSetting('morning', this)"></div>
+<div class="notification-toggle ${settings.morning ? 'active' : ''}"onclick="toggleNotificationSetting('morning', this)"></div>
 </div>
 <div class="notification-option">
 <div class="notification-option-info">
 <div class="notification-option-title">🌙 Вечерние размышления</div>
 <div class="notification-option-desc">Мотивационные цитаты по вечерам (21:00)</div>
 </div>
-<div class="notification-toggle ${settings.evening ? 'active' : ''}" onclick="toggleNotificationSetting('evening', this)"></div>
+<div class="notification-toggle ${settings.evening ? 'active' : ''}"onclick="toggleNotificationSetting('evening', this)"></div>
 </div>
 <div class="notification-option">
 <div class="notification-option-info">
 <div class="notification-option-title">🎲 Напоминания о мечте</div>
 <div class="notification-option-desc">Случайная мечта будет напоминать о себе раз в день</div>
 </div>
-<div class="notification-toggle ${settings.dreamReminder ? 'active' : ''}" onclick="toggleNotificationSetting('dreamReminder', this)"></div>
+<div class="notification-toggle ${settings.dreamReminder ? 'active' : ''}"onclick="toggleNotificationSetting('dreamReminder', this)"></div>
 </div>
 </div>
 <div class="modal-actions">
-<button class="btn btn-secondary" onclick="testNotification()">🔔 Тест</button>
-<button class="btn btn-primary" onclick="closeGenericModal()">Готово</button>
+<button class="btn btn-secondary"onclick="testNotification()">🔔 Тест</button>
+<button class="btn btn-primary"onclick="closeGenericModal()">Готово</button>
 </div>
 `);
 }
